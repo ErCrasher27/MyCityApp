@@ -4,6 +4,10 @@
     <string name="navigation_back">Back</string>
 
     <string name="category_activities_description">Check here your activity to do in Caserta</string>
+    <string name="category_restaurations_description">Our typical plates</string>
+    <string name="category_bar_description">get a coffe!</string>
+    <string name="category_panoramas_description">The best views of Caserta</string>
+
 
 
 </resources>
