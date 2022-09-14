@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">MyCityApp</string>
+
+    <string name="category_activities_description">Check here your activity to do in Caserta</string>
+
 </resources>
