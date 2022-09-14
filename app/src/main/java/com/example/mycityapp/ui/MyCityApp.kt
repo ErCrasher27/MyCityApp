@@ -46,6 +46,9 @@ fun MyCityApp(
         topBar = { TopAppBar(title = stringResource(id = R.string.app_name)) },
         content = { padding ->
             ContentApp(modifier = Modifier.padding(padding))
+        },
+        bottomBar = {
+            BottomNavigationBar()
         }
     )
 }
