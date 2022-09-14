@@ -36,4 +36,5 @@ fun MyCityApp(
             contentType = MyCityContentType.LIST_ONLY
         }
     }
+    TopAppBar()
 }

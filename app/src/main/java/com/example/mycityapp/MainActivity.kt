@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun ReplyAppCompactPreview() {
-    MyCityAppTheme {
+    MyCityAppTheme(darkTheme = true) {
         MyCityApp(
             windowSize = WindowWidthSizeClass.Compact,
         )
