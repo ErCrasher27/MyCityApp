@@ -12,4 +12,8 @@
     <string name="place_activities_description">una magnifica avventura alla reggia</string>
     <string name="place_activities_location">via carlo 142, caserta 8102832 ITA </string>
 
+    <string name="place_bar_name">Rock and Blues</string>
+    <string name="place_bar_description">il locale ambientato nel rock</string>
+    <string name="place_bar_location">via carlo 142, casagiove 8320, ITA </string>
+
 </resources>

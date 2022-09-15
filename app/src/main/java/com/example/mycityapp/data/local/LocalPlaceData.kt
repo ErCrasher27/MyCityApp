@@ -16,20 +16,12 @@ object LocalPlaceData {
             ratingPlace = Rate.STAR_3,
         ),
         Place(
-            nameCategory = CategoryName.Restaurants,
-            name = R.string.place_activities_name,
-            descriptionPlace = R.string.place_activities_description,
+            nameCategory = CategoryName.Bar,
+            name = R.string.place_bar_name,
+            descriptionPlace = R.string.place_bar_description,
             photoPlace = R.drawable.reggia_caserta,
-            locationPlace = R.string.place_activities_location,
-            ratingPlace = Rate.STAR_3,
-        ),
-        Place(
-            nameCategory = CategoryName.Activities,
-            name = R.string.place_activities_name,
-            descriptionPlace = R.string.place_activities_description,
-            photoPlace = R.drawable.reggia_caserta,
-            locationPlace = R.string.place_activities_location,
-            ratingPlace = Rate.STAR_3,
+            locationPlace = R.string.place_bar_location,
+            ratingPlace = Rate.STAR_5,
         )
     )
 }

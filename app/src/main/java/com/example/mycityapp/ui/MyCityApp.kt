@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mycityapp.R
 import com.example.mycityapp.data.model.CategoryName
+import com.example.mycityapp.ui.components.DetailsPlace
 import com.example.mycityapp.ui.utils.MyCityNavigationType
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -45,11 +46,21 @@ fun MyCityApp(
     when (navigationType) {
 
         MyCityNavigationType.BOTTOM_NAVIGATION -> {
+            if (myCityAppUiState.currentDetails != null) {
+                DetailsPlace(
+                    place = myCityAppUiState.currentDetails,
+                    onClose = { viewModel.updateCurrentDetails(null) })
+            }
+
             Scaffold(
                 topBar = { TopAppBar(title = myCityAppUiState.currentTab.name) },
                 content = {
                     OnlyListCategoryCards(
                         currentTab = myCityAppUiState.currentTab,
+                        onCardClick = { category: CategoryName ->
+                            viewModel.updateCurrentCategory(category = category)
+                        },
+                        viewModel = viewModel,
                         modifier = modifier.padding(it)
                     )
                 }, bottomBar = {
@@ -65,6 +76,12 @@ fun MyCityApp(
         }
 
         MyCityNavigationType.NAVIGATION_RAIL -> {
+            if (myCityAppUiState.currentDetails != null) {
+                DetailsPlace(
+                    place = myCityAppUiState.currentDetails,
+                    onClose = { viewModel.updateCurrentDetails(null) })
+            }
+
             Row(
                 modifier = modifier
                     .fillMaxSize()
@@ -82,6 +99,10 @@ fun MyCityApp(
                     TopAppBar(title = stringResource(id = R.string.app_name))
                     OnlyListCategoryCards(
                         currentTab = myCityAppUiState.currentTab,
+                        onCardClick = { category: CategoryName ->
+                            viewModel.updateCurrentCategory(category = category)
+                        },
+                        viewModel = viewModel
                     )
                 }
             }
@@ -89,6 +110,11 @@ fun MyCityApp(
         }
 
         MyCityNavigationType.PERMANENT_NAVIGATION_DRAWER -> {
+            if (myCityAppUiState.currentDetails != null) {
+                DetailsPlace(
+                    place = myCityAppUiState.currentDetails,
+                    onClose = { viewModel.updateCurrentDetails(null) })
+            }
 
             PermanentNavigationDrawer(
                 drawerContent = {
@@ -109,7 +135,13 @@ fun MyCityApp(
                             .padding(16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        ListAndDetailsCategoryCard(currentTab = myCityAppUiState.currentTab)
+                        ListAndDetailsCategoryCard(
+                            currentTab = myCityAppUiState.currentTab,
+                            onCardClick = { category: CategoryName ->
+                                viewModel.updateCurrentCategory(category = category)
+                            },
+                            viewModel = viewModel
+                        )
                     }
                 }
             )

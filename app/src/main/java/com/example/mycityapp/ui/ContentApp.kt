@@ -13,18 +13,28 @@ import com.example.mycityapp.ui.components.PlaceCard
 @Composable
 fun OnlyListCategoryCards(
     currentTab: CategoryName,
+    onCardClick: (CategoryName) -> Unit,
+    viewModel: MyCityViewModel,
     modifier: Modifier = Modifier
 ) {
     if (currentTab.name == CategoryName.HomePage.name) {
         LazyColumn(modifier) {
             items(LocalCategoryData.categories) { category ->
-                CategoryCard(category)
+                CategoryCard(
+                    category = category,
+                    onCardClick = onCardClick
+                )
             }
         }
     } else {
         LazyColumn(modifier) {
             items(LocalPlaceData.places.filter { it.nameCategory.name == currentTab.name }) { place ->
-                PlaceCard(place)
+                PlaceCard(
+                    place = place,
+                    onPlaceClick = {
+                        viewModel.updateCurrentDetails(it)
+                    }
+                )
             }
         }
     }
@@ -33,11 +43,29 @@ fun OnlyListCategoryCards(
 @Composable
 fun ListAndDetailsCategoryCard(
     currentTab: CategoryName,
+    onCardClick: (CategoryName) -> Unit,
+    viewModel: MyCityViewModel,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn {
-        items(LocalCategoryData.categories) { category ->
-            CategoryCard(category)
+    if (currentTab.name == CategoryName.HomePage.name) {
+        LazyColumn(modifier) {
+            items(LocalCategoryData.categories) { category ->
+                CategoryCard(
+                    category = category,
+                    onCardClick = onCardClick
+                )
+            }
+        }
+    } else {
+        LazyColumn(modifier) {
+            items(LocalPlaceData.places.filter { it.nameCategory.name == currentTab.name }) { place ->
+                PlaceCard(
+                    place = place,
+                    onPlaceClick = {
+                        viewModel.updateCurrentDetails(it)
+                    }
+                )
+            }
         }
     }
 }

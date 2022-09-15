@@ -2,6 +2,12 @@ package com.example.mycityapp.data.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.ui.graphics.vector.ImageVector
+
+data class NavigationItemContent(
+    val icon: ImageVector,
+    val text: CategoryName,
+)
 
 data class Category(
     val nameCategory: CategoryName,
@@ -17,6 +23,7 @@ data class Place(
     @StringRes val locationPlace: Int,
     val ratingPlace: Rate,
 )
+
 
 
 
