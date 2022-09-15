@@ -26,21 +26,5 @@ fun TopAppBar(
             )
         },
         modifier.background(MaterialTheme.colorScheme.background),
-        navigationIcon = {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(
-                    imageVector = Icons.Default.ArrowBack,
-                    contentDescription = stringResource(id = R.string.navigation_back)
-                )
-            }
-        },
-        actions = {
-            IconButton(onClick = { /* doSomething() */ }) {
-                Icon(
-                    imageVector = Icons.Filled.Bookmark,
-                    contentDescription = "Localized description"
-                )
-            }
-        }
     )
 }
