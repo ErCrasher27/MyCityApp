@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyCityApp</string>
+    <string name="app_name">My City App</string>
 
     <string name="navigation_back">Back</string>
 
@@ -8,6 +8,8 @@
     <string name="category_bar_description">get a coffe!</string>
     <string name="category_panoramas_description">The best views of Caserta</string>
 
-
+    <string name="place_activities_name">Reggia Di Caserta</string>
+    <string name="place_activities_description">una magnifica avventura alla reggia</string>
+    <string name="place_activities_location">via carlo 142, caserta 8102832 ITA </string>
 
 </resources>

@@ -1,4 +1,7 @@
 package com.example.mycityapp.ui
 
-class MyCityUiState {
-}
+import com.example.mycityapp.data.model.CategoryName
+
+data class MyCityUiState(
+    val currentTab: CategoryName = CategoryName.HomePage
+)

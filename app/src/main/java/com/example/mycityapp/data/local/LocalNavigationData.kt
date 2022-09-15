@@ -7,27 +7,25 @@ import com.example.mycityapp.data.model.NavigationItemContent
 
 object LocalNavigationData {
     val navigationsItems = listOf<NavigationItemContent>(
-
         NavigationItemContent(
-            Icons.Default.LocalActivity,
-            CategoryName.Activities.name
+            icon = Icons.Default.LocalActivity,
+            text = CategoryName.Activities
         ),
         NavigationItemContent(
-            Icons.Default.Panorama,
-            CategoryName.Panoramas.name
+            icon = Icons.Default.Panorama,
+            text = CategoryName.Panoramas
         ),
         NavigationItemContent(
-            Icons.Default.Home,
-            text = "HomePage",
-            isHomePage = true
+            icon = Icons.Default.Home,
+            text = CategoryName.HomePage,
         ),
         NavigationItemContent(
-            Icons.Default.Restaurant,
-            CategoryName.Restaurants.name
+            icon = Icons.Default.Restaurant,
+            text = CategoryName.Restaurants
         ),
         NavigationItemContent(
-            Icons.Default.WineBar,
-            CategoryName.Bar.name
+            icon = Icons.Default.WineBar,
+            text = CategoryName.Bar
         )
     )
 }

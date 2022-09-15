@@ -6,6 +6,5 @@ import androidx.compose.ui.unit.dp
 
 data class NavigationItemContent(
     val icon: ImageVector,
-    val text: String,
-    val isHomePage: Boolean = false
+    val text: CategoryName,
 )

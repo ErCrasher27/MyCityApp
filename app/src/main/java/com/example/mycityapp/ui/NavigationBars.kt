@@ -1,38 +1,109 @@
 package com.example.mycityapp.ui
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.TravelExplore
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.mycityapp.R
 import com.example.mycityapp.data.local.LocalNavigationData.navigationsItems
+import com.example.mycityapp.data.model.CategoryName
 
 @Composable
-fun BottomNavigationBar(
+fun MyCityAppBottomNavigationBar(
+    currentTab: CategoryName,
+    onTabPressed: (CategoryName) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var size: Int
     NavigationBar(modifier = modifier.fillMaxWidth()) {
         for (navItem in navigationsItems) {
-            if (navItem.isHomePage) {
-                size = 35
-            } else {
-                size = 25
-            }
             NavigationBarItem(
                 icon = {
                     Icon(
                         imageVector = navItem.icon,
-                        contentDescription = navItem.text,
-                        modifier = modifier.size(size.dp)
+                        contentDescription = navItem.text.name,
                     )
                 },
-                selected = true,
-                onClick = {}
+                selected = currentTab == navItem.text,
+                onClick = { onTabPressed(navItem.text) }
             )
         }
+    }
+}
+
+@Composable
+fun MyCityAppNavigationRail(
+    currentTab: CategoryName,
+    onTabPressed: (CategoryName) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    NavigationRail(
+        modifier = modifier.fillMaxHeight()
+    ) {
+        for (navItem in navigationsItems) {
+            NavigationRailItem(
+                selected = currentTab == navItem.text,
+                onClick = { onTabPressed(navItem.text) },
+                icon = {
+                    Icon(
+                        imageVector = navItem.icon,
+                        contentDescription = navItem.text.name
+                    )
+                }
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MyCityAppNavigationDrawerContent(
+    selectedDestination: CategoryName,
+    onTabPressed: (CategoryName) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    NavigationRail(
+        modifier = modifier.fillMaxHeight()
+    ) {
+        NavigationDrawerHeader(modifier)
+        for (navItem in navigationsItems) {
+            NavigationDrawerItem(
+                selected = selectedDestination == navItem.text,
+                label = {
+                    Text(
+                        text = navItem.text.name,
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    )
+                },
+                icon = {
+                    Icon(
+                        imageVector = navItem.icon,
+                        contentDescription = navItem.text.name
+                    )
+                },
+                onClick = { onTabPressed(navItem.text) }
+            )
+        }
+    }
+}
+
+@Composable
+private fun NavigationDrawerHeader(modifier: Modifier) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(text = stringResource(R.string.app_name))
+        Icon(
+            imageVector = Icons.Default.TravelExplore,
+            contentDescription = stringResource(R.string.app_name)
+        )
     }
 }
