@@ -65,7 +65,7 @@ fun PlaceCard(
                 modifier = modifier
                     .padding(horizontal = 8.dp)
                     .clip(RoundedCornerShape(8.dp))
-                    .background(MaterialTheme.colorScheme.secondary)
+                    .background(MaterialTheme.colorScheme.surface)
                     .padding(vertical = 8.dp)
             ) {
                 LocationPlace(
@@ -92,7 +92,10 @@ fun DetailsPlace(place: Place, onClose: () -> Unit) {
 @Composable
 fun DetailsPlaceCard(place: Place, onClose: () -> Unit, modifier: Modifier = Modifier) {
     Card(
-        modifier
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface,
+        ),
+        modifier = modifier
             .fillMaxSize()
             .padding(vertical = 4.dp)
     ) {

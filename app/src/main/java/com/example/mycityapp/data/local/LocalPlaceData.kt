@@ -23,6 +23,14 @@ object LocalPlaceData {
             photoPlace = R.drawable.reggia_caserta,
             locationPlace = R.string.place_bar_location1,
             ratingPlace = Rate.STAR5
+        ),
+        Place(
+            nameCategory = CategoryName.Activities,
+            name = R.string.place_bar_name1,
+            descriptionPlace = R.string.place_bar_description1,
+            photoPlace = R.drawable.reggia_caserta,
+            locationPlace = R.string.place_bar_location1,
+            ratingPlace = Rate.STAR5
         )
     )
 }

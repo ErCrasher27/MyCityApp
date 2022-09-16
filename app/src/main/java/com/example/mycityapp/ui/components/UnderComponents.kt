@@ -3,7 +3,6 @@ package com.example.mycityapp.ui.components
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -59,13 +58,13 @@ fun LocationPlace(
         Icon(
             imageVector = Icons.Default.LocationOn,
             contentDescription = stringResource(location),
-            tint = MaterialTheme.colorScheme.onSecondary
+            tint = MaterialTheme.colorScheme.onSecondaryContainer
         )
         Spacer(modifier = Modifier.width(2.dp))
         Text(
             text = stringResource(location),
             style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.onSecondary
+            color = MaterialTheme.colorScheme.onSecondaryContainer
         )
     }
 }
@@ -121,7 +120,7 @@ fun StarsPlace(
             Icon(
                 imageVector = Icons.Default.Star,
                 contentDescription = star.name,
-                tint = MaterialTheme.colorScheme.onSecondary
+                tint = MaterialTheme.colorScheme.onTertiaryContainer
             )
         }
     }
