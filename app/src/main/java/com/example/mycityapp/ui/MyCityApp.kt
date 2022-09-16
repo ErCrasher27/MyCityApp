@@ -1,10 +1,8 @@
 package com.example.mycityapp.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.PermanentDrawerSheet
-import androidx.compose.material3.PermanentNavigationDrawer
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.*
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -14,9 +12,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mycityapp.R
-import com.example.mycityapp.data.local.LocalCategoryData.categories
-import com.example.mycityapp.data.local.LocalPlaceData.places
-import com.example.mycityapp.data.model.Category
 import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.ui.components.DetailsPlace
 import com.example.mycityapp.ui.utils.MyCityNavigationType
@@ -56,6 +51,7 @@ fun MyCityApp(
             }
 
             Scaffold(
+                containerColor = MaterialTheme.colorScheme.background,
                 topBar = { TopAppBar(title = myCityAppUiState.currentTab.name) },
                 content = {
                     OnlyListCards(
@@ -84,7 +80,6 @@ fun MyCityApp(
                     place = myCityAppUiState.currentDetails,
                     onClose = { viewModel.updateCurrentDetails(null) })
             }
-
             Row(
                 modifier = modifier
                     .fillMaxSize()
@@ -98,6 +93,7 @@ fun MyCityApp(
                 Column(
                     modifier = modifier
                         .fillMaxSize()
+                        .background(MaterialTheme.colorScheme.background)
                 ) {
                     TopAppBar(title = stringResource(id = R.string.app_name))
                     OnlyListCards(
@@ -105,7 +101,7 @@ fun MyCityApp(
                         onCardClick = { category: CategoryName ->
                             viewModel.updateCurrentCategory(category = category)
                         },
-                        viewModel = viewModel
+                        viewModel = viewModel,
                     )
                 }
             }
@@ -135,6 +131,7 @@ fun MyCityApp(
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
+                            .background(MaterialTheme.colorScheme.background)
                             .padding(16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {

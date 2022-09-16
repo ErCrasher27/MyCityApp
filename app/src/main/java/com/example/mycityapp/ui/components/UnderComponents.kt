@@ -3,6 +3,7 @@ package com.example.mycityapp.ui.components
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -33,12 +34,12 @@ fun TitleAndDescriptionPlace(place: Place, modifier: Modifier = Modifier) {
         Text(
             text = stringResource(place.name),
             style = MaterialTheme.typography.headlineLarge,
-            color = MaterialTheme.colorScheme.primary,
+            color = MaterialTheme.colorScheme.onPrimaryContainer
         )
         Text(
             text = "\"" + stringResource(place.descriptionPlace) + "\"",
             style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.secondary,
+            color = MaterialTheme.colorScheme.onPrimaryContainer
         )
     }
 }
@@ -58,12 +59,13 @@ fun LocationPlace(
         Icon(
             imageVector = Icons.Default.LocationOn,
             contentDescription = stringResource(location),
+            tint = MaterialTheme.colorScheme.onSecondary
         )
         Spacer(modifier = Modifier.width(2.dp))
         Text(
             text = stringResource(location),
             style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.secondary,
+            color = MaterialTheme.colorScheme.onSecondary
         )
     }
 }
@@ -82,13 +84,14 @@ fun PhonePlace(
     ) {
         Icon(
             imageVector = Icons.Default.Phone,
-            contentDescription = stringResource(id = numberPhone)
+            contentDescription = stringResource(id = numberPhone),
+            tint = MaterialTheme.colorScheme.onSecondaryContainer
         )
         Spacer(modifier = Modifier.width(2.dp))
         Text(
             text = stringResource(numberPhone),
             style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.secondary,
+            color = MaterialTheme.colorScheme.onSecondaryContainer
         )
     }
 }
@@ -117,7 +120,8 @@ fun StarsPlace(
         repeat(repeater) {
             Icon(
                 imageVector = Icons.Default.Star,
-                contentDescription = star.name
+                contentDescription = star.name,
+                tint = MaterialTheme.colorScheme.onSecondary
             )
         }
     }

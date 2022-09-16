@@ -19,17 +19,23 @@ fun MyCityAppBottomNavigationBar(
     onTabPressed: (CategoryName) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    NavigationBar(modifier = modifier.fillMaxWidth()) {
+    NavigationBar(
+        containerColor = MaterialTheme.colorScheme.surface,
+        modifier = modifier.fillMaxWidth()
+    ) {
         for (navItem in navigationsItems) {
+
+            //val tint = MaterialTheme.colorScheme.onPrimaryContainer
             NavigationBarItem(
                 icon = {
                     Icon(
                         imageVector = navItem.icon,
                         contentDescription = navItem.text.name,
+                        tint = MaterialTheme.colorScheme.primary
                     )
                 },
                 selected = currentTab == navItem.text,
-                onClick = { onTabPressed(navItem.text) }
+                onClick = { onTabPressed(navItem.text) },
             )
         }
     }
@@ -42,7 +48,8 @@ fun MyCityAppNavigationRail(
     modifier: Modifier = Modifier
 ) {
     NavigationRail(
-        modifier = modifier.fillMaxHeight()
+        modifier = modifier.fillMaxHeight(),
+        containerColor = MaterialTheme.colorScheme.surface,
     ) {
         for (navItem in navigationsItems) {
             NavigationRailItem(
@@ -51,7 +58,8 @@ fun MyCityAppNavigationRail(
                 icon = {
                     Icon(
                         imageVector = navItem.icon,
-                        contentDescription = navItem.text.name
+                        contentDescription = navItem.text.name,
+                        tint = MaterialTheme.colorScheme.primary
                     )
                 }
             )
@@ -67,7 +75,8 @@ fun MyCityAppNavigationDrawerContent(
     modifier: Modifier = Modifier
 ) {
     NavigationRail(
-        modifier = modifier.fillMaxHeight()
+        modifier = modifier.fillMaxHeight(),
+        containerColor = MaterialTheme.colorScheme.surface,
     ) {
         NavigationDrawerHeader(modifier)
         for (navItem in navigationsItems) {
@@ -76,13 +85,15 @@ fun MyCityAppNavigationDrawerContent(
                 label = {
                     Text(
                         text = navItem.text.name,
-                        modifier = Modifier.padding(horizontal = 16.dp)
+                        modifier = Modifier.padding(horizontal = 16.dp),
+                        color = MaterialTheme.colorScheme.primary
                     )
                 },
                 icon = {
                     Icon(
                         imageVector = navItem.icon,
-                        contentDescription = navItem.text.name
+                        contentDescription = navItem.text.name,
+                        tint = MaterialTheme.colorScheme.primary
                     )
                 },
                 onClick = { onTabPressed(navItem.text) }
@@ -103,7 +114,8 @@ private fun NavigationDrawerHeader(modifier: Modifier) {
         Text(text = stringResource(R.string.app_name))
         Icon(
             imageVector = Icons.Default.TravelExplore,
-            contentDescription = stringResource(R.string.app_name)
+            contentDescription = stringResource(R.string.app_name),
+            tint = MaterialTheme.colorScheme.primary
         )
     }
 }

@@ -1,5 +1,6 @@
 package com.example.mycityapp.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -27,13 +28,11 @@ fun CategoryCard(
         Text(
             text = category.nameCategory.name,
             style = MaterialTheme.typography.headlineLarge,
-            color = MaterialTheme.colorScheme.primary,
         )
         Spacer(modifier = modifier.height(4.dp))
         Text(
             text = stringResource(category.descriptionCategory),
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.secondary,
         )
     }
 }
@@ -47,6 +46,9 @@ fun PlaceCard(
     modifier: Modifier = Modifier,
 ) {
     Card(
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+        ),
         modifier = modifier
             .padding(horizontal = 18.dp, vertical = 8.dp)
             .clip(RoundedCornerShape(8.dp)),
@@ -59,12 +61,20 @@ fun PlaceCard(
         ) {
             TitleAndDescriptionPlace(place = place)
             Spacer(modifier = Modifier.height(16.dp))
-            LocationPlace(
-                location = place.locationPlace,
-                horizontalArrangement = Arrangement.Start
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            StarsPlace(star = place.ratingPlace, horizontalArrangement = Arrangement.Start)
+            Column(
+                modifier = modifier
+                    .padding(horizontal = 8.dp)
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(MaterialTheme.colorScheme.secondary)
+                    .padding(vertical = 8.dp)
+            ) {
+                LocationPlace(
+                    location = place.locationPlace,
+                    horizontalArrangement = Arrangement.Start
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                StarsPlace(star = place.ratingPlace, horizontalArrangement = Arrangement.Start)
+            }
         }
     }
 

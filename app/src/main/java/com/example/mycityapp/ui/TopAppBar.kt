@@ -1,14 +1,11 @@
 package com.example.mycityapp.ui
 
-import androidx.compose.foundation.background
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Bookmark
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import com.example.mycityapp.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -21,10 +18,8 @@ fun TopAppBar(
         title = {
             Text(
                 text = title,
-                color = MaterialTheme.colorScheme.onBackground,
+                color = MaterialTheme.colorScheme.primary,
                 style = MaterialTheme.typography.headlineSmall
             )
-        },
-        modifier.background(MaterialTheme.colorScheme.background),
-    )
+        })
 }
