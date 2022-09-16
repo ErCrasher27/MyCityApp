@@ -138,13 +138,14 @@ fun MyCityApp(
                             .padding(16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        ListAndDetailsCard(
+
+                        /*ListAndDetailsCard(
                             currentTab = myCityAppUiState.currentTab,
                             onCardClick = { category: CategoryName ->
                                 viewModel.updateCurrentCategory(category = category)
                             },
                             viewModel = viewModel
-                        )
+                        )*/
                     }
                 }
             )

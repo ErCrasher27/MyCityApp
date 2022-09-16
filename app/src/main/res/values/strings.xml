@@ -1,19 +1,27 @@
 <resources>
     <string name="app_name">My City App</string>
 
+    <!-- UTILS !-->
     <string name="navigation_back">Back</string>
+    <string name="close_details_place">Close</string>
 
+    <!-- CATEGORIES !-->
     <string name="category_activities_description">Check here your activity to do in Caserta</string>
     <string name="category_restaurations_description">Our typical plates</string>
     <string name="category_bar_description">get a coffe!</string>
-    <string name="category_panoramas_description">The best views of Caserta</string>
+    <string name="category_panoramas_description">The best views of caserta</string>
 
-    <string name="place_activities_name">Reggia Di Caserta</string>
-    <string name="place_activities_description">una magnifica avventura alla reggia</string>
-    <string name="place_activities_location">via carlo 142, caserta 8102832 ITA </string>
+    <!-- PLACES !-->
 
-    <string name="place_bar_name">Rock and Blues</string>
-    <string name="place_bar_description">il locale ambientato nel rock</string>
-    <string name="place_bar_location">via carlo 142, casagiove 8320, ITA </string>
+    <!-- ACTIVITIES !-->
+    <string name="place_activities_name1">Reggia Di Caserta</string>
+    <string name="place_activities_description1">una magnifica avventura alla reggia</string>
+    <string name="place_activities_location1">via carlo 142, caserta 8102832 ITA </string>
+    <string name="place_activities_phone1">+39 327 903 0132</string>
+
+    <!-- BAR !-->
+    <string name="place_bar_name1">Rock and Blues</string>
+    <string name="place_bar_description1">il locale ambientato nel rock</string>
+    <string name="place_bar_location1">via carlo 142, casagiove 8320, ITA </string>
 
 </resources>

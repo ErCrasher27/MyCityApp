@@ -76,7 +76,6 @@ fun OnlyListCards(
         }
     }
 }
-
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ListAndDetailsCard(
