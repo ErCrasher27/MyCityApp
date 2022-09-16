@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,6 +20,7 @@ import androidx.compose.ui.window.Dialog
 import com.example.mycityapp.data.model.Category
 import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.data.model.Place
+import com.example.mycityapp.data.model.Rate
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,27 +64,72 @@ fun PlaceCard(
 ) {
     Card(
         modifier = modifier
-            .padding(vertical = 4.dp)
+            .padding(horizontal = 18.dp, vertical = 8.dp)
             .clip(RoundedCornerShape(8.dp)),
         onClick = { onPlaceClick(place) }
     ) {
         Column(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(30.dp)
+                .padding(vertical = 13.dp)
         ) {
-            Text(
-                text = stringResource(place.name),
-                style = MaterialTheme.typography.headlineLarge,
-                color = MaterialTheme.colorScheme.primary,
-            )
-            Spacer(modifier = modifier.height(4.dp))
-            Text(
-                text = stringResource(place.descriptionPlace),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.secondary,
-            )
+            Column(
+                modifier = modifier
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Text(
+                    text = stringResource(place.name),
+                    style = MaterialTheme.typography.headlineLarge,
+                    color = MaterialTheme.colorScheme.primary,
+                )
+                Text(
+                    text = "\"" + stringResource(place.descriptionPlace) + "\"",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.secondary,
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(start = 8.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.LocationOn,
+                    contentDescription = "Location"
+                )
+                Text(
+                    text = stringResource(place.locationPlace),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.secondary,
+                )
+            }
+            Spacer(modifier = Modifier.height(4.dp))
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(start = 8.dp)
+            ) {
+                val repeater: Int
+                when (place.ratingPlace) {
+                    Rate.STAR_1 -> repeater = 1
+                    Rate.STAR_2 -> repeater = 2
+                    Rate.STAR_3 -> repeater = 3
+                    Rate.STAR_4 -> repeater = 4
+                    Rate.STAR_5 -> repeater = 5
+                }
+                repeat(repeater) {
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "Location"
+                    )
+                }
+            }
         }
+
     }
 }
 

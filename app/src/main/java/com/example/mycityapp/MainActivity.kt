@@ -8,7 +8,9 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.mycityapp.data.local.LocalPlaceData
 import com.example.mycityapp.ui.MyCityApp
+import com.example.mycityapp.ui.components.PlaceCard
 import com.example.mycityapp.ui.theme.MyCityAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,7 +26,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun ReplyAppCompactPreview() {
     MyCityAppTheme(darkTheme = true) {
@@ -50,6 +52,17 @@ fun ReplyAppExpandedPreview() {
     MyCityAppTheme {
         MyCityApp(
             windowSize = WindowWidthSizeClass.Expanded,
+        )
+    }
+}*/
+
+@Preview(showBackground = true)
+@Composable
+fun boh() {
+    MyCityAppTheme(darkTheme = true) {
+        PlaceCard(
+            place = LocalPlaceData.places[1],
+            onPlaceClick = {}
         )
     }
 }
