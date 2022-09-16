@@ -4,12 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.mycityapp.data.local.LocalPlaceData
 import com.example.mycityapp.ui.MyCityApp
+import com.example.mycityapp.ui.components.DetailsPlaceCard
 import com.example.mycityapp.ui.components.PlaceCard
 import com.example.mycityapp.ui.theme.MyCityAppTheme
 
@@ -58,11 +58,22 @@ fun ReplyAppExpandedPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun boh() {
+fun PlaceCardPreview() {
     MyCityAppTheme(darkTheme = true) {
         PlaceCard(
             place = LocalPlaceData.places[1],
             onPlaceClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DetailsCardPreview() {
+    MyCityAppTheme(darkTheme = true) {
+        DetailsPlaceCard(
+            place = LocalPlaceData.places[1],
+            onClose = {}
         )
     }
 }

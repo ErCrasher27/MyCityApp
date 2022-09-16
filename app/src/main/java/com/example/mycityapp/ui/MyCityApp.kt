@@ -55,7 +55,7 @@ fun MyCityApp(
             Scaffold(
                 topBar = { TopAppBar(title = myCityAppUiState.currentTab.name) },
                 content = {
-                    OnlyListCategoryCards(
+                    OnlyListCards(
                         currentTab = myCityAppUiState.currentTab,
                         onCardClick = { category: CategoryName ->
                             viewModel.updateCurrentCategory(category = category)
@@ -97,7 +97,7 @@ fun MyCityApp(
                         .fillMaxSize()
                 ) {
                     TopAppBar(title = stringResource(id = R.string.app_name))
-                    OnlyListCategoryCards(
+                    OnlyListCards(
                         currentTab = myCityAppUiState.currentTab,
                         onCardClick = { category: CategoryName ->
                             viewModel.updateCurrentCategory(category = category)
@@ -135,13 +135,13 @@ fun MyCityApp(
                             .padding(16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        ListAndDetailsCategoryCard(
+                        /*ListAndDetailsCard(
                             currentTab = myCityAppUiState.currentTab,
                             onCardClick = { category: CategoryName ->
                                 viewModel.updateCurrentCategory(category = category)
                             },
                             viewModel = viewModel
-                        )
+                        )*/
                     }
                 }
             )

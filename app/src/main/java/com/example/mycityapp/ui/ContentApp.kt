@@ -11,7 +11,7 @@ import com.example.mycityapp.ui.components.CategoryCard
 import com.example.mycityapp.ui.components.PlaceCard
 
 @Composable
-fun OnlyListCategoryCards(
+fun OnlyListCards(
     currentTab: CategoryName,
     onCardClick: (CategoryName) -> Unit,
     viewModel: MyCityViewModel,
@@ -40,8 +40,8 @@ fun OnlyListCategoryCards(
     }
 }
 
-@Composable
-fun ListAndDetailsCategoryCard(
+/*@Composable
+fun ListAndDetailsCard(
     currentTab: CategoryName,
     onCardClick: (CategoryName) -> Unit,
     viewModel: MyCityViewModel,
@@ -68,4 +68,4 @@ fun ListAndDetailsCategoryCard(
             }
         }
     }
-}
+}*/
