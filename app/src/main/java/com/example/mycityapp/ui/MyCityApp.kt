@@ -138,7 +138,6 @@ fun MyCityApp(
                             .padding(16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-
                         /*ListAndDetailsCard(
                             currentTab = myCityAppUiState.currentTab,
                             onCardClick = { category: CategoryName ->

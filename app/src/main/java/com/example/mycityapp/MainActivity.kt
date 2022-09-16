@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
@@ -12,10 +13,8 @@ import com.example.mycityapp.ui.MyCityApp
 import com.example.mycityapp.ui.components.DetailsPlaceCard
 import com.example.mycityapp.ui.components.PlaceCard
 import com.example.mycityapp.ui.theme.MyCityAppTheme
-import com.google.accompanist.pager.ExperimentalPagerApi
 
 class MainActivity : ComponentActivity() {
-    @ExperimentalPagerApi
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +26,8 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+@Preview(showBackground = true)
 @Composable
 fun ReplyAppCompactPreview() {
     MyCityAppTheme(darkTheme = true) {
@@ -35,7 +36,7 @@ fun ReplyAppCompactPreview() {
         )
     }
 }
-@ExperimentalPagerApi
+
 @Preview(showBackground = true, widthDp = 700)
 @Composable
 fun ReplyAppMediumPreview() {
@@ -45,7 +46,7 @@ fun ReplyAppMediumPreview() {
         )
     }
 }
-@ExperimentalPagerApi
+
 @Preview(showBackground = true, widthDp = 1000)
 @Composable
 fun ReplyAppExpandedPreview() {
@@ -54,7 +55,7 @@ fun ReplyAppExpandedPreview() {
             windowSize = WindowWidthSizeClass.Expanded,
         )
     }
-}*/
+}
 
 @Preview(showBackground = true)
 @Composable
