@@ -61,7 +61,6 @@ fun PlaceCard(
             .padding(horizontal = 18.dp, vertical = 8.dp)
             .clip(RoundedCornerShape(8.dp)),
         onClick = { onPlaceClick(place) },
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp, pressedElevation = 10.dp)
     ) {
         Column(
             modifier = modifier
