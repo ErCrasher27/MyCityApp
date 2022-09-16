@@ -14,6 +14,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mycityapp.R
+import com.example.mycityapp.data.local.LocalCategoryData.categories
+import com.example.mycityapp.data.local.LocalPlaceData.places
+import com.example.mycityapp.data.model.Category
 import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.ui.components.DetailsPlace
 import com.example.mycityapp.ui.utils.MyCityNavigationType
@@ -55,7 +58,7 @@ fun MyCityApp(
             Scaffold(
                 topBar = { TopAppBar(title = myCityAppUiState.currentTab.name) },
                 content = {
-                    OnlyListCategoryCards(
+                    OnlyListCards(
                         currentTab = myCityAppUiState.currentTab,
                         onCardClick = { category: CategoryName ->
                             viewModel.updateCurrentCategory(category = category)
@@ -97,7 +100,7 @@ fun MyCityApp(
                         .fillMaxSize()
                 ) {
                     TopAppBar(title = stringResource(id = R.string.app_name))
-                    OnlyListCategoryCards(
+                    OnlyListCards(
                         currentTab = myCityAppUiState.currentTab,
                         onCardClick = { category: CategoryName ->
                             viewModel.updateCurrentCategory(category = category)
@@ -135,7 +138,7 @@ fun MyCityApp(
                             .padding(16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        ListAndDetailsCategoryCard(
+                        ListAndDetailsCard(
                             currentTab = myCityAppUiState.currentTab,
                             onCardClick = { category: CategoryName ->
                                 viewModel.updateCurrentCategory(category = category)
