@@ -14,12 +14,12 @@ object LocalCategoryData {
         Category(
             nameCategory = CategoryName.Restaurants,
             descriptionCategory = R.string.category_restaurations_description,
-            backgroundCategory = R.drawable.background_restaurants_category
+            backgroundCategory = R.mipmap.drinkpng
         ),
         Category(
             nameCategory = CategoryName.Bar,
             descriptionCategory = R.string.category_bar_description,
-            backgroundCategory = R.drawable.background_bar_category
+            backgroundCategory = R.drawable.bar_1
         ),
         Category(
             nameCategory = CategoryName.Panoramas,

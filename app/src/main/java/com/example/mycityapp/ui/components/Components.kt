@@ -7,6 +7,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
@@ -17,6 +18,21 @@ import com.example.mycityapp.data.model.Category
 import com.example.mycityapp.data.model.Place
 
 @Composable
+fun HeaderListCard(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .fillMaxSize()
+    ) {
+        Text(
+            text = "Categories",
+            style = MaterialTheme.typography.headlineLarge,
+            color = MaterialTheme.colorScheme.primary
+        )
+    }
+}
+
+@Composable
 fun CategoryCard(
     category: Category,
     modifier: Modifier = Modifier
@@ -24,13 +40,17 @@ fun CategoryCard(
     Column(
         modifier = modifier
             .padding(30.dp)
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
+            color = MaterialTheme.colorScheme.onSecondary,
             text = category.nameCategory.name,
             style = MaterialTheme.typography.headlineLarge,
         )
-        Spacer(modifier = modifier.height(4.dp))
         Text(
+            color = MaterialTheme.colorScheme.onSecondary,
             text = stringResource(category.descriptionCategory),
             style = MaterialTheme.typography.bodyMedium,
         )

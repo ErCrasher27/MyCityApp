@@ -20,6 +20,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.data.model.Place
 import com.example.mycityapp.data.model.Rate
 
@@ -147,3 +148,25 @@ fun ImagePlace(
         )
     }
 }
+
+/*@Composable
+fun ImageCategory(
+    @DrawableRes imageCategory: Int,
+    nameCategory: CategoryName,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+    ) {
+        Image(
+            painter = painterResource(id = imageCategory),
+            contentDescription = nameCategory.name,
+            contentScale = ContentScale.Crop,
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(4.dp)
+                .clip(RoundedCornerShape(8.dp))
+        )
+    }
+}*/
