@@ -22,7 +22,6 @@ fun HeaderListCard(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .fillMaxSize()
     ) {
         Text(
             text = "Categories",

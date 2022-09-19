@@ -54,14 +54,15 @@ fun MyCityApp(
                 containerColor = MaterialTheme.colorScheme.background,
                 topBar = { TopAppBar(title = myCityAppUiState.currentTab.name) },
                 content = {
-                    OnlyListCards(
-                        currentTab = myCityAppUiState.currentTab,
-                        onCardClick = { category: CategoryName ->
-                            viewModel.updateCurrentCategory(category = category)
-                        },
-                        viewModel = viewModel,
-                        modifier = modifier.padding(it)
-                    )
+                    Column(modifier = modifier.padding(it)) {
+                        OnlyListCards(
+                            currentTab = myCityAppUiState.currentTab,
+                            onCardClick = { category: CategoryName ->
+                                viewModel.updateCurrentCategory(category = category)
+                            },
+                            viewModel = viewModel,
+                        )
+                    }
                 }, bottomBar = {
                     MyCityAppBottomNavigationBar(
                         currentTab = myCityAppUiState.currentTab,
