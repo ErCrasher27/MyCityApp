@@ -20,6 +20,7 @@ import androidx.compose.ui.window.Dialog
 import com.example.mycityapp.R
 import com.example.mycityapp.data.model.Category
 import com.example.mycityapp.data.model.Place
+import com.example.mycityapp.ui.utils.MyCityNavigationType
 
 @Composable
 fun HeaderListCard(title: String, modifier: Modifier = Modifier) {
@@ -53,15 +54,11 @@ fun CategoryCard(
             contentScale = ContentScale.Crop,
             modifier = modifier.fillMaxSize()
         )
-
-        TextWithShadow(text = category.nameCategory.name, modifier = modifier.padding(top = 10.dp))
-        /*
-        Text(
-            color = MaterialTheme.colorScheme.onSecondaryContainer,
-            text = stringResource(category.descriptionCategory),
-            style = MaterialTheme.typography.labelMedium,
-        )
-        */
+        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            TextWithShadow(text = category.nameCategory.name, modifier = modifier.padding(top = 10.dp), style =  MaterialTheme.typography.titleLarge)
+            TextWithShadow(text = stringResource(id = category.descriptionCategory), modifier = modifier.padding(top = 0.dp),  style = MaterialTheme.typography.labelMedium)
+        }
+                
     }
 
 }
@@ -131,7 +128,7 @@ fun DetailsPlace(place: Place, onClose: () -> Unit) {
 }
 
 @Composable
-fun DetailsPlaceCard(place: Place, onClose: () -> Unit, modifier: Modifier = Modifier) {
+fun DetailsPlaceCard(place: Place, onClose: () -> Unit, modifier: Modifier = Modifier, navigationType: MyCityNavigationType = MyCityNavigationType.BOTTOM_NAVIGATION) {
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface,
@@ -140,11 +137,13 @@ fun DetailsPlaceCard(place: Place, onClose: () -> Unit, modifier: Modifier = Mod
             .fillMaxSize()
             .padding(vertical = 4.dp)
     ) {
-        IconButton(onClick = onClose) {
-            Icon(
-                imageVector = Icons.Default.Close,
-                contentDescription = stringResource(id = R.string.close_details_place)
-            )
+        if(navigationType != MyCityNavigationType.PERMANENT_NAVIGATION_DRAWER){
+            IconButton(onClick = onClose) {
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    contentDescription = stringResource(id = R.string.close_details_place)
+                )
+            }
         }
         Column(
             modifier.fillMaxSize(),
@@ -172,6 +171,8 @@ fun DetailsPlaceCard(place: Place, onClose: () -> Unit, modifier: Modifier = Mod
         }
     }
 }
+
+//Details for DrawerContenet
 
 
 

@@ -1,7 +1,5 @@
 package com.example.mycityapp.ui
 
-import android.widget.Space
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -21,6 +19,7 @@ import com.example.mycityapp.data.local.LocalPlaceData.places
 import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.data.model.Rate
 import com.example.mycityapp.ui.components.CategoryCard
+import com.example.mycityapp.ui.components.DetailsPlaceCard
 import com.example.mycityapp.ui.components.HeaderListCard
 import com.example.mycityapp.ui.components.PlaceCard
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -37,7 +36,7 @@ fun OnlyListCards(
     viewModel: MyCityViewModel,
 ) {
     if (currentTab.name == CategoryName.Homepage.name) {
-        LazyColumn() {
+        LazyColumn {
             items(1) {
                 Spacer(modifier = Modifier.height(10.dp))
                 CategoriesHorizontalListsWithHeader(onCardClick = onCardClick, title = "Categories")
@@ -57,35 +56,33 @@ fun OnlyListCards(
     }
 }
 
-/*
+
 @Composable
 fun ListAndDetailsCard(
     currentTab: CategoryName,
     onCardClick: (CategoryName) -> Unit,
     viewModel: MyCityViewModel,
-    modifier: Modifier = Modifier
 ) {
-    if (currentTab.name == CategoryName.HomePage.name) {
-        LazyColumn(modifier) {
-            items(categories) { category ->
-                CategoryCard(
-                    category = category,
-                )
+    Row(horizontalArrangement = Arrangement.Start, modifier = Modifier.width(600.dp)) {
+        if (currentTab.name == CategoryName.Homepage.name) {
+            LazyColumn {
+                items(1) {
+                    Spacer(modifier = Modifier.height(10.dp))
+                    CategoriesHorizontalListsWithHeader(onCardClick = onCardClick, title = "Categories")
+                    Spacer(modifier = Modifier.height(40.dp))
+                    BestPlacesHorizontalListWithHeader(
+                        onCardClick = onCardClick,
+                        title = "Best Ratings",
+                        viewModel = viewModel
+                    )
+                    Spacer(modifier = Modifier.height(10.dp))
+                }
             }
-        }
-    } else {
-        LazyColumn(modifier) {
-            items(LocalPlaceData.places.filter { it.nameCategory.name == currentTab.name }) { place ->
-                PlaceCard(
-                    place = place,
-                    onPlaceClick = {
-                        viewModel.updateCurrentDetails(it)
-                    }
-                )
-            }
+        } else {
+            PlacesLists(currentTab = currentTab, viewModel = viewModel)
         }
     }
-}*/
+}
 
 @OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
 @Composable

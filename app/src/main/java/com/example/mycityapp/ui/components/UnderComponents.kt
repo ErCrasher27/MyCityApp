@@ -3,6 +3,7 @@ package com.example.mycityapp.ui.components
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.MagnifierStyle
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Colors
@@ -24,6 +25,7 @@ import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.data.model.Place
@@ -179,23 +181,26 @@ fun ImageCategory(
 @Composable
 fun TextWithShadow(
     text: String,
-    modifier: Modifier
+    modifier: Modifier,
+    style: TextStyle,
 ) {
-    Text(
-        text = text,
-        color = DarkGray,
-        modifier = modifier
-            .offset(
-                x = 2.dp,
-                y = 2.dp
-            )
-            .alpha(0.75f),
-        style = MaterialTheme.typography.titleLarge
-    )
-    Text(
-        text = text,
-        color = White,
-        modifier = modifier,
-        style = MaterialTheme.typography.titleLarge
-    )
+    Box(){
+        Text(
+            text = text,
+            color = DarkGray,
+            modifier = modifier
+                .offset(
+                    x = 2.dp,
+                    y = 2.dp
+                )
+                .alpha(0.75f),
+            style = style
+        )
+        Text(
+            text = text,
+            color = White,
+            modifier = modifier,
+            style = style
+        )
+    }
 }
