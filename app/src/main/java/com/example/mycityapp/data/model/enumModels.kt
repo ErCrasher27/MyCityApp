@@ -9,9 +9,9 @@ enum class CategoryName {
 }
 
 enum class Rate {
-    STAR1,
-    STAR2,
-    STAR3,
-    STAR4,
-    STAR5
+    star1,
+    star2,
+    star3,
+    star4,
+    star5
 }

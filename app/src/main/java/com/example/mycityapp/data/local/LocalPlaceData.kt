@@ -14,7 +14,7 @@ object LocalPlaceData {
             photoPlace = R.drawable.place_activities_image_1,
             locationPlace = R.string.place_activities_location1,
             phonePlace = R.string.place_activities_phone1,
-            ratingPlace = Rate.STAR4
+            ratingPlace = Rate.star4
         ),
         Place(
             nameCategory = CategoryName.panoramas,
@@ -22,7 +22,7 @@ object LocalPlaceData {
             descriptionPlace = R.string.place_panoramas_description1,
             photoPlace = R.drawable.place_panoramas_image_1,
             locationPlace = R.string.place_panoramas_location1,
-            ratingPlace = Rate.STAR5
+            ratingPlace = Rate.star5
         ),
         Place(
             nameCategory = CategoryName.restaurants,
@@ -30,7 +30,7 @@ object LocalPlaceData {
             descriptionPlace = R.string.place_restaurants_description1,
             photoPlace = R.drawable.place_restaurant_image_1,
             locationPlace = R.string.place_restaurants_location1,
-            ratingPlace = Rate.STAR4
+            ratingPlace = Rate.star4
         ),
         Place(
             nameCategory = CategoryName.bar,
@@ -38,7 +38,7 @@ object LocalPlaceData {
             descriptionPlace = R.string.place_bar_description1,
             photoPlace = R.drawable.place_bar_image_1,
             locationPlace = R.string.place_bar_location1,
-            ratingPlace = Rate.STAR3
+            ratingPlace = Rate.star3
         )
     )
 }

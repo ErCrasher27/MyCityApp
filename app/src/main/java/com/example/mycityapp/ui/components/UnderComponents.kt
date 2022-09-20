@@ -111,11 +111,11 @@ fun StarsPlace(
     ) {
         val repeater: Int
         when (star) {
-            Rate.STAR1 -> repeater = 1
-            Rate.STAR2 -> repeater = 2
-            Rate.STAR3 -> repeater = 3
-            Rate.STAR4 -> repeater = 4
-            Rate.STAR5 -> repeater = 5
+            Rate.star1 -> repeater = 1
+            Rate.star2 -> repeater = 2
+            Rate.star3 -> repeater = 3
+            Rate.star4 -> repeater = 4
+            Rate.star5 -> repeater = 5
         }
         repeat(repeater) {
             Icon(

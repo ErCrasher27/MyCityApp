@@ -18,14 +18,14 @@ import com.example.mycityapp.data.model.Category
 import com.example.mycityapp.data.model.Place
 
 @Composable
-fun HeaderListCard(modifier: Modifier = Modifier) {
+fun HeaderListCard(title: String, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxWidth()
             .padding(10.dp)
     ) {
         Text(
-            text = "Categories",
+            text = title,
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onSurface
         )

@@ -16,22 +16,22 @@
     <!-- ACTIVITIES !-->
     <string name="place_activities_name1">Reggia Di Caserta</string>
     <string name="place_activities_description1">una magnifica avventura alla reggia</string>
-    <string name="place_activities_location1">via carlo 142, caserta 8102832 ITA </string>
+    <string name="place_activities_location1">Piazza Carlo di Borbone, 81100 Caserta CE</string>
     <string name="place_activities_phone1">+39 327 903 0132</string>
 
     <!-- PANORAMAS !-->
     <string name="place_panoramas_name1">Belvedere di San Leucio</string>
     <string name="place_panoramas_description1">una vista mozzafiato</string>
-    <string name="place_panoramas_location1">via carlo 142, casagiove 8320, ITA </string>
+    <string name="place_panoramas_location1">Via del Setifiicio 5, CE</string>
 
     <!-- RESTAURANTS !-->
     <string name="place_restaurants_name1">I Masanielli</string>
     <string name="place_restaurants_description1">la pizza dai mille sapori</string>
-    <string name="place_restaurants_location1">via carlo 142, casagiove 8320, ITA </string>
+    <string name="place_restaurants_location1">Viale Giulio Douhet, 11, 81100 Caserta CE</string>
 
     <!-- BAR !-->
     <string name="place_bar_name1">Rock and Blues</string>
     <string name="place_bar_description1">il locale ambientato nel rock</string>
-    <string name="place_bar_location1">via carlo 142, casagiove 8320, ITA </string>
+    <string name="place_bar_location1">Via Nazionale Appia, 231/a, 81020 Casapulla CE</string>
 
 </resources>

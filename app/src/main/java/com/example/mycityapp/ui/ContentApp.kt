@@ -1,6 +1,5 @@
 package com.example.mycityapp.ui
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,57 +32,11 @@ fun OnlyListCards(
     currentTab: CategoryName,
     onCardClick: (CategoryName) -> Unit,
     viewModel: MyCityViewModel,
-    modifier: Modifier = Modifier
 ) {
     if (currentTab.name == CategoryName.homepage.name) {
-        HeaderListCard(modifier)
-            HorizontalPager(
-                count = categories.size,
-                modifier,
-                contentPadding = PaddingValues(horizontal = 70.dp)
-            ) { page ->
-                Card(
-                    onClick = { onCardClick(categories[page].nameCategory) },
-                    Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(1f)
-                        .graphicsLayer {
-                            val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
-                            lerp(
-                                start = 0.85f,
-                                stop = 1f,
-                                fraction = 1f - pageOffset.coerceIn(0f, 1f)
-                            ).also { scale ->
-                                scaleX = scale
-                                scaleY = scale
-                            }
-                            alpha = lerp(
-                                start = 0.5f,
-                                stop = 1f,
-                                fraction = 1f - pageOffset.coerceIn(0f, 1f)
-                            )
-                        },
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.secondary
-                    )
-                ) {
-                    CategoryCard(
-                        category = categories[page],
-                    )
-                }
-            }
-
+        CategoriesHorizontalListsWithHeader(onCardClick = onCardClick, title = "categories")
     } else {
-        LazyColumn(modifier) {
-            items(LocalPlaceData.places.filter { it.nameCategory.name == currentTab.name }) { place ->
-                PlaceCard(
-                    place = place,
-                    onPlaceClick = {
-                        viewModel.updateCurrentDetails(it)
-                    }
-                )
-            }
-        }
+        PlacesLists(currentTab = currentTab, viewModel = viewModel)
     }
 }
 
@@ -116,3 +69,66 @@ fun ListAndDetailsCard(
         }
     }
 }*/
+
+@OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
+@Composable
+fun CategoriesHorizontalListsWithHeader(
+    onCardClick: (CategoryName) -> Unit,
+    modifier: Modifier = Modifier,
+    title: String
+) {
+    HeaderListCard(title = title)
+    HorizontalPager(
+        count = categories.size,
+        modifier,
+        contentPadding = PaddingValues(horizontal = 70.dp)
+    ) { page ->
+        Card(
+            onClick = { onCardClick(categories[page].nameCategory) },
+            Modifier
+                .fillMaxWidth()
+                .aspectRatio(1f)
+                .graphicsLayer {
+                    val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
+                    lerp(
+                        start = 0.85f,
+                        stop = 1f,
+                        fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                    ).also { scale ->
+                        scaleX = scale
+                        scaleY = scale
+                    }
+                    alpha = lerp(
+                        start = 0.5f,
+                        stop = 1f,
+                        fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                    )
+                },
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.secondary
+            )
+        ) {
+            CategoryCard(
+                category = categories[page],
+            )
+        }
+    }
+}
+
+@Composable
+fun PlacesLists(
+    currentTab: CategoryName,
+    viewModel: MyCityViewModel,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn(modifier) {
+        items(LocalPlaceData.places.filter { it.nameCategory.name == currentTab.name }) { place ->
+            PlaceCard(
+                place = place,
+                onPlaceClick = {
+                    viewModel.updateCurrentDetails(it)
+                }
+            )
+        }
+    }
+}
