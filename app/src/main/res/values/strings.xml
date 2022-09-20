@@ -6,8 +6,8 @@
     <string name="close_details_place">Close</string>
 
     <!-- CATEGORIES !-->
-    <string name="category_activities_description">Check here your activity to do in Caserta</string>
-    <string name="category_restaurations_description">Our typical plates</string>
+    <string name="category_activities_description">check here your activity to do</string>
+    <string name="category_restaurations_description">our typical plates</string>
     <string name="category_bar_description">get a coffe!</string>
     <string name="category_panoramas_description">The best views of caserta</string>
 
@@ -18,6 +18,16 @@
     <string name="place_activities_description1">una magnifica avventura alla reggia</string>
     <string name="place_activities_location1">via carlo 142, caserta 8102832 ITA </string>
     <string name="place_activities_phone1">+39 327 903 0132</string>
+
+    <!-- PANORAMAS !-->
+    <string name="place_panoramas_name1">Belvedere di San Leucio</string>
+    <string name="place_panoramas_description1">una vista mozzafiato</string>
+    <string name="place_panoramas_location1">via carlo 142, casagiove 8320, ITA </string>
+
+    <!-- RESTAURANTS !-->
+    <string name="place_restaurants_name1">I Masanielli</string>
+    <string name="place_restaurants_description1">la pizza dai mille sapori</string>
+    <string name="place_restaurants_location1">via carlo 142, casagiove 8320, ITA </string>
 
     <!-- BAR !-->
     <string name="place_bar_name1">Rock and Blues</string>

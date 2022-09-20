@@ -9,23 +9,23 @@ object LocalNavigationData {
     val navigationsItems = listOf<NavigationItemContent>(
         NavigationItemContent(
             icon = Icons.Default.LocalActivity,
-            text = CategoryName.Activities
+            text = CategoryName.activities
         ),
         NavigationItemContent(
             icon = Icons.Default.Panorama,
-            text = CategoryName.Panoramas
+            text = CategoryName.panoramas
         ),
         NavigationItemContent(
             icon = Icons.Default.Home,
-            text = CategoryName.HomePage,
+            text = CategoryName.homepage,
         ),
         NavigationItemContent(
             icon = Icons.Default.Restaurant,
-            text = CategoryName.Restaurants
+            text = CategoryName.restaurants
         ),
         NavigationItemContent(
             icon = Icons.Default.WineBar,
-            text = CategoryName.Bar
+            text = CategoryName.bar
         )
     )
 }

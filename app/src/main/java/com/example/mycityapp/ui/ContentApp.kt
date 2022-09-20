@@ -35,7 +35,7 @@ fun OnlyListCards(
     viewModel: MyCityViewModel,
     modifier: Modifier = Modifier
 ) {
-    if (currentTab.name == CategoryName.HomePage.name) {
+    if (currentTab.name == CategoryName.homepage.name) {
         HeaderListCard(modifier)
             HorizontalPager(
                 count = categories.size,

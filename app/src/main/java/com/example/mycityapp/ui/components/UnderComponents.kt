@@ -33,12 +33,12 @@ fun TitleAndDescriptionPlace(place: Place, modifier: Modifier = Modifier) {
     ) {
         Text(
             text = stringResource(place.name),
-            style = MaterialTheme.typography.headlineLarge,
+            style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onPrimaryContainer
         )
         Text(
             text = "\"" + stringResource(place.descriptionPlace) + "\"",
-            style = MaterialTheme.typography.labelSmall,
+            style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onPrimaryContainer
         )
     }

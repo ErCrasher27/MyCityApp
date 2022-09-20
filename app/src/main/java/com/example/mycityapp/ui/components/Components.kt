@@ -22,11 +22,12 @@ fun HeaderListCard(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxWidth()
+            .padding(10.dp)
     ) {
         Text(
             text = "Categories",
-            style = MaterialTheme.typography.headlineLarge,
-            color = MaterialTheme.colorScheme.primary
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.onSurface
         )
     }
 }
@@ -40,18 +41,18 @@ fun CategoryCard(
         modifier = modifier
             .padding(30.dp)
             .fillMaxSize(),
-        verticalArrangement = Arrangement.Top,
+        verticalArrangement = Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             color = MaterialTheme.colorScheme.onSecondary,
             text = category.nameCategory.name,
-            style = MaterialTheme.typography.headlineLarge,
+            style = MaterialTheme.typography.titleLarge,
         )
         Text(
             color = MaterialTheme.colorScheme.onSecondary,
             text = stringResource(category.descriptionCategory),
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.labelMedium,
         )
     }
 }

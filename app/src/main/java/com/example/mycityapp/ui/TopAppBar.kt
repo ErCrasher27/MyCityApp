@@ -19,7 +19,7 @@ fun TopAppBar(
             Text(
                 text = title,
                 color = MaterialTheme.colorScheme.primary,
-                style = MaterialTheme.typography.headlineSmall
+                style = MaterialTheme.typography.headlineMedium
             )
         })
 }

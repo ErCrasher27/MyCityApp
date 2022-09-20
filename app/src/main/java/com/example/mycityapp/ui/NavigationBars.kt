@@ -86,7 +86,8 @@ fun MyCityAppNavigationDrawerContent(
                     Text(
                         text = navItem.text.name,
                         modifier = Modifier.padding(horizontal = 16.dp),
-                        color = MaterialTheme.colorScheme.primary
+                        color = MaterialTheme.colorScheme.primary,
+                        style = MaterialTheme.typography.titleLarge
                     )
                 },
                 icon = {
@@ -111,7 +112,9 @@ private fun NavigationDrawerHeader(modifier: Modifier) {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(text = stringResource(R.string.app_name))
+        Text(
+            text = stringResource(R.string.app_name), style = MaterialTheme.typography.headlineLarge
+        )
         Icon(
             imageVector = Icons.Default.TravelExplore,
             contentDescription = stringResource(R.string.app_name),
