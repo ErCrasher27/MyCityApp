@@ -1,6 +1,7 @@
 package com.example.mycityapp.ui
 
 import android.widget.Space
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -98,7 +99,9 @@ fun CategoriesHorizontalListsWithHeader(
         modifier,
         contentPadding = PaddingValues(horizontal = 110.dp)
     ) { page ->
+
         Card(
+
             onClick = { onCardClick(categories[page].nameCategory) },
             Modifier
                 .width(350.dp)

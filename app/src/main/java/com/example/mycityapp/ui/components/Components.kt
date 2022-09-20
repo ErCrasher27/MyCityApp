@@ -1,6 +1,7 @@
 package com.example.mycityapp.ui.components
 
 import android.icu.text.CaseMap
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,8 +11,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -39,24 +44,32 @@ fun CategoryCard(
     category: Category,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = modifier
-            .padding(30.dp)
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceAround,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            color = MaterialTheme.colorScheme.onSecondary,
-            text = category.nameCategory.name,
-            style = MaterialTheme.typography.titleLarge,
-        )
-        Text(
-            color = MaterialTheme.colorScheme.onSecondary,
-            text = stringResource(category.descriptionCategory),
-            style = MaterialTheme.typography.labelMedium,
-        )
+    Box(modifier = modifier.fillMaxSize()){
+        Image(painter = painterResource(id = category.backgroundCategory), contentDescription = null, contentScale = ContentScale.Crop, modifier = modifier.fillMaxSize() )
+        Column(modifier = modifier
+            .fillMaxSize()
+            .padding(top = 15.dp, bottom = 15.dp), verticalArrangement = Arrangement.SpaceBetween , horizontalAlignment = Alignment.CenterHorizontally, ) {
+            TextWithShadow(text = category.nameCategory.name, modifier = modifier)
+            
+            
+            
+            /*Text(
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                text = category.nameCategory.name,
+                style = MaterialTheme.typography.headlineLarge,
+            )
+            */
+
+            Text(
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                text = stringResource(category.descriptionCategory),
+                style = MaterialTheme.typography.labelMedium,
+            )
+
+
+        }
     }
+
 }
 
 

@@ -5,6 +5,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Colors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Phone
@@ -15,7 +16,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.BlendMode.Companion.Color
+import androidx.compose.ui.graphics.Color.Companion.DarkGray
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -170,3 +175,25 @@ fun ImageCategory(
         )
     }
 }*/
+
+@Composable
+fun TextWithShadow(
+    text: String,
+    modifier: Modifier
+) {
+    Text(
+        text = text,
+        color = DarkGray,
+        modifier = modifier
+            .offset(
+                x = 2.dp,
+                y = 2.dp
+            )
+            .alpha(0.75f)
+    )
+    Text(
+        text = text,
+        color = White,
+        modifier = modifier
+    )
+}
