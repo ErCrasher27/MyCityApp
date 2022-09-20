@@ -1,6 +1,8 @@
 package com.example.mycityapp.data.local
 
 import com.example.mycityapp.R
+import com.example.mycityapp.data.local.LocalCategoryData.categories
+import com.example.mycityapp.data.model.Category
 import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.data.model.Place
 import com.example.mycityapp.data.model.Rate
@@ -8,7 +10,7 @@ import com.example.mycityapp.data.model.Rate
 object LocalPlaceData {
     val places = listOf<Place>(
         Place(
-            nameCategory = CategoryName.activities,
+            category = categories[0],
             name = R.string.place_activities_name1,
             descriptionPlace = R.string.place_activities_description1,
             photoPlace = R.drawable.place_activities_image_1,
@@ -17,7 +19,7 @@ object LocalPlaceData {
             ratingPlace = Rate.STAR4
         ),
         Place(
-            nameCategory = CategoryName.panoramas,
+            category = categories[1],
             name = R.string.place_panoramas_name1,
             descriptionPlace = R.string.place_panoramas_description1,
             photoPlace = R.drawable.place_panoramas_image_1,
@@ -25,7 +27,7 @@ object LocalPlaceData {
             ratingPlace = Rate.STAR5
         ),
         Place(
-            nameCategory = CategoryName.restaurants,
+            category = categories[2],
             name = R.string.place_restaurants_name1,
             descriptionPlace = R.string.place_restaurants_description1,
             photoPlace = R.drawable.place_restaurant_image_1,
@@ -33,7 +35,7 @@ object LocalPlaceData {
             ratingPlace = Rate.STAR4
         ),
         Place(
-            nameCategory = CategoryName.bar,
+            category = categories[3],
             name = R.string.place_bar_name1,
             descriptionPlace = R.string.place_bar_description1,
             photoPlace = R.drawable.place_bar_image_1,

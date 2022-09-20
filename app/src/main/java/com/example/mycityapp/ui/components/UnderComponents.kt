@@ -189,11 +189,13 @@ fun TextWithShadow(
                 x = 2.dp,
                 y = 2.dp
             )
-            .alpha(0.75f)
+            .alpha(0.75f),
+        style = MaterialTheme.typography.titleLarge
     )
     Text(
         text = text,
         color = White,
-        modifier = modifier
+        modifier = modifier,
+        style = MaterialTheme.typography.titleLarge
     )
 }

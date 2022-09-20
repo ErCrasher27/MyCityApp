@@ -11,6 +11,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
@@ -35,7 +36,7 @@ fun OnlyListCards(
     onCardClick: (CategoryName) -> Unit,
     viewModel: MyCityViewModel,
 ) {
-    if (currentTab.name == CategoryName.homepage.name) {
+    if (currentTab.name == CategoryName.Homepage.name) {
         LazyColumn() {
             items(1) {
                 Spacer(modifier = Modifier.height(10.dp))
@@ -123,7 +124,7 @@ fun CategoriesHorizontalListsWithHeader(
                     )
                 },
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.secondary
+                containerColor = Color(categories[page].backgroundColor)
             )
         ) {
             CategoryCard(
@@ -150,10 +151,10 @@ fun BestPlacesHorizontalListWithHeader(
         contentPadding = PaddingValues(horizontal = 50.dp)
     ) { page ->
         Card(
-            onClick = { onCardClick(bestPlacesWithFourOrMoreStars[page].nameCategory) },
+            onClick = { onCardClick(bestPlacesWithFourOrMoreStars[page].category.nameCategory) },
             Modifier
                 .width(500.dp)
-                .height(150.dp)
+                .height(175.dp)
                 .graphicsLayer {
                     val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
                     lerp(
@@ -178,7 +179,8 @@ fun BestPlacesHorizontalListWithHeader(
                 place = bestPlacesWithFourOrMoreStars[page], onPlaceClick = {
                     viewModel.updateCurrentDetails(it)
                 }, horizontalPadding = 0,
-                verticalPadding = 0
+                verticalPadding = 0,
+                isInHomePage = true
             )
         }
     }
@@ -191,7 +193,7 @@ fun PlacesLists(
     modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier) {
-        items(LocalPlaceData.places.filter { it.nameCategory.name == currentTab.name }) { place ->
+        items(LocalPlaceData.places.filter { it.category.nameCategory.name == currentTab.name }) { place ->
             PlaceCard(
                 place = place,
                 onPlaceClick = {

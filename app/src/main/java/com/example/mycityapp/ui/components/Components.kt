@@ -1,6 +1,6 @@
 package com.example.mycityapp.ui.components
 
-import android.icu.text.CaseMap
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -11,13 +11,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.mycityapp.R
@@ -44,30 +41,27 @@ fun CategoryCard(
     category: Category,
     modifier: Modifier = Modifier
 ) {
-    Box(modifier = modifier.fillMaxSize()){
-        Image(painter = painterResource(id = category.backgroundCategory), contentDescription = null, contentScale = ContentScale.Crop, modifier = modifier.fillMaxSize() )
-        Column(modifier = modifier
+    Box(
+        modifier = modifier
             .fillMaxSize()
-            .padding(top = 15.dp, bottom = 15.dp), verticalArrangement = Arrangement.SpaceBetween , horizontalAlignment = Alignment.CenterHorizontally, ) {
-            TextWithShadow(text = category.nameCategory.name, modifier = modifier)
-            
-            
-            
-            /*Text(
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                text = category.nameCategory.name,
-                style = MaterialTheme.typography.headlineLarge,
-            )
-            */
+            .padding(top = 10.dp),
+        contentAlignment = Alignment.TopCenter
+    ) {
+        Image(
+            painter = painterResource(id = category.backgroundCategory),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = modifier.fillMaxSize()
+        )
 
-            Text(
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                text = stringResource(category.descriptionCategory),
-                style = MaterialTheme.typography.labelMedium,
-            )
-
-
-        }
+        TextWithShadow(text = category.nameCategory.name, modifier = modifier.padding(top = 10.dp))
+        /*
+        Text(
+            color = MaterialTheme.colorScheme.onSecondaryContainer,
+            text = stringResource(category.descriptionCategory),
+            style = MaterialTheme.typography.labelMedium,
+        )
+        */
     }
 
 }
@@ -79,7 +73,8 @@ fun PlaceCard(
     place: Place,
     onPlaceClick: (Place) -> Unit,
     horizontalPadding: Int,
-    verticalPadding : Int,
+    verticalPadding: Int,
+    isInHomePage: Boolean = false,
     modifier: Modifier = Modifier,
 ) {
     Card(
@@ -96,6 +91,15 @@ fun PlaceCard(
                 .fillMaxWidth()
                 .padding(vertical = 13.dp)
         ) {
+            if (isInHomePage) {
+                Image(
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .padding(top = 2.dp, bottom = 2.dp),
+                    imageVector = place.category.icon,
+                    contentDescription = place.category.nameCategory.name
+                )
+            }
             TitleAndDescriptionPlace(place = place)
             Spacer(modifier = Modifier.height(16.dp))
             Column(

@@ -1,11 +1,11 @@
 package com.example.mycityapp.data.model
 
 enum class CategoryName {
-    activities,
-    restaurants,
-    bar,
-    panoramas,
-    homepage
+    Activities,
+    Restaurants,
+    Bar,
+    Panoramas,
+    Homepage
 }
 
 enum class Rate {
