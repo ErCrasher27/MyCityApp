@@ -2,6 +2,7 @@ package com.example.mycityapp.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
@@ -49,7 +50,6 @@ fun MyCityApp(
                     place = myCityAppUiState.currentDetails,
                     onClose = { viewModel.updateCurrentDetails(null) })
             }
-
             Scaffold(
                 containerColor = MaterialTheme.colorScheme.background,
                 topBar = { TopAppBar(title = myCityAppUiState.currentTab.name) },

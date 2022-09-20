@@ -1,5 +1,6 @@
 package com.example.mycityapp.ui.components
 
+import android.icu.text.CaseMap
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.mycityapp.R
@@ -18,14 +20,14 @@ import com.example.mycityapp.data.model.Category
 import com.example.mycityapp.data.model.Place
 
 @Composable
-fun HeaderListCard(modifier: Modifier = Modifier) {
+fun HeaderListCard(title: String, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(10.dp)
+            .padding(start = 20.dp, top = 10.dp, bottom = 10.dp)
     ) {
         Text(
-            text = "Categories",
+            text = title,
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onSurface
         )
@@ -63,6 +65,8 @@ fun CategoryCard(
 fun PlaceCard(
     place: Place,
     onPlaceClick: (Place) -> Unit,
+    horizontalPadding: Int,
+    verticalPadding : Int,
     modifier: Modifier = Modifier,
 ) {
     Card(
@@ -70,7 +74,7 @@ fun PlaceCard(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
         ),
         modifier = modifier
-            .padding(horizontal = 18.dp, vertical = 8.dp)
+            .padding(horizontal = horizontalPadding.dp, vertical = verticalPadding.dp)
             .clip(RoundedCornerShape(8.dp)),
         onClick = { onPlaceClick(place) },
     ) {
@@ -151,5 +155,6 @@ fun DetailsPlaceCard(place: Place, onClose: () -> Unit, modifier: Modifier = Mod
         }
     }
 }
+
 
 

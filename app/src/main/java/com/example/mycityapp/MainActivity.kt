@@ -59,17 +59,6 @@ fun ReplyAppExpandedPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun PlaceCardPreview() {
-    MyCityAppTheme(darkTheme = true) {
-        PlaceCard(
-            place = LocalPlaceData.places[1],
-            onPlaceClick = {}
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
 fun DetailsCardPreview() {
     MyCityAppTheme(darkTheme = true) {
         DetailsPlaceCard(
