@@ -58,7 +58,7 @@ fun CategoryCard(
             TextWithShadow(
                 text = category.nameCategory.name,
                 modifier = modifier.padding(top = 10.dp),
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleMedium
             )
             TextWithShadow(
                 text = stringResource(id = category.descriptionCategory),
@@ -100,8 +100,7 @@ fun PlaceCard(
             if (isInHomePage) {
                 Image(
                     modifier = modifier
-                        .fillMaxWidth()
-                        .padding(top = 2.dp, bottom = 2.dp),
+                        .fillMaxWidth(),
                     imageVector = place.category.icon,
                     contentDescription = place.category.nameCategory.name
                 )

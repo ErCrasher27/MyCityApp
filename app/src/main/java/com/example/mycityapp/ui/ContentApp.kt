@@ -97,7 +97,7 @@ fun CategoriesHorizontalListsWithHeader(
     HorizontalPager(
         count = categories.size,
         modifier,
-        contentPadding = PaddingValues(horizontal = 80.dp)
+        contentPadding = PaddingValues(horizontal = 60.dp)
     ) { page ->
 
         Card(
@@ -146,7 +146,7 @@ fun BestPlacesHorizontalListWithHeader(
     HorizontalPager(
         count = bestPlacesWithFourOrMoreStars.size,
         modifier,
-        contentPadding = PaddingValues(horizontal = 50.dp)
+        contentPadding = PaddingValues(horizontal = 35.dp)
     ) { page ->
         Card(
             onClick = { onCardClick(bestPlacesWithFourOrMoreStars[page].category.nameCategory) },

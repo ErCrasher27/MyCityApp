@@ -1,10 +1,10 @@
 package com.example.mycityapp.ui.theme
 
+import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 
 private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
@@ -69,10 +69,18 @@ private val DarkColors = darkColorScheme(
 
 @Composable
 fun MyCityAppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    val colors = if (darkTheme) {
-        DarkColors
-    } else {
-        LightColors
+    /* val colors = if (darkTheme) {
+         DarkColors
+     } else {
+         LightColors
+     }*/
+
+    val useDynamicColors = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+    val colors = when {
+        useDynamicColors && darkTheme -> dynamicDarkColorScheme(LocalContext.current)
+        useDynamicColors && !darkTheme -> dynamicLightColorScheme(LocalContext.current)
+        darkTheme -> DarkColors
+        else -> LightColors
     }
 
     MaterialTheme(

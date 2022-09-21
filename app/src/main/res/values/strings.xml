@@ -6,10 +6,10 @@
     <string name="close_details_place">Close</string>
 
     <!-- CATEGORIES !-->
-    <string name="category_activities_description">check here your activity to do</string>
+    <string name="category_activities_description">outdoor activity</string>
     <string name="category_restaurations_description">our typical plates</string>
     <string name="category_bar_description">get a coffe!</string>
-    <string name="category_panoramas_description">The best views of Caserta</string>
+    <string name="category_panoramas_description">The best views</string>
 
     <!-- PLACES !-->
 
