@@ -3,15 +3,17 @@ package com.example.mycityapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Surface
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.mycityapp.data.local.LocalPlaceData
 import com.example.mycityapp.ui.MyCityApp
 import com.example.mycityapp.ui.components.DetailsPlaceCard
-import com.example.mycityapp.ui.components.PlaceCard
 import com.example.mycityapp.ui.theme.MyCityAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,8 +22,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyCityAppTheme {
-                val windowSize = calculateWindowSizeClass(this)
-                MyCityApp(windowSize = windowSize.widthSizeClass)
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = androidx.compose.material3.MaterialTheme.colorScheme.background
+                ) {
+                    val windowSize = calculateWindowSizeClass(this)
+                    MyCityApp(windowSize = windowSize.widthSizeClass)
+                }
             }
         }
     }

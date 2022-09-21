@@ -36,7 +36,6 @@ private val LightColors = lightColorScheme(
     surfaceTint = md_theme_light_surfaceTint,
 )
 
-
 private val DarkColors = darkColorScheme(
     primary = md_theme_dark_primary,
     onPrimary = md_theme_dark_onPrimary,
@@ -69,12 +68,6 @@ private val DarkColors = darkColorScheme(
 
 @Composable
 fun MyCityAppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    /* val colors = if (darkTheme) {
-         DarkColors
-     } else {
-         LightColors
-     }*/
-
     val useDynamicColors = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val colors = when {
         useDynamicColors && darkTheme -> dynamicDarkColorScheme(LocalContext.current)
@@ -85,7 +78,8 @@ fun MyCityAppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composa
 
     MaterialTheme(
         colorScheme = colors,
-        typography = myCityApptTypography,
-        content = content
+        typography = myCityAppTypography,
+        content = content,
+        shapes = Shapes
     )
 }

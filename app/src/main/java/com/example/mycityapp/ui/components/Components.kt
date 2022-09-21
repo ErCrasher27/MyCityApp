@@ -2,9 +2,7 @@ package com.example.mycityapp.ui.components
 
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.*
@@ -58,12 +56,12 @@ fun CategoryCard(
             TextWithShadow(
                 text = category.nameCategory.name,
                 modifier = modifier.padding(top = 10.dp),
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleLarge
             )
             TextWithShadow(
                 text = stringResource(id = category.descriptionCategory),
                 modifier = modifier.padding(top = 0.dp),
-                style = MaterialTheme.typography.labelMedium
+                style = MaterialTheme.typography.bodyMedium
             )
         }
 
@@ -84,11 +82,11 @@ fun PlaceCard(
 ) {
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
         ),
+        shape = MaterialTheme.shapes.large,
         modifier = modifier
             .padding(horizontal = horizontalPadding.dp, vertical = verticalPadding.dp)
-            .clip(RoundedCornerShape(8.dp))
             .fillMaxSize(),
         onClick = { onPlaceClick(place) },
     ) {
@@ -110,8 +108,7 @@ fun PlaceCard(
             Column(
                 modifier = modifier
                     .padding(horizontal = 8.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(MaterialTheme.colorScheme.surface)
+                    .clip(MaterialTheme.shapes.large)
                     .padding(vertical = 8.dp)
             ) {
                 LocationPlace(
@@ -144,8 +141,9 @@ fun DetailsPlaceCard(
 ) {
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface,
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
         ),
+        shape = MaterialTheme.shapes.large,
         modifier = modifier
             .fillMaxSize()
             .padding(vertical = 4.dp)
@@ -154,7 +152,7 @@ fun DetailsPlaceCard(
             IconButton(onClick = onClose) {
                 Icon(
                     imageVector = Icons.Default.Close,
-                    contentDescription = stringResource(id = R.string.close_details_place)
+                    contentDescription = stringResource(id = R.string.close_details_place),
                 )
             }
         }

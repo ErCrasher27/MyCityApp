@@ -147,7 +147,6 @@ fun MyCityApp(
                                 modifier = Modifier
                                     .fillMaxHeight()
                                     .width(1.dp)
-                                    .background(MaterialTheme.colorScheme.primary)
                             )
                             if (myCityAppUiState.currentDetails != null) {
                                 DetailsPlaceCard(

@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.sp
 import com.example.mycityapp.R
 
 // Material 3 typography
-val myCityApptTypography = Typography(
+val myCityAppTypography = Typography(
     headlineLarge = TextStyle(
         fontWeight = FontWeight.SemiBold,
         fontSize = 32.sp,

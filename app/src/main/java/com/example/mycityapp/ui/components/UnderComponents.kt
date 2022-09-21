@@ -4,7 +4,6 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Phone
@@ -17,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
@@ -36,13 +36,11 @@ fun TitleAndDescriptionPlace(place: Place, modifier: Modifier = Modifier) {
     ) {
         Text(
             text = stringResource(place.name),
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onPrimaryContainer
+            style = MaterialTheme.typography.titleLarge,
         )
         Text(
             text = "\"" + stringResource(place.descriptionPlace) + "\"",
-            style = MaterialTheme.typography.labelMedium,
-            color = MaterialTheme.colorScheme.onPrimaryContainer
+            style = MaterialTheme.typography.bodyMedium,
         )
     }
 }
@@ -62,13 +60,11 @@ fun LocationPlace(
         Icon(
             imageVector = Icons.Default.LocationOn,
             contentDescription = stringResource(location),
-            tint = MaterialTheme.colorScheme.onSecondaryContainer
         )
         Spacer(modifier = Modifier.width(2.dp))
         Text(
             text = stringResource(location),
             style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.onSecondaryContainer
         )
     }
 }
@@ -88,13 +84,11 @@ fun PhonePlace(
         Icon(
             imageVector = Icons.Default.Phone,
             contentDescription = stringResource(id = numberPhone),
-            tint = MaterialTheme.colorScheme.onSecondaryContainer
         )
         Spacer(modifier = Modifier.width(2.dp))
         Text(
             text = stringResource(numberPhone),
             style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.onSecondaryContainer
         )
     }
 }
@@ -123,8 +117,7 @@ fun StarsPlace(
         repeat(repeater) {
             Icon(
                 imageVector = Icons.Default.Star,
-                contentDescription = star.name,
-                tint = MaterialTheme.colorScheme.onTertiaryContainer
+                contentDescription = star.name
             )
         }
     }
@@ -147,7 +140,7 @@ fun ImagePlace(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(8.dp)
-                .clip(RoundedCornerShape(8.dp))
+                .clip(MaterialTheme.shapes.large)
         )
     }
 }
@@ -161,20 +154,20 @@ fun TextWithShadow(
     Box {
         Text(
             text = text,
-            color = DarkGray,
             modifier = modifier
                 .offset(
                     x = 2.dp,
                     y = 2.dp
                 )
                 .alpha(0.75f),
-            style = style
+            style = style,
+            color = DarkGray
         )
         Text(
             text = text,
-            color = White,
             modifier = modifier,
-            style = style
+            style = style,
+            color = White
         )
     }
 }

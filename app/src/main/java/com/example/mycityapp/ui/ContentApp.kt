@@ -123,7 +123,8 @@ fun CategoriesHorizontalListsWithHeader(
                 },
             colors = CardDefaults.cardColors(
                 containerColor = Color(categories[page].backgroundColor)
-            )
+            ),
+            shape = MaterialTheme.shapes.large
         ) {
             CategoryCard(
                 category = categories[page],
@@ -170,8 +171,9 @@ fun BestPlacesHorizontalListWithHeader(
                     )
                 },
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.secondary
-            )
+                containerColor = MaterialTheme.colorScheme.surfaceVariant,
+            ),
+            shape = MaterialTheme.shapes.large
         ) {
             PlaceCard(
                 place = bestPlacesWithFourOrMoreStars[page], onPlaceClick = {
