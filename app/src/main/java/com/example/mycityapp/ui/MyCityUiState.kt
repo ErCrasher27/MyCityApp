@@ -5,5 +5,6 @@ import com.example.mycityapp.data.model.Place
 
 data class MyCityUiState(
     val currentTab: CategoryName = CategoryName.Homepage,
-    val currentDetails: Place? = null
+    val currentDetails: Place? = null,
+    val isInHomePage: Boolean = true
 )

@@ -60,6 +60,7 @@ fun MyCityApp(
                                 viewModel.updateCurrentCategory(category = category)
                             },
                             viewModel = viewModel,
+                            isInHomePage = myCityAppUiState.isInHomePage
                         )
                     }
                 }, bottomBar = {
@@ -67,6 +68,11 @@ fun MyCityApp(
                         currentTab = myCityAppUiState.currentTab,
                         onTabPressed = { category: CategoryName ->
                             viewModel.updateCurrentCategory(category = category)
+                            if (category == CategoryName.Homepage) {
+                                viewModel.updateIsInHomepage(isInHomePage = true)
+                            } else {
+                                viewModel.updateIsInHomepage(isInHomePage = false)
+                            }
                         },
                     )
                 }
@@ -88,6 +94,11 @@ fun MyCityApp(
                     currentTab = myCityAppUiState.currentTab,
                     onTabPressed = { category: CategoryName ->
                         viewModel.updateCurrentCategory(category = category)
+                        if (category == CategoryName.Homepage) {
+                            viewModel.updateIsInHomepage(isInHomePage = true)
+                        } else {
+                            viewModel.updateIsInHomepage(isInHomePage = false)
+                        }
                     },
                 )
                 Column(
@@ -102,6 +113,7 @@ fun MyCityApp(
                             viewModel.updateCurrentCategory(category = category)
                         },
                         viewModel = viewModel,
+                        isInHomePage = myCityAppUiState.isInHomePage
                     )
                 }
             }
@@ -117,6 +129,11 @@ fun MyCityApp(
                             selectedDestination = myCityAppUiState.currentTab,
                             onTabPressed = { category: CategoryName ->
                                 viewModel.updateCurrentCategory(category = category)
+                                if (category == CategoryName.Homepage) {
+                                    viewModel.updateIsInHomepage(isInHomePage = true)
+                                } else {
+                                    viewModel.updateIsInHomepage(isInHomePage = false)
+                                }
                             }
                         )
                     }
@@ -140,6 +157,7 @@ fun MyCityApp(
                                     viewModel.updateCurrentCategory(category = category)
                                 },
                                 viewModel = viewModel,
+                                isInHomePage = myCityAppUiState.isInHomePage
                             )
                             Spacer(
                                 modifier = Modifier

@@ -33,6 +33,7 @@ fun OnlyListCards(
     currentTab: CategoryName,
     onCardClick: (CategoryName) -> Unit,
     viewModel: MyCityViewModel,
+    isInHomePage: Boolean
 ) {
     if (currentTab.name == CategoryName.Homepage.name) {
         LazyColumn {
@@ -43,7 +44,8 @@ fun OnlyListCards(
                 BestPlacesHorizontalListWithHeader(
                     onCardClick = onCardClick,
                     title = "Best Ratings",
-                    viewModel = viewModel
+                    viewModel = viewModel,
+                    isInHomePage = isInHomePage
                 )
                 Spacer(modifier = Modifier.height(10.dp))
             }
@@ -51,7 +53,7 @@ fun OnlyListCards(
         }
 
     } else {
-        PlacesLists(currentTab = currentTab, viewModel = viewModel)
+        PlacesLists(currentTab = currentTab, viewModel = viewModel, isInHomePage = isInHomePage)
     }
 }
 
@@ -61,6 +63,7 @@ fun ListAndDetailsCard(
     currentTab: CategoryName,
     onCardClick: (CategoryName) -> Unit,
     viewModel: MyCityViewModel,
+    isInHomePage: Boolean
 ) {
     Row(horizontalArrangement = Arrangement.Start, modifier = Modifier.width(600.dp)) {
         if (currentTab.name == CategoryName.Homepage.name) {
@@ -75,13 +78,14 @@ fun ListAndDetailsCard(
                     BestPlacesHorizontalListWithHeader(
                         onCardClick = onCardClick,
                         title = "Best Ratings",
-                        viewModel = viewModel
+                        viewModel = viewModel,
+                        isInHomePage = isInHomePage
                     )
                     Spacer(modifier = Modifier.height(10.dp))
                 }
             }
         } else {
-            PlacesLists(currentTab = currentTab, viewModel = viewModel)
+            PlacesLists(currentTab = currentTab, viewModel = viewModel, isInHomePage = isInHomePage)
         }
     }
 }
@@ -140,6 +144,7 @@ fun BestPlacesHorizontalListWithHeader(
     modifier: Modifier = Modifier,
     title: String,
     viewModel: MyCityViewModel,
+    isInHomePage: Boolean
 ) {
     val bestPlacesWithFourOrMoreStars =
         places.filter { place -> place.ratingPlace == Rate.STAR4 || place.ratingPlace == Rate.STAR5 }
@@ -180,7 +185,7 @@ fun BestPlacesHorizontalListWithHeader(
                     viewModel.updateCurrentDetails(it)
                 }, horizontalPadding = 0,
                 verticalPadding = 0,
-                isInHomePage = true
+                isInHomePage = isInHomePage
             )
         }
     }
@@ -190,7 +195,8 @@ fun BestPlacesHorizontalListWithHeader(
 fun PlacesLists(
     currentTab: CategoryName,
     viewModel: MyCityViewModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isInHomePage: Boolean
 ) {
     LazyColumn(modifier) {
         items(LocalPlaceData.places.filter { it.category.nameCategory.name == currentTab.name }) { place ->
@@ -200,7 +206,8 @@ fun PlacesLists(
                     viewModel.updateCurrentDetails(it)
                 },
                 horizontalPadding = 18,
-                verticalPadding = 8
+                verticalPadding = 18,
+                isInHomePage = isInHomePage
             )
         }
     }

@@ -26,4 +26,12 @@ class MyCityViewModel : ViewModel() {
             )
         }
     }
+
+    fun updateIsInHomepage(isInHomePage: Boolean) {
+        _uiState.update {
+            it.copy(
+                isInHomePage = isInHomePage
+            )
+        }
+    }
 }

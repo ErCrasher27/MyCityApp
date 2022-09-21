@@ -5,12 +5,8 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Phone
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -169,3 +165,36 @@ fun TextWithShadow(
         )
     }
 }
+
+@Composable
+fun ClickToGo(modifier: Modifier = Modifier) {
+    Button(
+        onClick = { /*TODO*/ },
+        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+    ) {
+        Icon(
+            imageVector = Icons.Default.Navigation,
+            contentDescription = "Navigate",
+            modifier = Modifier.size(ButtonDefaults.IconSize)
+        )
+        Spacer(Modifier.size(ButtonDefaults.IconSize))
+        Text(text = "Navigate")
+    }
+}
+
+@Composable
+fun ClickForMore(modifier: Modifier = Modifier) {
+    Button(
+        onClick = { /*TODO*/ },
+        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
+    ) {
+        Icon(
+            imageVector = Icons.Default.UnfoldMore,
+            contentDescription = "More Details",
+            modifier = Modifier.size(ButtonDefaults.IconSize)
+        )
+        Spacer(Modifier.size(ButtonDefaults.IconSize))
+        Text(text = "More Details")
+    }
+}
+
