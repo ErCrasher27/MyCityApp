@@ -55,10 +55,18 @@ fun CategoryCard(
             modifier = modifier.fillMaxSize()
         )
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            TextWithShadow(text = category.nameCategory.name, modifier = modifier.padding(top = 10.dp), style =  MaterialTheme.typography.titleLarge)
-            TextWithShadow(text = stringResource(id = category.descriptionCategory), modifier = modifier.padding(top = 0.dp),  style = MaterialTheme.typography.labelMedium)
+            TextWithShadow(
+                text = category.nameCategory.name,
+                modifier = modifier.padding(top = 10.dp),
+                style = MaterialTheme.typography.titleLarge
+            )
+            TextWithShadow(
+                text = stringResource(id = category.descriptionCategory),
+                modifier = modifier.padding(top = 0.dp),
+                style = MaterialTheme.typography.labelMedium
+            )
         }
-                
+
     }
 
 }
@@ -80,7 +88,8 @@ fun PlaceCard(
         ),
         modifier = modifier
             .padding(horizontal = horizontalPadding.dp, vertical = verticalPadding.dp)
-            .clip(RoundedCornerShape(8.dp)),
+            .clip(RoundedCornerShape(8.dp))
+            .fillMaxSize(),
         onClick = { onPlaceClick(place) },
     ) {
         Column(
@@ -128,7 +137,12 @@ fun DetailsPlace(place: Place, onClose: () -> Unit) {
 }
 
 @Composable
-fun DetailsPlaceCard(place: Place, onClose: () -> Unit, modifier: Modifier = Modifier, navigationType: MyCityNavigationType = MyCityNavigationType.BOTTOM_NAVIGATION) {
+fun DetailsPlaceCard(
+    place: Place,
+    onClose: () -> Unit,
+    modifier: Modifier = Modifier,
+    navigationType: MyCityNavigationType = MyCityNavigationType.BOTTOM_NAVIGATION
+) {
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface,
@@ -137,7 +151,7 @@ fun DetailsPlaceCard(place: Place, onClose: () -> Unit, modifier: Modifier = Mod
             .fillMaxSize()
             .padding(vertical = 4.dp)
     ) {
-        if(navigationType != MyCityNavigationType.PERMANENT_NAVIGATION_DRAWER){
+        if (navigationType != MyCityNavigationType.PERMANENT_NAVIGATION_DRAWER) {
             IconButton(onClick = onClose) {
                 Icon(
                     imageVector = Icons.Default.Close,

@@ -3,10 +3,8 @@ package com.example.mycityapp.ui.components
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.MagnifierStyle
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Colors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Phone
@@ -19,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.BlendMode.Companion.Color
 import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
@@ -27,7 +24,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.data.model.Place
 import com.example.mycityapp.data.model.Rate
 
@@ -156,35 +152,13 @@ fun ImagePlace(
     }
 }
 
-/*@Composable
-fun ImageCategory(
-    @DrawableRes imageCategory: Int,
-    nameCategory: CategoryName,
-    modifier: Modifier = Modifier
-) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-    ) {
-        Image(
-            painter = painterResource(id = imageCategory),
-            contentDescription = nameCategory.name,
-            contentScale = ContentScale.Crop,
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(4.dp)
-                .clip(RoundedCornerShape(8.dp))
-        )
-    }
-}*/
-
 @Composable
 fun TextWithShadow(
     text: String,
     modifier: Modifier,
     style: TextStyle,
 ) {
-    Box(){
+    Box {
         Text(
             text = text,
             color = DarkGray,

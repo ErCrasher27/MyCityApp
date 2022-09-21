@@ -143,7 +143,12 @@ fun MyCityApp(
                                 },
                                 viewModel = viewModel,
                             )
-                            Spacer(modifier = Modifier.fillMaxHeight().width(1.dp).background(MaterialTheme.colorScheme.primary))
+                            Spacer(
+                                modifier = Modifier
+                                    .fillMaxHeight()
+                                    .width(1.dp)
+                                    .background(MaterialTheme.colorScheme.primary)
+                            )
                             if (myCityAppUiState.currentDetails != null) {
                                 DetailsPlaceCard(
                                     place = myCityAppUiState.currentDetails,

@@ -19,7 +19,6 @@ import com.example.mycityapp.data.local.LocalPlaceData.places
 import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.data.model.Rate
 import com.example.mycityapp.ui.components.CategoryCard
-import com.example.mycityapp.ui.components.DetailsPlaceCard
 import com.example.mycityapp.ui.components.HeaderListCard
 import com.example.mycityapp.ui.components.PlaceCard
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -68,7 +67,10 @@ fun ListAndDetailsCard(
             LazyColumn {
                 items(1) {
                     Spacer(modifier = Modifier.height(10.dp))
-                    CategoriesHorizontalListsWithHeader(onCardClick = onCardClick, title = "Categories")
+                    CategoriesHorizontalListsWithHeader(
+                        onCardClick = onCardClick,
+                        title = "Categories"
+                    )
                     Spacer(modifier = Modifier.height(40.dp))
                     BestPlacesHorizontalListWithHeader(
                         onCardClick = onCardClick,
@@ -95,14 +97,13 @@ fun CategoriesHorizontalListsWithHeader(
     HorizontalPager(
         count = categories.size,
         modifier,
-        contentPadding = PaddingValues(horizontal = 110.dp)
+        contentPadding = PaddingValues(horizontal = 80.dp)
     ) { page ->
 
         Card(
-
             onClick = { onCardClick(categories[page].nameCategory) },
             Modifier
-                .width(350.dp)
+                .width(600.dp)
                 .height(250.dp)
                 .graphicsLayer {
                     val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
@@ -150,8 +151,8 @@ fun BestPlacesHorizontalListWithHeader(
         Card(
             onClick = { onCardClick(bestPlacesWithFourOrMoreStars[page].category.nameCategory) },
             Modifier
-                .width(500.dp)
-                .height(175.dp)
+                .width(600.dp)
+                .height(190.dp)
                 .graphicsLayer {
                     val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
                     lerp(
