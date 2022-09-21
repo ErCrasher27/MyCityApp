@@ -167,9 +167,12 @@ fun TextWithShadow(
 }
 
 @Composable
-fun ClickToGo(modifier: Modifier = Modifier) {
+fun ClickToGo(
+    onClick: (Place) -> Unit,
+    modifier: Modifier = Modifier
+) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = {},
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
     ) {
         Icon(
@@ -183,9 +186,13 @@ fun ClickToGo(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ClickForMore(modifier: Modifier = Modifier) {
+fun ClickForMore(
+    onClick: (Place) -> Unit,
+    place: Place,
+    modifier: Modifier = Modifier
+) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = { onClick(place) },
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
     ) {
         Icon(

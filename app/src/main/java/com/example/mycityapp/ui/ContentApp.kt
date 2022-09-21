@@ -152,13 +152,13 @@ fun BestPlacesHorizontalListWithHeader(
     HorizontalPager(
         count = bestPlacesWithFourOrMoreStars.size,
         modifier,
-        contentPadding = PaddingValues(horizontal = 35.dp)
+        contentPadding = PaddingValues(horizontal = 40.dp)
     ) { page ->
         Card(
             onClick = { onCardClick(bestPlacesWithFourOrMoreStars[page].category.nameCategory) },
             Modifier
-                .width(600.dp)
-                .height(190.dp)
+                .width(500.dp)
+                .height(225.dp)
                 .graphicsLayer {
                     val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
                     lerp(

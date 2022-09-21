@@ -18,7 +18,6 @@ import androidx.compose.ui.window.Dialog
 import com.example.mycityapp.R
 import com.example.mycityapp.data.model.Category
 import com.example.mycityapp.data.model.Place
-import com.example.mycityapp.ui.MyCityUiState
 import com.example.mycityapp.ui.utils.MyCityNavigationType
 
 @Composable
@@ -88,8 +87,7 @@ fun PlaceCard(
         shape = MaterialTheme.shapes.large,
         modifier = modifier
             .padding(horizontal = horizontalPadding.dp, vertical = verticalPadding.dp)
-            .fillMaxSize(),
-        onClick = { onPlaceClick(place) },
+            .fillMaxSize()
     ) {
         Column(
             modifier = modifier
@@ -119,15 +117,19 @@ fun PlaceCard(
                 Spacer(modifier = Modifier.height(4.dp))
                 StarsPlace(star = place.ratingPlace, horizontalArrangement = Arrangement.Start)
             }
-            if (!isInHomePage) {
-                Row(
-                    modifier = modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    ClickToGo()
-                    ClickForMore()
-                }
+            Row(
+                modifier = modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                ClickToGo(
+                    onClick = {}
+                )
+                ClickForMore(
+                    onClick = onPlaceClick,
+                    place = place
+                )
             }
+
         }
 
     }
