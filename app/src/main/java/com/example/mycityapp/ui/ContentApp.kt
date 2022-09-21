@@ -158,7 +158,7 @@ fun BestPlacesHorizontalListWithHeader(
             onClick = { onCardClick(bestPlacesWithFourOrMoreStars[page].category.nameCategory) },
             Modifier
                 .width(500.dp)
-                .height(225.dp)
+                .height(230.dp)
                 .graphicsLayer {
                     val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
                     lerp(

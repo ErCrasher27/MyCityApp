@@ -192,10 +192,9 @@ fun DetailsPlaceCard(
                 PhonePlace(numberPhone = place.phonePlace)
             }
         }
+        //to implement map
     }
 }
-
-//Details for DrawerContenet
 
 
 

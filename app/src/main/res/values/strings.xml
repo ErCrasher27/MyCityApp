@@ -4,6 +4,10 @@
     <!-- UTILS !-->
     <string name="navigation_back">Back</string>
     <string name="close_details_place">Close</string>
+    <!-- BUTTONS !-->
+    <string name="more_details_place">More Details</string>
+    <string name="navigate_to_place">Navigatie</string>
+
 
     <!-- CATEGORIES !-->
     <string name="category_activities_description">outdoor activity</string>

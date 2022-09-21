@@ -19,8 +19,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import com.example.mycityapp.R
 import com.example.mycityapp.data.model.Place
 import com.example.mycityapp.data.model.Rate
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerState
+import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
 fun TitleAndDescriptionPlace(place: Place, modifier: Modifier = Modifier) {
@@ -177,11 +184,11 @@ fun ClickToGo(
     ) {
         Icon(
             imageVector = Icons.Default.Navigation,
-            contentDescription = "Navigate",
+            contentDescription = stringResource(id = R.string.navigate_to_place),
             modifier = Modifier.size(ButtonDefaults.IconSize)
         )
-        Spacer(Modifier.size(ButtonDefaults.IconSize))
-        Text(text = "Navigate")
+        /*Spacer(Modifier.size(ButtonDefaults.IconSize))
+        Text(text = "Navigate")*/
     }
 }
 
@@ -197,11 +204,31 @@ fun ClickForMore(
     ) {
         Icon(
             imageVector = Icons.Default.UnfoldMore,
-            contentDescription = "More Details",
+            contentDescription = stringResource(id = R.string.more_details_place),
             modifier = Modifier.size(ButtonDefaults.IconSize)
         )
-        Spacer(Modifier.size(ButtonDefaults.IconSize))
-        Text(text = "More Details")
+        /*Spacer(Modifier.size(ButtonDefaults.IconSize))
+        Text(text = "More Details")*/
+    }
+}
+
+@Composable
+fun Maps() {
+    Column(modifier = Modifier.fillMaxSize()) {
+        val singapore = LatLng(1.35, 103.87)
+        val cameraPositionState = rememberCameraPositionState {
+            position = CameraPosition.fromLatLngZoom(singapore, 10f)
+        }
+        GoogleMap(
+            modifier = Modifier.fillMaxSize(),
+            cameraPositionState = cameraPositionState
+        ) {
+            Marker(
+                state = MarkerState(position = singapore),
+                title = "Singapore",
+                snippet = "Marker in Singapore"
+            )
+        }
     }
 }
 
