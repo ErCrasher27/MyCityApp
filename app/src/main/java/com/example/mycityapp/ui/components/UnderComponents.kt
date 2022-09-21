@@ -16,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
@@ -106,13 +105,12 @@ fun StarsPlace(
             .fillMaxWidth()
             .padding(start = 8.dp)
     ) {
-        val repeater: Int
-        when (star) {
-            Rate.STAR1 -> repeater = 1
-            Rate.STAR2 -> repeater = 2
-            Rate.STAR3 -> repeater = 3
-            Rate.STAR4 -> repeater = 4
-            Rate.STAR5 -> repeater = 5
+        val repeater: Int = when (star) {
+            Rate.STAR1 -> 1
+            Rate.STAR2 -> 2
+            Rate.STAR3 -> 3
+            Rate.STAR4 -> 4
+            Rate.STAR5 -> 5
         }
         repeat(repeater) {
             Icon(

@@ -23,22 +23,21 @@ fun MyCityApp(
     windowSize: WindowWidthSizeClass,
     modifier: Modifier = Modifier
 ) {
-    val navigationType: MyCityNavigationType
     val viewModel: MyCityViewModel = viewModel()
     val myCityAppUiState = viewModel.uiState.collectAsState().value
 
-    when (windowSize) {
+    val navigationType: MyCityNavigationType = when (windowSize) {
         WindowWidthSizeClass.Compact -> {
-            navigationType = MyCityNavigationType.BOTTOM_NAVIGATION
+            MyCityNavigationType.BOTTOM_NAVIGATION
         }
         WindowWidthSizeClass.Medium -> {
-            navigationType = MyCityNavigationType.NAVIGATION_RAIL
+            MyCityNavigationType.NAVIGATION_RAIL
         }
         WindowWidthSizeClass.Expanded -> {
-            navigationType = MyCityNavigationType.PERMANENT_NAVIGATION_DRAWER
+            MyCityNavigationType.PERMANENT_NAVIGATION_DRAWER
         }
         else -> {
-            navigationType = MyCityNavigationType.BOTTOM_NAVIGATION
+            MyCityNavigationType.BOTTOM_NAVIGATION
         }
     }
 
@@ -110,7 +109,6 @@ fun MyCityApp(
         }
 
         MyCityNavigationType.PERMANENT_NAVIGATION_DRAWER -> {
-
             PermanentNavigationDrawer(
                 drawerContent = {
                     PermanentDrawerSheet(Modifier.width(240.dp)) {
