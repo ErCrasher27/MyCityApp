@@ -201,7 +201,7 @@ fun ClickToGo(
 fun ClickToCall(onClick: (Place) -> Unit, modifier: Modifier = Modifier) {
     Button(
         onClick = {},
-        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiary),
         modifier = modifier.widthIn(100.dp)
     ) {
         Icon(
@@ -225,7 +225,7 @@ fun ClickForMore(
         modifier = modifier.widthIn(100.dp)
     ) {
         Icon(
-            imageVector = Icons.Default.UnfoldMore,
+            imageVector = Icons.Default.Add,
             contentDescription = stringResource(id = R.string.more_details_place),
             modifier = Modifier.size(ButtonDefaults.IconSize)
         )

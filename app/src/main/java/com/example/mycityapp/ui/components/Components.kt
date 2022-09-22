@@ -1,8 +1,10 @@
 package com.example.mycityapp.ui.components
 
 
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.ScrollableDefaults
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
@@ -163,8 +165,6 @@ fun DetailsPlaceCard(
         shape = MaterialTheme.shapes.large,
         modifier = modifier
             .fillMaxSize()
-            .padding(vertical = 4.dp)
-            .verticalScroll(rememberScrollState())
     ) {
         if (navigationType != MyCityNavigationType.PERMANENT_NAVIGATION_DRAWER) {
             IconButton(onClick = onClose) {
@@ -175,46 +175,41 @@ fun DetailsPlaceCard(
             }
         }
         Column(
-            modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Top
+            modifier
+                .weight(10f)
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
+                .padding(bottom = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            Column(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 13.dp)
-            ) {
-                TitleAndDescriptionPlace(place = place)
-                Spacer(modifier = Modifier.height(4.dp))
-                StarsPlace(
-                    star = place.ratingPlace,
-                    horizontalArrangement = Arrangement.Center
-                )
-            }
+            TitleAndDescriptionPlace(place = place)
+            StarsPlace(
+                star = place.ratingPlace,
+                horizontalArrangement = Arrangement.Center
+            )
             ImagePlace(imagePlace = place.photoPlace, namePlace = place.name)
-            Spacer(modifier = Modifier.height(4.dp))
             LocationPlace(
                 location = place.locationPlace,
                 horizontalArrangement = Arrangement.Center
             )
-            Spacer(modifier = Modifier.height(4.dp))
             if (place.phonePlace != null) {
                 PhonePlace(numberPhone = place.phonePlace)
             }
-            Spacer(modifier = Modifier.height(4.dp))
             MapPlace(place = place)
-            Spacer(modifier = Modifier.height(4.dp))
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = modifier.fillMaxWidth()
-            ) {
-                ClickToCall(
-                    onClick = {}
-                )
-                ClickToGo(
-                    onClick = {},
-                    navigationType = MyCityNavigationType.PERMANENT_NAVIGATION_DRAWER,
-                )
-            }
+        }
+        Row(
+            modifier = modifier
+                .weight(1f)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            ClickToCall(
+                onClick = {}
+            )
+            ClickToGo(
+                onClick = {},
+                navigationType = MyCityNavigationType.PERMANENT_NAVIGATION_DRAWER,
+            )
         }
     }
 }
