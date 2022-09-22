@@ -24,7 +24,6 @@ import com.example.mycityapp.data.model.Place
 import com.example.mycityapp.data.model.Rate
 import com.example.mycityapp.ui.utils.MyCityNavigationType
 import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
@@ -74,7 +73,7 @@ fun LocationPlace(
 
 @Composable
 fun PhonePlace(
-    @StringRes numberPhone: Int,
+    numberPhone: String,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -86,11 +85,11 @@ fun PhonePlace(
     ) {
         Icon(
             imageVector = Icons.Default.Phone,
-            contentDescription = stringResource(id = numberPhone),
+            contentDescription = numberPhone,
         )
         Spacer(modifier = Modifier.width(2.dp))
         Text(
-            text = stringResource(numberPhone),
+            text = numberPhone,
             style = MaterialTheme.typography.labelSmall,
         )
     }
@@ -198,9 +197,15 @@ fun ClickToGo(
 }
 
 @Composable
-fun ClickToCall(onClick: (Place) -> Unit, modifier: Modifier = Modifier) {
+fun ClickToCall(
+    onClickToCall: (String) -> Unit,
+    place: Place,
+    enablePhone: Boolean,
+    modifier: Modifier = Modifier
+) {
     Button(
-        onClick = {},
+        enabled = enablePhone,
+        onClick = { place.phonePlace?.let { onClickToCall(it) } },
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiary),
         modifier = modifier.widthIn(100.dp)
     ) {

@@ -68,5 +68,13 @@ dependencies {
 
     implementation 'com.google.maps.android:maps-compose:2.5.3'
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
-    
+
+    implementation "androidx.activity:activity-ktx:1.6.0"
+    implementation "androidx.fragment:fragment-ktx:1.5.3"
+
+    implementation 'com.google.accompanist:accompanist-permissions:0.26.3-beta'
+
+    debugImplementation "androidx.fragment:fragment-testing:1.5.3"
+
+
 }

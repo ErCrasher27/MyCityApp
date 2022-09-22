@@ -1,12 +1,8 @@
 package com.example.mycityapp.ui.components
 
 
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.gestures.ScrollableDefaults
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -144,10 +140,16 @@ fun PlaceCard(
 
 
 @Composable
-fun DetailsPlace(place: Place, onClose: () -> Unit) {
+fun DetailsPlace(place: Place, onClose: () -> Unit, onClickToCall: (String) -> Unit) {
     Dialog(
         onDismissRequest = onClose,
-        content = { DetailsPlaceCard(place = place, onClose = onClose) }
+        content = {
+            DetailsPlaceCard(
+                place = place,
+                onClose = onClose,
+                onClickToCall = onClickToCall
+            )
+        }
     )
 }
 
@@ -155,6 +157,7 @@ fun DetailsPlace(place: Place, onClose: () -> Unit) {
 fun DetailsPlaceCard(
     place: Place,
     onClose: () -> Unit,
+    onClickToCall: (String) -> Unit,
     modifier: Modifier = Modifier,
     navigationType: MyCityNavigationType = MyCityNavigationType.BOTTOM_NAVIGATION
 ) {
@@ -203,8 +206,11 @@ fun DetailsPlaceCard(
                 .padding(top = 2.dp, bottom = 2.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
+            val enablePhone = place.phonePlace != null
             ClickToCall(
-                onClick = {}
+                onClickToCall = onClickToCall,
+                place = place,
+                enablePhone = enablePhone,
             )
             ClickToGo(
                 onClick = {},

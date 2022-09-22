@@ -25,7 +25,7 @@ data class Place(
     @StringRes val descriptionPlace: Int,
     @DrawableRes val photoPlace: Int,
     @StringRes val locationPlace: Int,
-    @StringRes val phonePlace: Int? = null,
+    val phonePlace: String? = null,
     val latLng: LatLng,
     val ratingPlace: Rate,
 )

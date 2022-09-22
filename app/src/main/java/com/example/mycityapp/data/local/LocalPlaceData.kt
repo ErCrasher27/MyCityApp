@@ -17,7 +17,7 @@ object LocalPlaceData {
             photoPlace = R.drawable.place_activities_image_1,
             locationPlace = R.string.place_activities_location1,
             latLng = LatLng(41.07592251854585, 14.327369549252298),
-            phonePlace = R.string.place_activities_phone1,
+            phonePlace = "327 903 0132",
             ratingPlace = Rate.STAR4
         ),
         Place(

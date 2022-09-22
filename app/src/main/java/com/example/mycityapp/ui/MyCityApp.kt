@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -16,8 +17,10 @@ import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.ui.components.DetailsPlace
 import com.example.mycityapp.ui.components.DetailsPlaceCard
 import com.example.mycityapp.ui.utils.MyCityNavigationType
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberPermissionState
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
 fun MyCityApp(
     windowSize: WindowWidthSizeClass,
@@ -25,6 +28,8 @@ fun MyCityApp(
 ) {
     val viewModel: MyCityViewModel = viewModel()
     val myCityAppUiState = viewModel.uiState.collectAsState().value
+    val phonePermissionState =
+        rememberPermissionState(permission = android.Manifest.permission.CALL_PHONE)
 
     val navigationType: MyCityNavigationType = when (windowSize) {
         WindowWidthSizeClass.Compact -> {
@@ -45,9 +50,17 @@ fun MyCityApp(
 
         MyCityNavigationType.BOTTOM_NAVIGATION -> {
             if (myCityAppUiState.currentDetails != null) {
+                val context = LocalContext.current
                 DetailsPlace(
                     place = myCityAppUiState.currentDetails,
-                    onClose = { viewModel.updateCurrentDetails(null) })
+                    onClose = { viewModel.updateCurrentDetails(null) },
+                    onClickToCall = {
+                        viewModel.callPlace(
+                            context = context,
+                            phoneNumber = myCityAppUiState.currentDetails.phonePlace
+                        )
+                    }
+                )
             }
             Scaffold(
                 containerColor = MaterialTheme.colorScheme.background,
@@ -83,9 +96,17 @@ fun MyCityApp(
 
         MyCityNavigationType.NAVIGATION_RAIL -> {
             if (myCityAppUiState.currentDetails != null) {
+                val context = LocalContext.current
                 DetailsPlace(
                     place = myCityAppUiState.currentDetails,
-                    onClose = { viewModel.updateCurrentDetails(null) })
+                    onClose = { viewModel.updateCurrentDetails(null) },
+                    onClickToCall = {
+                        viewModel.callPlace(
+                            context = context,
+                            phoneNumber = myCityAppUiState.currentDetails.phonePlace
+                        )
+                    })
+
             }
             Row(
                 modifier = modifier
@@ -168,10 +189,17 @@ fun MyCityApp(
                                     .width(1.dp)
                             )
                             if (myCityAppUiState.currentDetails != null) {
+                                val context = LocalContext.current
                                 DetailsPlaceCard(
                                     place = myCityAppUiState.currentDetails,
                                     onClose = { viewModel.updateCurrentDetails(null) },
-                                    navigationType = MyCityNavigationType.PERMANENT_NAVIGATION_DRAWER
+                                    navigationType = MyCityNavigationType.PERMANENT_NAVIGATION_DRAWER,
+                                    onClickToCall = {
+                                        viewModel.callPlace(
+                                            context = context,
+                                            phoneNumber = myCityAppUiState.currentDetails.phonePlace
+                                        )
+                                    }
                                 )
                             }
                         }
@@ -181,5 +209,3 @@ fun MyCityApp(
         }
     }
 }
-
-
