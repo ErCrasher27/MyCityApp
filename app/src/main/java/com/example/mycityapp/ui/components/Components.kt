@@ -2,7 +2,11 @@ package com.example.mycityapp.ui.components
 
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.gestures.ScrollableDefaults
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.*
@@ -78,6 +82,7 @@ fun PlaceCard(
     horizontalPadding: Int,
     verticalPadding: Int,
     isInHomePage: Boolean,
+    navigationType: MyCityNavigationType,
     modifier: Modifier = Modifier,
 ) {
     Card(
@@ -122,16 +127,16 @@ fun PlaceCard(
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 ClickToGo(
-                    onClick = {}
+                    onClick = {},
+                    navigationType = navigationType
                 )
                 ClickForMore(
                     onClick = onPlaceClick,
-                    place = place
+                    place = place,
+                    navigationType = navigationType
                 )
             }
-
         }
-
     }
 }
 
@@ -159,6 +164,7 @@ fun DetailsPlaceCard(
         modifier = modifier
             .fillMaxSize()
             .padding(vertical = 4.dp)
+            .verticalScroll(rememberScrollState())
     ) {
         if (navigationType != MyCityNavigationType.PERMANENT_NAVIGATION_DRAWER) {
             IconButton(onClick = onClose) {
@@ -179,7 +185,10 @@ fun DetailsPlaceCard(
             ) {
                 TitleAndDescriptionPlace(place = place)
                 Spacer(modifier = Modifier.height(4.dp))
-                StarsPlace(star = place.ratingPlace, horizontalArrangement = Arrangement.Center)
+                StarsPlace(
+                    star = place.ratingPlace,
+                    horizontalArrangement = Arrangement.Center
+                )
             }
             ImagePlace(imagePlace = place.photoPlace, namePlace = place.name)
             Spacer(modifier = Modifier.height(4.dp))
@@ -191,10 +200,27 @@ fun DetailsPlaceCard(
             if (place.phonePlace != null) {
                 PhonePlace(numberPhone = place.phonePlace)
             }
+            Spacer(modifier = Modifier.height(4.dp))
+            MapPlace(place = place)
+            Spacer(modifier = Modifier.height(4.dp))
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = modifier.fillMaxWidth()
+            ) {
+                ClickToCall(
+                    onClick = {}
+                )
+                ClickToGo(
+                    onClick = {},
+                    navigationType = MyCityNavigationType.PERMANENT_NAVIGATION_DRAWER,
+                )
+            }
         }
-        //to implement map
     }
 }
+
+
+
 
 
 

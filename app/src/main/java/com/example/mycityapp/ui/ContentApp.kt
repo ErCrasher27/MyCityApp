@@ -21,6 +21,7 @@ import com.example.mycityapp.data.model.Rate
 import com.example.mycityapp.ui.components.CategoryCard
 import com.example.mycityapp.ui.components.HeaderListCard
 import com.example.mycityapp.ui.components.PlaceCard
+import com.example.mycityapp.ui.utils.MyCityNavigationType
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
@@ -33,7 +34,8 @@ fun OnlyListCards(
     currentTab: CategoryName,
     onCardClick: (CategoryName) -> Unit,
     viewModel: MyCityViewModel,
-    isInHomePage: Boolean
+    isInHomePage: Boolean,
+    navigationType: MyCityNavigationType
 ) {
     if (currentTab.name == CategoryName.Homepage.name) {
         LazyColumn {
@@ -45,7 +47,8 @@ fun OnlyListCards(
                     onCardClick = onCardClick,
                     title = "Best Ratings",
                     viewModel = viewModel,
-                    isInHomePage = isInHomePage
+                    isInHomePage = isInHomePage,
+                    navigationType = navigationType
                 )
                 Spacer(modifier = Modifier.height(10.dp))
             }
@@ -53,7 +56,12 @@ fun OnlyListCards(
         }
 
     } else {
-        PlacesLists(currentTab = currentTab, viewModel = viewModel, isInHomePage = isInHomePage)
+        PlacesLists(
+            currentTab = currentTab,
+            viewModel = viewModel,
+            isInHomePage = isInHomePage,
+            navigationType = navigationType
+        )
     }
 }
 
@@ -63,7 +71,8 @@ fun ListAndDetailsCard(
     currentTab: CategoryName,
     onCardClick: (CategoryName) -> Unit,
     viewModel: MyCityViewModel,
-    isInHomePage: Boolean
+    isInHomePage: Boolean,
+    navigationType: MyCityNavigationType
 ) {
     Row(horizontalArrangement = Arrangement.Start, modifier = Modifier.width(600.dp)) {
         if (currentTab.name == CategoryName.Homepage.name) {
@@ -79,13 +88,19 @@ fun ListAndDetailsCard(
                         onCardClick = onCardClick,
                         title = "Best Ratings",
                         viewModel = viewModel,
-                        isInHomePage = isInHomePage
+                        isInHomePage = isInHomePage,
+                        navigationType = navigationType
                     )
                     Spacer(modifier = Modifier.height(10.dp))
                 }
             }
         } else {
-            PlacesLists(currentTab = currentTab, viewModel = viewModel, isInHomePage = isInHomePage)
+            PlacesLists(
+                currentTab = currentTab,
+                viewModel = viewModel,
+                isInHomePage = isInHomePage,
+                navigationType = navigationType
+            )
         }
     }
 }
@@ -144,7 +159,8 @@ fun BestPlacesHorizontalListWithHeader(
     modifier: Modifier = Modifier,
     title: String,
     viewModel: MyCityViewModel,
-    isInHomePage: Boolean
+    isInHomePage: Boolean,
+    navigationType: MyCityNavigationType
 ) {
     val bestPlacesWithFourOrMoreStars =
         places.filter { place -> place.ratingPlace == Rate.STAR4 || place.ratingPlace == Rate.STAR5 }
@@ -185,7 +201,8 @@ fun BestPlacesHorizontalListWithHeader(
                     viewModel.updateCurrentDetails(it)
                 }, horizontalPadding = 0,
                 verticalPadding = 0,
-                isInHomePage = isInHomePage
+                isInHomePage = isInHomePage,
+                navigationType = navigationType
             )
         }
     }
@@ -196,7 +213,8 @@ fun PlacesLists(
     currentTab: CategoryName,
     viewModel: MyCityViewModel,
     modifier: Modifier = Modifier,
-    isInHomePage: Boolean
+    isInHomePage: Boolean,
+    navigationType: MyCityNavigationType
 ) {
     LazyColumn(modifier) {
         items(LocalPlaceData.places.filter { it.category.nameCategory.name == currentTab.name }) { place ->
@@ -207,7 +225,8 @@ fun PlacesLists(
                 },
                 horizontalPadding = 18,
                 verticalPadding = 18,
-                isInHomePage = isInHomePage
+                isInHomePage = isInHomePage,
+                navigationType = navigationType
             )
         }
     }

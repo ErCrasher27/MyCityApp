@@ -60,7 +60,8 @@ fun MyCityApp(
                                 viewModel.updateCurrentCategory(category = category)
                             },
                             viewModel = viewModel,
-                            isInHomePage = myCityAppUiState.isInHomePage
+                            isInHomePage = myCityAppUiState.isInHomePage,
+                            navigationType = navigationType
                         )
                     }
                 }, bottomBar = {
@@ -113,7 +114,8 @@ fun MyCityApp(
                             viewModel.updateCurrentCategory(category = category)
                         },
                         viewModel = viewModel,
-                        isInHomePage = myCityAppUiState.isInHomePage
+                        isInHomePage = myCityAppUiState.isInHomePage,
+                        navigationType = navigationType
                     )
                 }
             }
@@ -157,7 +159,8 @@ fun MyCityApp(
                                     viewModel.updateCurrentCategory(category = category)
                                 },
                                 viewModel = viewModel,
-                                isInHomePage = myCityAppUiState.isInHomePage
+                                isInHomePage = myCityAppUiState.isInHomePage,
+                                navigationType = navigationType
                             )
                             Spacer(
                                 modifier = Modifier
@@ -176,7 +179,6 @@ fun MyCityApp(
                 }
             )
         }
-
     }
 }
 

@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.example.mycityapp.R
 import com.example.mycityapp.data.model.Place
 import com.example.mycityapp.data.model.Rate
+import com.example.mycityapp.ui.utils.MyCityNavigationType
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -149,8 +150,8 @@ fun ImagePlace(
 @Composable
 fun TextWithShadow(
     text: String,
-    modifier: Modifier,
     style: TextStyle,
+    modifier: Modifier = Modifier
 ) {
     Box {
         Text(
@@ -176,19 +177,38 @@ fun TextWithShadow(
 @Composable
 fun ClickToGo(
     onClick: (Place) -> Unit,
+    navigationType: MyCityNavigationType,
     modifier: Modifier = Modifier
 ) {
     Button(
         onClick = {},
-        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+        modifier = modifier.widthIn(100.dp)
     ) {
         Icon(
             imageVector = Icons.Default.Navigation,
             contentDescription = stringResource(id = R.string.navigate_to_place),
             modifier = Modifier.size(ButtonDefaults.IconSize)
         )
-        /*Spacer(Modifier.size(ButtonDefaults.IconSize))
-        Text(text = "Navigate")*/
+        if (navigationType != MyCityNavigationType.BOTTOM_NAVIGATION) {
+            Spacer(Modifier.size(ButtonDefaults.IconSize))
+            Text(text = stringResource(id = R.string.navigate_to_place))
+        }
+    }
+}
+
+@Composable
+fun ClickToCall(onClick: (Place) -> Unit, modifier: Modifier = Modifier) {
+    Button(
+        onClick = {},
+        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+        modifier = modifier.widthIn(100.dp)
+    ) {
+        Icon(
+            imageVector = Icons.Default.Call,
+            contentDescription = stringResource(id = R.string.call_place),
+            modifier = Modifier.size(ButtonDefaults.IconSize)
+        )
     }
 }
 
@@ -196,39 +216,50 @@ fun ClickToGo(
 fun ClickForMore(
     onClick: (Place) -> Unit,
     place: Place,
+    navigationType: MyCityNavigationType,
     modifier: Modifier = Modifier
 ) {
     Button(
         onClick = { onClick(place) },
-        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
+        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary),
+        modifier = modifier.widthIn(100.dp)
     ) {
         Icon(
             imageVector = Icons.Default.UnfoldMore,
             contentDescription = stringResource(id = R.string.more_details_place),
             modifier = Modifier.size(ButtonDefaults.IconSize)
         )
-        /*Spacer(Modifier.size(ButtonDefaults.IconSize))
-        Text(text = "More Details")*/
+        if (navigationType != MyCityNavigationType.BOTTOM_NAVIGATION) {
+            Spacer(Modifier.size(ButtonDefaults.IconSize))
+            Text(text = stringResource(id = R.string.more_details_place))
+        }
     }
 }
 
 @Composable
-fun Maps() {
-    Column(modifier = Modifier.fillMaxSize()) {
-        val singapore = LatLng(1.35, 103.87)
-        val cameraPositionState = rememberCameraPositionState {
-            position = CameraPosition.fromLatLngZoom(singapore, 10f)
-        }
+fun MapPlace(place: Place, modifier: Modifier = Modifier) {
+    val locationMaps = place.latLng
+    val cameraPositionState = rememberCameraPositionState {
+        position = CameraPosition.fromLatLngZoom(locationMaps, 12f)
+    }
+    Column(
+        modifier = modifier
+            .height(340.dp)
+            .fillMaxWidth()
+            .padding(32.dp)
+            .clip(shape = MaterialTheme.shapes.large)
+    ) {
+
         GoogleMap(
             modifier = Modifier.fillMaxSize(),
             cameraPositionState = cameraPositionState
         ) {
             Marker(
-                state = MarkerState(position = singapore),
-                title = "Singapore",
-                snippet = "Marker in Singapore"
+                state = MarkerState(position = locationMaps),
+                title = stringResource(id = place.name),
+                snippet = stringResource(id = place.locationPlace),
+                tag = place.category.nameCategory.name
             )
         }
     }
 }
-

@@ -4,9 +4,11 @@
     <!-- UTILS !-->
     <string name="navigation_back">Back</string>
     <string name="close_details_place">Close</string>
+
     <!-- BUTTONS !-->
     <string name="more_details_place">More Details</string>
-    <string name="navigate_to_place">Navigatie</string>
+    <string name="navigate_to_place">Navigate</string>
+    <string name="call_place">Call</string>
 
 
     <!-- CATEGORIES !-->

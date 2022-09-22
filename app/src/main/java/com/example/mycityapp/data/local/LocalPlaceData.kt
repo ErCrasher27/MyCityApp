@@ -6,6 +6,7 @@ import com.example.mycityapp.data.model.Category
 import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.data.model.Place
 import com.example.mycityapp.data.model.Rate
+import com.google.android.gms.maps.model.LatLng
 
 object LocalPlaceData {
     val places = listOf<Place>(
@@ -15,6 +16,7 @@ object LocalPlaceData {
             descriptionPlace = R.string.place_activities_description1,
             photoPlace = R.drawable.place_activities_image_1,
             locationPlace = R.string.place_activities_location1,
+            latLng = LatLng(41.07592251854585, 14.327369549252298),
             phonePlace = R.string.place_activities_phone1,
             ratingPlace = Rate.STAR4
         ),
@@ -24,6 +26,7 @@ object LocalPlaceData {
             descriptionPlace = R.string.place_panoramas_description1,
             photoPlace = R.drawable.place_panoramas_image_1,
             locationPlace = R.string.place_panoramas_location1,
+            latLng = LatLng(41.07592251854585, 14.327369549252298),
             ratingPlace = Rate.STAR5
         ),
         Place(
@@ -32,6 +35,7 @@ object LocalPlaceData {
             descriptionPlace = R.string.place_restaurants_description1,
             photoPlace = R.drawable.place_restaurant_image_1,
             locationPlace = R.string.place_restaurants_location1,
+            latLng = LatLng(41.07592251854585, 14.327369549252298),
             ratingPlace = Rate.STAR4
         ),
         Place(
@@ -40,6 +44,7 @@ object LocalPlaceData {
             descriptionPlace = R.string.place_bar_description1,
             photoPlace = R.drawable.place_bar_image_1,
             locationPlace = R.string.place_bar_location1,
+            latLng = LatLng(41.07592251854585, 14.327369549252298),
             ratingPlace = Rate.STAR3
         )
     )

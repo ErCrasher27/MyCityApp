@@ -4,6 +4,7 @@ import android.graphics.Color
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.google.android.gms.maps.model.LatLng
 
 data class NavigationItemContent(
     val icon: ImageVector,
@@ -25,6 +26,7 @@ data class Place(
     @DrawableRes val photoPlace: Int,
     @StringRes val locationPlace: Int,
     @StringRes val phonePlace: Int? = null,
+    val latLng: LatLng,
     val ratingPlace: Rate,
 )
 
