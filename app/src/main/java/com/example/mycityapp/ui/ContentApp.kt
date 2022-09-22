@@ -3,6 +3,8 @@ package com.example.mycityapp.ui
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -38,23 +40,20 @@ fun OnlyListCards(
     navigationType: MyCityNavigationType
 ) {
     if (currentTab.name == CategoryName.Homepage.name) {
-        LazyColumn {
-            items(1) {
-                Spacer(modifier = Modifier.height(10.dp))
-                CategoriesHorizontalListsWithHeader(onCardClick = onCardClick, title = "Categories")
-                Spacer(modifier = Modifier.height(40.dp))
-                BestPlacesHorizontalListWithHeader(
-                    onCardClick = onCardClick,
-                    title = "Best Ratings",
-                    viewModel = viewModel,
-                    isInHomePage = isInHomePage,
-                    navigationType = navigationType
-                )
-                Spacer(modifier = Modifier.height(10.dp))
-            }
-
+        Column(
+            Modifier.verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(32.dp)
+        )
+        {
+            CategoriesHorizontalListsWithHeader(onCardClick = onCardClick, title = "Categories")
+            BestPlacesHorizontalListWithHeader(
+                onCardClick = onCardClick,
+                title = "Best Ratings",
+                viewModel = viewModel,
+                isInHomePage = isInHomePage,
+                navigationType = navigationType
+            )
         }
-
     } else {
         PlacesLists(
             currentTab = currentTab,
@@ -76,23 +75,21 @@ fun ListAndDetailsCard(
 ) {
     Row(horizontalArrangement = Arrangement.Start, modifier = Modifier.width(600.dp)) {
         if (currentTab.name == CategoryName.Homepage.name) {
-            LazyColumn {
-                items(1) {
-                    Spacer(modifier = Modifier.height(10.dp))
-                    CategoriesHorizontalListsWithHeader(
-                        onCardClick = onCardClick,
-                        title = "Categories"
-                    )
-                    Spacer(modifier = Modifier.height(40.dp))
-                    BestPlacesHorizontalListWithHeader(
-                        onCardClick = onCardClick,
-                        title = "Best Ratings",
-                        viewModel = viewModel,
-                        isInHomePage = isInHomePage,
-                        navigationType = navigationType
-                    )
-                    Spacer(modifier = Modifier.height(10.dp))
-                }
+            Column(
+                Modifier.verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(32.dp)
+            ) {
+                CategoriesHorizontalListsWithHeader(
+                    onCardClick = onCardClick,
+                    title = "Categories"
+                )
+                BestPlacesHorizontalListWithHeader(
+                    onCardClick = onCardClick,
+                    title = "Best Ratings",
+                    viewModel = viewModel,
+                    isInHomePage = isInHomePage,
+                    navigationType = navigationType
+                )
             }
         } else {
             PlacesLists(
@@ -112,44 +109,47 @@ fun CategoriesHorizontalListsWithHeader(
     modifier: Modifier = Modifier,
     title: String
 ) {
-    HeaderListCard(title = title)
-    HorizontalPager(
-        count = categories.size,
-        modifier,
-        contentPadding = PaddingValues(horizontal = 60.dp)
-    ) { page ->
+    Column {
+        HeaderListCard(title = title)
+        HorizontalPager(
+            count = categories.size,
+            modifier,
+            contentPadding = PaddingValues(horizontal = 60.dp)
+        ) { page ->
 
-        Card(
-            onClick = { onCardClick(categories[page].nameCategory) },
-            Modifier
-                .width(600.dp)
-                .height(250.dp)
-                .graphicsLayer {
-                    val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
-                    lerp(
-                        start = 0.85f,
-                        stop = 1f,
-                        fraction = 1f - pageOffset.coerceIn(0f, 1f)
-                    ).also { scale ->
-                        scaleX = scale
-                        scaleY = scale
-                    }
-                    alpha = lerp(
-                        start = 0.5f,
-                        stop = 1f,
-                        fraction = 1f - pageOffset.coerceIn(0f, 1f)
-                    )
-                },
-            colors = CardDefaults.cardColors(
-                containerColor = Color(categories[page].backgroundColor)
-            ),
-            shape = MaterialTheme.shapes.large
-        ) {
-            CategoryCard(
-                category = categories[page],
-            )
+            Card(
+                onClick = { onCardClick(categories[page].nameCategory) },
+                Modifier
+                    .width(600.dp)
+                    .height(250.dp)
+                    .graphicsLayer {
+                        val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
+                        lerp(
+                            start = 0.85f,
+                            stop = 1f,
+                            fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                        ).also { scale ->
+                            scaleX = scale
+                            scaleY = scale
+                        }
+                        alpha = lerp(
+                            start = 0.5f,
+                            stop = 1f,
+                            fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                        )
+                    },
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(categories[page].backgroundColor)
+                ),
+                shape = MaterialTheme.shapes.large
+            ) {
+                CategoryCard(
+                    category = categories[page],
+                )
+            }
         }
     }
+
 }
 
 @OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
@@ -162,48 +162,50 @@ fun BestPlacesHorizontalListWithHeader(
     isInHomePage: Boolean,
     navigationType: MyCityNavigationType
 ) {
-    val bestPlacesWithFourOrMoreStars =
-        places.filter { place -> place.ratingPlace == Rate.STAR4 || place.ratingPlace == Rate.STAR5 }
-    HeaderListCard(title = title)
-    HorizontalPager(
-        count = bestPlacesWithFourOrMoreStars.size,
-        modifier,
-        contentPadding = PaddingValues(horizontal = 40.dp)
-    ) { page ->
-        Card(
-            onClick = { onCardClick(bestPlacesWithFourOrMoreStars[page].category.nameCategory) },
-            Modifier
-                .width(500.dp)
-                .height(230.dp)
-                .graphicsLayer {
-                    val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
-                    lerp(
-                        start = 0.85f,
-                        stop = 1f,
-                        fraction = 1f - pageOffset.coerceIn(0f, 1f)
-                    ).also { scale ->
-                        scaleX = scale
-                        scaleY = scale
-                    }
-                    alpha = lerp(
-                        start = 0.5f,
-                        stop = 1f,
-                        fraction = 1f - pageOffset.coerceIn(0f, 1f)
-                    )
-                },
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant,
-            ),
-            shape = MaterialTheme.shapes.large
-        ) {
-            PlaceCard(
-                place = bestPlacesWithFourOrMoreStars[page], onPlaceClick = {
-                    viewModel.updateCurrentDetails(it)
-                }, horizontalPadding = 0,
-                verticalPadding = 0,
-                isInHomePage = isInHomePage,
-                navigationType = navigationType
-            )
+    Column {
+        val bestPlacesWithFourOrMoreStars =
+            places.filter { place -> place.ratingPlace == Rate.STAR4 || place.ratingPlace == Rate.STAR5 }
+        HeaderListCard(title = title)
+        HorizontalPager(
+            count = bestPlacesWithFourOrMoreStars.size,
+            modifier,
+            contentPadding = PaddingValues(horizontal = 40.dp)
+        ) { page ->
+            Card(
+                onClick = { onCardClick(bestPlacesWithFourOrMoreStars[page].category.nameCategory) },
+                Modifier
+                    .width(500.dp)
+                    .height(230.dp)
+                    .graphicsLayer {
+                        val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
+                        lerp(
+                            start = 0.85f,
+                            stop = 1f,
+                            fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                        ).also { scale ->
+                            scaleX = scale
+                            scaleY = scale
+                        }
+                        alpha = lerp(
+                            start = 0.5f,
+                            stop = 1f,
+                            fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                        )
+                    },
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                ),
+                shape = MaterialTheme.shapes.large
+            ) {
+                PlaceCard(
+                    place = bestPlacesWithFourOrMoreStars[page], onPlaceClick = {
+                        viewModel.updateCurrentDetails(it)
+                    }, horizontalPadding = 0,
+                    verticalPadding = 0,
+                    isInHomePage = isInHomePage,
+                    navigationType = navigationType
+                )
+            }
         }
     }
 }

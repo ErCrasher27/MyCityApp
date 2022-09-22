@@ -178,9 +178,8 @@ fun DetailsPlaceCard(
             modifier
                 .weight(10f)
                 .fillMaxWidth()
-                .verticalScroll(rememberScrollState())
-                .padding(bottom = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
             TitleAndDescriptionPlace(place = place)
             StarsPlace(
@@ -190,7 +189,7 @@ fun DetailsPlaceCard(
             ImagePlace(imagePlace = place.photoPlace, namePlace = place.name)
             LocationPlace(
                 location = place.locationPlace,
-                horizontalArrangement = Arrangement.Center
+                horizontalArrangement = Arrangement.Start
             )
             if (place.phonePlace != null) {
                 PhonePlace(numberPhone = place.phonePlace)
@@ -200,7 +199,8 @@ fun DetailsPlaceCard(
         Row(
             modifier = modifier
                 .weight(1f)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(top = 2.dp, bottom = 2.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             ClickToCall(

@@ -78,7 +78,7 @@ fun PhonePlace(
     modifier: Modifier = Modifier
 ) {
     Row(
-        horizontalArrangement = Arrangement.Center,
+        horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .fillMaxWidth()
@@ -246,7 +246,7 @@ fun MapPlace(place: Place, modifier: Modifier = Modifier) {
         modifier = modifier
             .height(340.dp)
             .fillMaxWidth()
-            .padding(32.dp)
+            .padding(top = 4.dp, bottom = 4.dp, start = 24.dp, end = 24.dp)
             .clip(shape = MaterialTheme.shapes.large)
     ) {
 
