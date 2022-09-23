@@ -6,18 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.mycityapp.data.local.LocalPlaceData
 import com.example.mycityapp.ui.MyCityApp
-import com.example.mycityapp.ui.components.DetailsPlaceCard
 import com.example.mycityapp.ui.theme.MyCityAppTheme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
-@OptIn(ExperimentalPermissionsApi::class)
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
