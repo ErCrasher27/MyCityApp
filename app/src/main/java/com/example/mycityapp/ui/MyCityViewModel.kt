@@ -1,11 +1,10 @@
 package com.example.mycityapp.ui
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.core.app.ActivityCompat
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
@@ -54,9 +53,7 @@ class MyCityViewModel : ViewModel() {
                 intent.data = Uri.parse("tel: $phoneNumber")
                 startActivity(context, intent, null)
             } else {
-                ActivityCompat.requestPermissions(
-                    context as Activity, arrayOf(android.Manifest.permission.CALL_PHONE), 777
-                )
+                Log.d("Shake", "no fra")
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.example.mycityapp.ui.components
 
 
+import android.Manifest
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -20,6 +21,7 @@ import androidx.compose.ui.window.Dialog
 import com.example.mycityapp.R
 import com.example.mycityapp.data.model.Category
 import com.example.mycityapp.data.model.Place
+import com.example.mycityapp.ui.RequestPermissions
 import com.example.mycityapp.ui.utils.MyCityNavigationType
 
 @Composable
@@ -71,8 +73,6 @@ fun CategoryCard(
 
 }
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlaceCard(
     place: Place,
@@ -140,14 +140,18 @@ fun PlaceCard(
 
 
 @Composable
-fun DetailsPlace(place: Place, onClose: () -> Unit, onClickToCall: (String) -> Unit) {
+fun DetailsPlace(
+    place: Place,
+    onClose: () -> Unit,
+    onClickToCall: (String) -> Unit,
+) {
     Dialog(
         onDismissRequest = onClose,
         content = {
             DetailsPlaceCard(
                 place = place,
                 onClose = onClose,
-                onClickToCall = onClickToCall
+                onClickToCall = onClickToCall,
             )
         }
     )
@@ -161,6 +165,10 @@ fun DetailsPlaceCard(
     modifier: Modifier = Modifier,
     navigationType: MyCityNavigationType = MyCityNavigationType.BOTTOM_NAVIGATION
 ) {
+    RequestPermissions(
+        namePermission = "Phone",
+        permission = Manifest.permission.CALL_PHONE
+    )
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
