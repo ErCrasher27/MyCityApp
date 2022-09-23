@@ -37,7 +37,7 @@ fun requestPermissions(modifier: Modifier = Modifier) {
                             Text(text = "Phone Call is needed to call place that you want book")
                         }
                         !perm.isPermanentlyDenied() -> {
-                            Text(text = "Phone Call permission was permanently denied. You can enable it in the app setting")
+                            Text(text = "phone Call permission was permanently denied. You can enable it in the app setting")
                         }
                     }
                 }
