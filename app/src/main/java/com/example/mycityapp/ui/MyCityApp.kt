@@ -25,9 +25,11 @@ fun MyCityApp(
     windowSize: WindowWidthSizeClass,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     RequestPermissions(
         namePermission = "Phone",
-        permission = Manifest.permission.CALL_PHONE
+        permission = Manifest.permission.CALL_PHONE,
+        context = context
     )
 
     val viewModel: MyCityViewModel = viewModel()

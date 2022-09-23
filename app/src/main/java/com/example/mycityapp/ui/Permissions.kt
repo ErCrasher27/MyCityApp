@@ -1,5 +1,8 @@
 package com.example.mycityapp.ui
 
+import android.content.Context
+import android.content.Intent
+import android.provider.Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.*
@@ -20,7 +23,9 @@ fun PermissionState.isPermanentlyDenied(): Boolean {
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun RequestPermissions(namePermission: String, permission: String) {
+fun RequestPermissions(
+    namePermission: String, permission: String, context: Context
+) {
     val permissionState =
         rememberPermissionState(permission = permission)
 
@@ -43,13 +48,19 @@ fun RequestPermissions(namePermission: String, permission: String) {
     CheckPermissions(
         namePermission = namePermission,
         permissionState = permissionState,
-        permission = permission
+        permission = permission,
+        context = context
     )
 }
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun CheckPermissions(namePermission: String, permissionState: PermissionState, permission: String) {
+fun CheckPermissions(
+    namePermission: String,
+    permissionState: PermissionState,
+    permission: String,
+    context: Context
+) {
 
     when (permissionState.permission) {
         permission -> {
@@ -61,7 +72,8 @@ fun CheckPermissions(namePermission: String, permissionState: PermissionState, p
                 permissionState.isPermanentlyDenied() -> {
                     DialogPermanentlyDeniedRequestPermission(
                         title = "$namePermission Permission",
-                        content = "$namePermission permission was permanently denied. You can enable it in the app setting"
+                        content = "$namePermission permission was permanently denied. You can enable it in the app setting",
+                        context = context
                     )
                 }
                 else -> {
@@ -73,7 +85,7 @@ fun CheckPermissions(namePermission: String, permissionState: PermissionState, p
 }
 
 @Composable
-fun DialogPermanentlyDeniedRequestPermission(title: String, content: String) {
+fun DialogPermanentlyDeniedRequestPermission(title: String, content: String, context: Context) {
     Column(modifier = Modifier.fillMaxSize()) {
         val openDialog = remember { mutableStateOf(true) }
         if (openDialog.value) {
@@ -92,7 +104,8 @@ fun DialogPermanentlyDeniedRequestPermission(title: String, content: String) {
                         colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
                         onClick = {
                             openDialog.value = false
-                            //go to setting to able permissions
+                            val i = Intent(ACTION_MANAGE_APPLICATIONS_SETTINGS)
+                            context.startActivity(i)
                         }) {
                         Text("Go to settings")
                     }
