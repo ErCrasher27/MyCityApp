@@ -39,7 +39,7 @@ class MyCityAppStateRestorationTest {
         ).performClick()
     }
     @Test
-    fun MediumDevice_selectedActivityRetained_afterConfigChange() {
+    fun mediumDevice_selectedActivityRetained_afterConfigChange() {
         val stateRestorationTester = StateRestorationTester(composeTestRule)
         stateRestorationTester.setContent { MyCityApp(windowSize = WindowWidthSizeClass.Medium) }
         composeTestRule.onNodeWithText(categories[0].nameCategory.name)

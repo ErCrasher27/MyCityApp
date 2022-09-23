@@ -21,6 +21,7 @@ fun MyCityAppBottomNavigationBar(
     modifier: Modifier = Modifier
 ) {
     val bottomNavigationContentDescription = stringResource(id = R.string.navigation_bottom)
+
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.surfaceVariant,
         modifier = modifier
