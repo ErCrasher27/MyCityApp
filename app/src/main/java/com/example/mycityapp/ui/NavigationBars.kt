@@ -7,6 +7,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.mycityapp.R
@@ -19,9 +20,12 @@ fun MyCityAppBottomNavigationBar(
     onTabPressed: (CategoryName) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val bottomNavigationContentDescription = stringResource(id = R.string.navigation_bottom)
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.surfaceVariant,
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
+            .fillMaxWidth()
+            .testTag(bottomNavigationContentDescription)
     ) {
         for (navItem in navigationsItems) {
             NavigationBarItem(
@@ -44,8 +48,11 @@ fun MyCityAppNavigationRail(
     onTabPressed: (CategoryName) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val railNavigationContentDescription = stringResource(id = R.string.navigation_rail)
     NavigationRail(
-        modifier = modifier.fillMaxHeight(),
+        modifier = modifier
+            .fillMaxHeight()
+            .testTag(railNavigationContentDescription),
         containerColor = MaterialTheme.colorScheme.surfaceVariant,
     ) {
         for (navItem in navigationsItems) {
@@ -70,8 +77,12 @@ fun MyCityAppNavigationDrawerContent(
     onTabPressed: (CategoryName) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val drawerNavigationContentDescription = stringResource(id = R.string.navigation_drawer)
     NavigationRail(
-        modifier = modifier.fillMaxHeight(),
+        modifier = modifier
+            .fillMaxHeight()
+            .testTag(drawerNavigationContentDescription),
+
         containerColor = MaterialTheme.colorScheme.surfaceVariant,
     ) {
         NavigationDrawerHeader(modifier)

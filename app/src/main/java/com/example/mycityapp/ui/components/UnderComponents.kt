@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -31,9 +32,11 @@ import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
 fun TitleAndDescriptionPlace(place: Place, modifier: Modifier = Modifier) {
+    val placeTestTag = stringResource(id = place.name)
     Column(
         modifier = modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .testTag(placeTestTag),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
@@ -224,10 +227,14 @@ fun ClickForMore(
     navigationType: MyCityNavigationType,
     modifier: Modifier = Modifier
 ) {
+    val placeTestTag = stringResource(id = place.locationPlace)
+    val buttonTestTagMediumAndDrawer = stringResource(id = R.string.more_details_place)
     Button(
         onClick = { onClick(place) },
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary),
-        modifier = modifier.widthIn(100.dp)
+        modifier = modifier
+            .widthIn(100.dp)
+            .testTag(placeTestTag)
     ) {
         Icon(
             imageVector = Icons.Default.Add,

@@ -218,6 +218,7 @@ fun PlacesLists(
     isInHomePage: Boolean,
     navigationType: MyCityNavigationType
 ) {
+
     LazyColumn(modifier) {
         items(LocalPlaceData.places.filter { it.category.nameCategory.name == currentTab.name }) { place ->
             PlaceCard(
