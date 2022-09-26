@@ -13,7 +13,12 @@ object LocalPlaceData {
             name = R.string.place_activities_name1,
             descriptionPlace = R.string.place_activities_description1,
             photoPlace = listOf
-                (R.drawable.place_activities_image_1),
+                (
+                R.drawable.place_activities_image_1,
+                R.drawable.place_activities_image_1,
+                R.drawable.place_activities_image_1,
+                R.drawable.place_activities_image_1
+            ),
             locationPlace = R.string.place_activities_location1,
             latLng = LatLng(41.07592251854585, 14.327369549252298),
             phonePlace = "327 903 0132",

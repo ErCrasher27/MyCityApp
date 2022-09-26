@@ -48,7 +48,7 @@ fun TitleAndDescriptionPlace(place: Place, modifier: Modifier = Modifier) {
         )
         Text(
             text = "\"" + stringResource(place.descriptionPlace) + "\"",
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.secondary
         )
     }
@@ -69,13 +69,13 @@ fun LocationPlace(
         Icon(
             imageVector = Icons.Default.LocationOn,
             contentDescription = stringResource(location),
-            tint = MaterialTheme.colorScheme.tertiary
+            tint = MaterialTheme.colorScheme.secondary
         )
         Spacer(modifier = Modifier.width(2.dp))
         Text(
             text = stringResource(location),
-            style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.tertiary
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.secondary
         )
     }
 }
@@ -95,13 +95,13 @@ fun PhonePlace(
         Icon(
             imageVector = Icons.Default.Phone,
             contentDescription = numberPhone,
-            tint = MaterialTheme.colorScheme.tertiary
+            tint = MaterialTheme.colorScheme.secondary
         )
         Spacer(modifier = Modifier.width(2.dp))
         Text(
             text = numberPhone,
-            style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.tertiary
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.secondary
         )
     }
 }
@@ -140,37 +140,14 @@ fun StarsPlace(
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ImagePlace(
-    @DrawableRes imagePlace: Int,
+    @DrawableRes imagePlace: List<Int>,
     @StringRes namePlace: Int,
     modifier: Modifier = Modifier
 ) {
-    //start
     val pagerState = rememberPagerState()
-    val count = 4 //to change
-
-    TabRow(
-        // Our selected tab is our current page
-        selectedTabIndex = pagerState.currentPage,
-        // Override the indicator, using the provided pagerTabIndicatorOffset modifier
-        indicator = { tabPositions ->
-            TabRowDefaults.Indicator(
-                Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
-            )
-        }
-    ) {
-        // Add tabs for all of our pages
-        count.forEachIndexed { index, title ->
-            Tab(
-                text = { Text(title) },
-                selected = pagerState.currentPage == index,
-                onClick = { /* TODO */ },
-            )
-        }
-    }
 
     HorizontalPager(
-        count = count,
-        modifier,
+        count = imagePlace.size, modifier,
         state = pagerState,
         contentPadding = PaddingValues(horizontal = 0.dp)
     ) { page ->
@@ -193,30 +170,30 @@ fun ImagePlace(
                         stop = 1f,
                         fraction = 1f - pageOffset.coerceIn(0f, 1f)
                     )
-                },
-            shape = MaterialTheme.shapes.large
-        ) {
+                }) {
             Box(
                 modifier = modifier
-                    .fillMaxWidth()
+                    .fillMaxSize()
             ) {
                 Image(
-                    painter = painterResource(id = imagePlace),
+                    painter = painterResource(id = imagePlace[page]),
                     contentDescription = stringResource(namePlace),
                     contentScale = ContentScale.Crop,
                     modifier = modifier
-                        .fillMaxWidth()
-                        .padding(8.dp)
-                        .clip(MaterialTheme.shapes.large)
+                        .fillMaxSize()
                 )
+
             }
         }
     }
-
-
-    //end
-
-
+    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+        HorizontalPagerIndicator(
+            pagerState = pagerState,
+            modifier = Modifier
+                .padding(top = 16.dp, bottom = 8.dp),
+            activeColor = MaterialTheme.colorScheme.onSurface,
+        )
+    }
 }
 
 @Composable
@@ -279,7 +256,7 @@ fun ClickToCall(
     Button(
         enabled = enablePhone,
         onClick = { place.phonePlace?.let { onClickToCall(it) } },
-        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiary),
+        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary),
         modifier = modifier.widthIn(100.dp)
     ) {
         Icon(
