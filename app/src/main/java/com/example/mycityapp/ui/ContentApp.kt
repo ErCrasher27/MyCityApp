@@ -172,7 +172,6 @@ fun BestPlacesHorizontalListWithHeader(
             contentPadding = PaddingValues(horizontal = 40.dp)
         ) { page ->
             Card(
-                onClick = { onCardClick(bestPlacesWithFourOrMoreStars[page].category.nameCategory) },
                 Modifier
                     .width(500.dp)
                     .height(230.dp)

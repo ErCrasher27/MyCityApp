@@ -86,11 +86,6 @@ fun MyCityApp(
                         currentTab = myCityAppUiState.currentTab,
                         onTabPressed = { category: CategoryName ->
                             viewModel.updateCurrentCategory(category = category)
-                            if (category == CategoryName.Homepage) {
-                                viewModel.updateIsInHomepage(isInHomePage = true)
-                            } else {
-                                viewModel.updateIsInHomepage(isInHomePage = false)
-                            }
                         },
                     )
                 }
@@ -120,11 +115,6 @@ fun MyCityApp(
                     currentTab = myCityAppUiState.currentTab,
                     onTabPressed = { category: CategoryName ->
                         viewModel.updateCurrentCategory(category = category)
-                        if (category == CategoryName.Homepage) {
-                            viewModel.updateIsInHomepage(isInHomePage = true)
-                        } else {
-                            viewModel.updateIsInHomepage(isInHomePage = false)
-                        }
                     },
                 )
                 Column(
@@ -156,11 +146,6 @@ fun MyCityApp(
                             selectedDestination = myCityAppUiState.currentTab,
                             onTabPressed = { category: CategoryName ->
                                 viewModel.updateCurrentCategory(category = category)
-                                if (category == CategoryName.Homepage) {
-                                    viewModel.updateIsInHomepage(isInHomePage = true)
-                                } else {
-                                    viewModel.updateIsInHomepage(isInHomePage = false)
-                                }
                             }
                         )
                     }

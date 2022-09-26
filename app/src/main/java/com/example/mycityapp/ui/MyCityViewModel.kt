@@ -19,9 +19,14 @@ class MyCityViewModel : ViewModel() {
     val uiState: StateFlow<MyCityUiState> = _uiState
 
     fun updateCurrentCategory(category: CategoryName) {
+        if (category == CategoryName.Homepage) {
+            updateIsInHomepage(true)
+        } else {
+            updateIsInHomepage(false)
+        }
         _uiState.update {
             it.copy(
-                currentTab = category
+                currentTab = category,
             )
         }
     }
