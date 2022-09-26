@@ -104,7 +104,7 @@ fun PlaceCard(
                     modifier = modifier
                         .fillMaxWidth(),
                     imageVector = place.category.icon,
-                    contentDescription = place.category.nameCategory.name
+                    contentDescription = null
                 )
             }
             TitleAndDescriptionPlace(place = place)

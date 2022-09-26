@@ -28,7 +28,7 @@ class MyCityAppStateRestorationTest {
         composeTestRule.onNodeWithText(categories[0].nameCategory.name)
             .performClick()
         composeTestRule.onNodeWithTagForStringId(
-            places[0].name
+            places[0].descriptionPlace
         ).assertIsDisplayed()
         composeTestRule.onNodeWithTagForStringId(
             places[0].locationPlace
@@ -45,7 +45,7 @@ class MyCityAppStateRestorationTest {
         composeTestRule.onNodeWithText(categories[0].nameCategory.name)
             .performClick()
         composeTestRule.onNodeWithTagForStringId(
-            places[0].name
+            places[0].descriptionPlace
         ).assertIsDisplayed()
         composeTestRule.onNodeWithTagForStringId(
             places[0].locationPlace

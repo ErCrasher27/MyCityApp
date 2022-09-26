@@ -32,11 +32,11 @@ import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
 fun TitleAndDescriptionPlace(place: Place, modifier: Modifier = Modifier) {
-    val placeTestTag = stringResource(id = place.name)
+    val tagPlaceDescription = stringResource(id = place.descriptionPlace)
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .testTag(placeTestTag),
+            .testTag(tagPlaceDescription),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
@@ -235,7 +235,8 @@ fun ClickForMore(
         modifier = modifier
             .widthIn(100.dp)
             .testTag(placeTestTag)
-    ) {
+
+        ) {
         Icon(
             imageVector = Icons.Default.Add,
             contentDescription = stringResource(id = R.string.more_details_place),
