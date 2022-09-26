@@ -1,14 +1,10 @@
 package com.example.mycityapp
 
 import androidx.activity.ComponentActivity
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.StateRestorationTester
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import com.example.mycityapp.data.local.LocalCategoryData.categories
@@ -38,6 +34,7 @@ class MyCityAppStateRestorationTest {
             R.string.close_details_place
         ).performClick()
     }
+
     @Test
     fun mediumDevice_selectedActivityRetained_afterConfigChange() {
         val stateRestorationTester = StateRestorationTester(composeTestRule)
@@ -55,4 +52,24 @@ class MyCityAppStateRestorationTest {
             R.string.close_details_place
         ).performClick()
     }
+    //TODO FIX it has 2 Activities nodes
+    /*
+    @Test
+    fun expandedDevice_selectedActivityRetained_afterConfigChange() {
+        val stateRestorationTester = StateRestorationTester(composeTestRule)
+        stateRestorationTester.setContent { MyCityApp(windowSize = WindowWidthSizeClass.Expanded) }
+        composeTestRule.onNodeWithText(categories[0].nameCategory.name)
+            .performClick()
+        composeTestRule.onNodeWithTagForStringId(
+            places[0].descriptionPlace
+        ).assertIsDisplayed()
+        composeTestRule.onNodeWithTagForStringId(
+            places[0].locationPlace
+        ).performClick()
+        stateRestorationTester.emulateSavedInstanceStateRestore()
+        composeTestRule.onNodeWithContentDescriptionForStringId(
+            places[0].name
+        ).assertIsDisplayed()
+    }
+     */
 }

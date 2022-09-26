@@ -100,7 +100,7 @@ fun MyCityAppNavigationDrawerContent(
                 icon = {
                     Icon(
                         imageVector = navItem.icon,
-                        contentDescription = navItem.text.name,
+                        contentDescription = navItem.text.name + "bar",
                     )
                 },
                 onClick = { onTabPressed(navItem.text) }

@@ -210,7 +210,7 @@ fun ClickToCall(
         enabled = enablePhone,
         onClick = { place.phonePlace?.let { onClickToCall(it) } },
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiary),
-        modifier = modifier.widthIn(100.dp)
+        modifier = modifier.widthIn(100.dp).testTag(enablePhone.toString())
     ) {
         Icon(
             imageVector = Icons.Default.Call,

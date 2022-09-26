@@ -33,7 +33,7 @@ class MyCityAppScreenNavigationTest {
     composables and applications using Compose*/
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
-
+    val lastElementOfCategories = categories.size - 1
     //Will check if the bottom navigation bar is displayed when the device is compact//
     @Test
     @TestCompactWidth
@@ -107,7 +107,6 @@ class MyCityAppScreenNavigationTest {
     @Test
     @TestCompactWidth
     fun compactDevice_SwipeLeftUntilLastThenReturns_verifyScrollableCategoriesCard() {
-        val lastElementOfCategories = categories.size - 1
         //Set up Compact window size
         setWindowWidthSizeCompact()
         //Swipe Left to the Categories card until last element
@@ -115,8 +114,7 @@ class MyCityAppScreenNavigationTest {
         //Swipe Right to the Categories card until last element
         swipeRightCategoriesToLastElement(lastElementOfCategories, 0)
         //Click the first categories Card to check if the user after the swipe can click
-        composeTestRule.onNodeWithTag(categories[0].nameCategory.name)
-            .performTouchInput { click() }
+        clickSpecificCategory(0)
         //assertEquals(myCityAppUiState.currentTab, CategoryName.Activities)
     }
 
@@ -129,14 +127,27 @@ class MyCityAppScreenNavigationTest {
         //Set up Compact window size
         setWindowWidthSizeCompact()
         //Swipe Left to the Best Places card
-        composeTestRule.onNodeWithTagForStringId(places[0].locationPlace)
-            .performTouchInput { swipeLeft() }
-        composeTestRule.onNodeWithTagForStringId(places[1].locationPlace)
-            .performTouchInput { swipeLeft() }
+        swipeLeftPlaceTo(2)
         //Click the third element of the Best Places card
-        composeTestRule.onNodeWithTagForStringId(
-            places[2].locationPlace
-        ).performTouchInput { click() }
+        clickButtonBestPlacesCard(2)
+    }
+    @Test
+    @TestCompactWidth
+    fun compactDevice_ClickCallButtonWorking_VerifyUserClickCallButton() {
+        //Set up Compact window size
+        setWindowWidthSizeCompact()
+        clickButtonBestPlacesCard(0)
+        clickCallButton()
+    }
+    @Test
+    @TestCompactWidth
+    fun compactDevice_ClickCallButtonNOTWorking_VerifyUserClickCallButton() {
+        //Set up Compact window size
+        setWindowWidthSizeCompact()
+        clickSpecificNavigationBarElement(3)
+        clickButtonBestPlacesCard(2)
+        clickCallButton()
+        assertIsDisplayedCloseButtonPlaceDetails()
     }
 
     @Test
@@ -165,6 +176,64 @@ class MyCityAppScreenNavigationTest {
         clickAllNavigationBarElements(navigationsItems.size)
     }
 
+    @Test
+    @TestMediumWidth
+    fun mediumDevice_SwipeLeftUntilLastThenReturns_verifyScrollableCategoriesCard() {
+        //Set up Medium window size
+        setWindowWidthSizeMedium()
+        //Swipe Left to the Categories card until last element
+        swipeLeftCategoriesToLastElement(lastElementOfCategories)
+        //Swipe Right to the Categories card until last element
+        swipeRightCategoriesToLastElement(lastElementOfCategories, 0)
+        //Click the first categories Card to check if the user after the swipe can click
+        clickSpecificCategory(0)
+        //assertEquals(myCityAppUiState.currentTab, CategoryName.Activities)
+    }
+
+    @Test
+    @TestExpandedWidth
+    fun expandedDevice_ClickButton_VerifyClickOnFirstBestRatingsCard() {
+        //Set up Expanded window size
+        setWindowWidthSizeExpanded()
+        //Click the first Best Places Card
+        clickButtonBestPlacesCard(index = 0)
+        //Check if the Image is Displayed
+        assertIsPlaceCardDetailsImageDisplayed(0)
+    }
+
+    @Test
+    @TestExpandedWidth
+    fun expandedDevice_ClickButton_VerifyClickOnNavigationBottomBar() {
+        //Set up Expanded window size
+        setWindowWidthSizeExpanded()
+        //Check if the current tab is Homepage
+        checkCurrentTabIsSelected(CategoryName.Homepage)
+
+        //TODO Fix check current tab
+        //assertEquals(myCityAppUiState.currentTab, navigationsItems[count].text)
+
+        //Click all the elements in the navigation drawer bar
+        clickAllNavigationBarElements(navigationsItems.size)
+    }
+    @Test
+    @TestExpandedWidth
+    fun expandedDevice_SwipeLeftUntilLastThenReturns_verifyScrollableCategoriesCard() {
+        //Set up Expanded window size
+        setWindowWidthSizeExpanded()
+        //Swipe Left to the Categories card until last element
+        swipeLeftCategoriesToLastElement(lastElementOfCategories)
+        //Swipe Right to the Categories card until last element
+        swipeRightCategoriesToLastElement(lastElementOfCategories, 0)
+        //Click the first categories Card to check if the user after the swipe can click
+        clickSpecificCategory(0)
+        //assertEquals(myCityAppUiState.currentTab, CategoryName.Activities)
+    }
+
+
+    fun clickSpecificCategory(index: Int){
+        composeTestRule.onNodeWithTag(categories[index].nameCategory.name)
+            .performTouchInput { click() }
+    }
     fun setWindowWidthSizeCompact() {
         composeTestRule.setContent {
             MyCityApp(WindowWidthSizeClass.Compact)
@@ -216,7 +285,15 @@ class MyCityAppScreenNavigationTest {
             swipeLeftCategories(count)
         }
     }
-
+    fun swipeLeftPlaceTo(sizePlaces: Int){
+        repeat(sizePlaces){ count ->
+            swipeLeftPlace(count)
+        }
+    }
+    fun swipeLeftPlace(count: Int){
+        composeTestRule.onNodeWithTagForStringId(places[count].locationPlace)
+            .performTouchInput { swipeLeft() }
+    }
     fun swipeLeftCategories(index: Int) {
         composeTestRule.onNodeWithTag(categories[index].nameCategory.name)
             .performTouchInput { swipeLeft() }
@@ -232,24 +309,14 @@ class MyCityAppScreenNavigationTest {
         composeTestRule.onNodeWithTag(categories[index].nameCategory.name)
             .performTouchInput { swipeRight() }
     }
-}
-
-
-/*
-@Test
-fun compactDevice_ButtonClickNavigationBar_navigateToActivitiesAndOpeningFirstPlace() {
-    composeTestRule.setContent {
-        MyCityApp(
-            windowSize = WindowWidthSizeClass.Compact
-        )
+    fun clickCallButton(){
+        composeTestRule.onNodeWithContentDescriptionForStringId(
+            R.string.call_place
+        ).performTouchInput { click() }
     }
-    // Navigation drawer is displayed
-    composeTestRule.onNodeWithContentDescription(
-        navigationsItems[0].text.name
-    ).performClick()
-    composeTestRule.onNodeWithContentDescriptionForStringId(
-        LocalPlaceData.places[0].locationPlace
-    ).performClick()
+    fun assertIsPlaceCardDetailsImageDisplayed(namePlaceIndex: Int){
+        composeTestRule.onNodeWithContentDescriptionForStringId(
+            places[namePlaceIndex].name
+        ).assertIsDisplayed()
+    }
 }
-*/
-
