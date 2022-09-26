@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
@@ -39,10 +40,12 @@ fun TitleAndDescriptionPlace(place: Place, modifier: Modifier = Modifier) {
         Text(
             text = stringResource(place.name),
             style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.primary
         )
         Text(
             text = "\"" + stringResource(place.descriptionPlace) + "\"",
             style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.secondary
         )
     }
 }
@@ -62,11 +65,13 @@ fun LocationPlace(
         Icon(
             imageVector = Icons.Default.LocationOn,
             contentDescription = stringResource(location),
+            tint = MaterialTheme.colorScheme.tertiary
         )
         Spacer(modifier = Modifier.width(2.dp))
         Text(
             text = stringResource(location),
             style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.tertiary
         )
     }
 }
@@ -86,11 +91,13 @@ fun PhonePlace(
         Icon(
             imageVector = Icons.Default.Phone,
             contentDescription = numberPhone,
+            tint = MaterialTheme.colorScheme.tertiary
         )
         Spacer(modifier = Modifier.width(2.dp))
         Text(
             text = numberPhone,
             style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.tertiary
         )
     }
 }
@@ -118,7 +125,9 @@ fun StarsPlace(
         repeat(repeater) {
             Icon(
                 imageVector = Icons.Default.Star,
-                contentDescription = star.name
+                contentDescription = star.name,
+                tint = Color(0xFFC7A005)
+
             )
         }
     }
@@ -214,6 +223,8 @@ fun ClickToCall(
             contentDescription = stringResource(id = R.string.call_place),
             modifier = Modifier.size(ButtonDefaults.IconSize)
         )
+        Spacer(Modifier.size(ButtonDefaults.IconSize))
+        Text(text = stringResource(id = R.string.call_place))
     }
 }
 
@@ -230,7 +241,7 @@ fun ClickForMore(
         modifier = modifier.widthIn(100.dp)
     ) {
         Icon(
-            imageVector = Icons.Default.Add,
+            imageVector = Icons.Default.Info,
             contentDescription = stringResource(id = R.string.more_details_place),
             modifier = Modifier.size(ButtonDefaults.IconSize)
         )
