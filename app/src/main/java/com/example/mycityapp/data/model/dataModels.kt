@@ -23,7 +23,7 @@ data class Place(
     val category: Category,
     @StringRes val name: Int,
     @StringRes val descriptionPlace: Int,
-    @DrawableRes val photoPlace: Int,
+    @DrawableRes val photoPlace: List<Int>,
     @StringRes val locationPlace: Int,
     val phonePlace: String? = null,
     val latLng: LatLng,

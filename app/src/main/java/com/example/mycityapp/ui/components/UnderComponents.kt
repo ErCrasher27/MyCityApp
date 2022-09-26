@@ -15,20 +15,24 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.util.lerp
 import com.example.mycityapp.R
 import com.example.mycityapp.data.model.Place
 import com.example.mycityapp.data.model.Rate
 import com.example.mycityapp.ui.utils.MyCityNavigationType
+import com.google.accompanist.pager.*
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
+import kotlin.math.absoluteValue
 
 @Composable
 fun TitleAndDescriptionPlace(place: Place, modifier: Modifier = Modifier) {
@@ -133,26 +137,86 @@ fun StarsPlace(
     }
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ImagePlace(
     @DrawableRes imagePlace: Int,
     @StringRes namePlace: Int,
     modifier: Modifier = Modifier
 ) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
+    //start
+    val pagerState = rememberPagerState()
+    val count = 4 //to change
+
+    TabRow(
+        // Our selected tab is our current page
+        selectedTabIndex = pagerState.currentPage,
+        // Override the indicator, using the provided pagerTabIndicatorOffset modifier
+        indicator = { tabPositions ->
+            TabRowDefaults.Indicator(
+                Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
+            )
+        }
     ) {
-        Image(
-            painter = painterResource(id = imagePlace),
-            contentDescription = stringResource(namePlace),
-            contentScale = ContentScale.Crop,
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-                .clip(MaterialTheme.shapes.large)
-        )
+        // Add tabs for all of our pages
+        count.forEachIndexed { index, title ->
+            Tab(
+                text = { Text(title) },
+                selected = pagerState.currentPage == index,
+                onClick = { /* TODO */ },
+            )
+        }
     }
+
+    HorizontalPager(
+        count = count,
+        modifier,
+        state = pagerState,
+        contentPadding = PaddingValues(horizontal = 0.dp)
+    ) { page ->
+        Card(
+            Modifier
+                .width(600.dp)
+                .height(200.dp)
+                .graphicsLayer {
+                    val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
+                    lerp(
+                        start = 0.85f,
+                        stop = 1f,
+                        fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                    ).also { scale ->
+                        scaleX = scale
+                        scaleY = scale
+                    }
+                    alpha = lerp(
+                        start = 0.5f,
+                        stop = 1f,
+                        fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                    )
+                },
+            shape = MaterialTheme.shapes.large
+        ) {
+            Box(
+                modifier = modifier
+                    .fillMaxWidth()
+            ) {
+                Image(
+                    painter = painterResource(id = imagePlace),
+                    contentDescription = stringResource(namePlace),
+                    contentScale = ContentScale.Crop,
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .clip(MaterialTheme.shapes.large)
+                )
+            }
+        }
+    }
+
+
+    //end
+
+
 }
 
 @Composable
