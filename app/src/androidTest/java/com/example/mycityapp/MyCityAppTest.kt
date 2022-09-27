@@ -9,6 +9,7 @@ import com.example.mycityapp.data.local.LocalCategoryData.categories
 import com.example.mycityapp.data.local.LocalNavigationData.navigationsItems
 import com.example.mycityapp.data.local.LocalPlaceData.places
 import com.example.mycityapp.data.model.CategoryName
+import com.example.mycityapp.data.model.Rate
 import com.example.mycityapp.ui.MyCityApp
 import com.example.mycityapp.ui.MyCityViewModel
 import org.junit.Rule
@@ -26,7 +27,7 @@ annotation class TestExpandedWidth
 //ViewModel declaration for checks in the UiState variables//
 private val viewModel = MyCityViewModel()
 private val myCityAppUiState = viewModel.uiState.value
-
+val bestPlacesWithFourOrMoreStars = places.filter { place -> place.ratingPlace == Rate.STAR4 || place.ratingPlace == Rate.STAR5 }
 class MyCityAppScreenNavigationTest {
 
     /*Creating a ComposeTestRule that allows you to test and control
@@ -120,7 +121,6 @@ class MyCityAppScreenNavigationTest {
 
     /*Will verify if the user can swipe the best places card
       and then click the button for more details on the place*/
-    //TODO Refactor this test because it get all the places and not the best ones
     @Test
     @TestCompactWidth
     fun compactDevice_SwipeAndClickButton_VerifyClickOnBestRatingsCard() {
@@ -191,6 +191,26 @@ class MyCityAppScreenNavigationTest {
     }
 
     @Test
+    @TestMediumWidth
+    fun mediumDevice_ClickCallButtonWorking_VerifyUserClickCallButton() {
+        //Set up Compact window size
+        setWindowWidthSizeCompact()
+        clickButtonBestPlacesCard(0)
+        clickCallButton()
+    }
+
+    @Test
+    @TestMediumWidth
+    fun mediumDevice_ClickCallButtonNOTWorking_VerifyUserClickCallButton() {
+        //Set up Compact window size
+        setWindowWidthSizeCompact()
+        clickSpecificNavigationBarElement(3)
+        clickButtonBestPlacesCard(2)
+        clickCallButton()
+        assertIsDisplayedCloseButtonPlaceDetails()
+    }
+
+    @Test
     @TestExpandedWidth
     fun expandedDevice_ClickButton_VerifyClickOnFirstBestRatingsCard() {
         //Set up Expanded window size
@@ -229,6 +249,25 @@ class MyCityAppScreenNavigationTest {
         //assertEquals(myCityAppUiState.currentTab, CategoryName.Activities)
     }
 
+    @Test
+    @TestExpandedWidth
+    fun expandedDevice_ClickCallButtonWorking_VerifyUserClickCallButton() {
+        //Set up Compact window size
+        setWindowWidthSizeCompact()
+        clickButtonBestPlacesCard(0)
+        clickCallButton()
+    }
+
+    @Test
+    @TestExpandedWidth
+    fun expandedDevice_ClickCallButtonNOTWorking_VerifyUserClickCallButton() {
+        //Set up Compact window size
+        setWindowWidthSizeCompact()
+        clickSpecificNavigationBarElement(4)
+        clickButtonBestPlacesCard(3)
+        clickCallButton()
+        assertIsPlaceCardDetailsImageDisplayed(3)
+    }
 
     fun clickSpecificCategory(index: Int){
         composeTestRule.onNodeWithTag(categories[index].nameCategory.name)
@@ -291,7 +330,7 @@ class MyCityAppScreenNavigationTest {
         }
     }
     fun swipeLeftPlace(count: Int){
-        composeTestRule.onNodeWithTagForStringId(places[count].locationPlace)
+        composeTestRule.onNodeWithTagForStringId(bestPlacesWithFourOrMoreStars[count].locationPlace)
             .performTouchInput { swipeLeft() }
     }
     fun swipeLeftCategories(index: Int) {
