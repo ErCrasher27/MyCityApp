@@ -13,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import com.example.mycityapp.data.local.LocalCategoryData.categories
@@ -37,7 +39,8 @@ fun OnlyListCards(
     onCardClick: (CategoryName) -> Unit,
     viewModel: MyCityViewModel,
     isInHomePage: Boolean,
-    navigationType: MyCityNavigationType
+    navigationType: MyCityNavigationType,
+    uiState: MyCityUiState
 ) {
     if (currentTab.name == CategoryName.Homepage.name) {
         Column(
@@ -47,11 +50,10 @@ fun OnlyListCards(
         {
             CategoriesHorizontalListsWithHeader(onCardClick = onCardClick, title = "Categories")
             BestPlacesHorizontalListWithHeader(
-                onCardClick = onCardClick,
                 title = "Best Ratings",
                 viewModel = viewModel,
                 isInHomePage = isInHomePage,
-                navigationType = navigationType
+                navigationType = navigationType,
             )
         }
     } else {
@@ -59,7 +61,8 @@ fun OnlyListCards(
             currentTab = currentTab,
             viewModel = viewModel,
             isInHomePage = isInHomePage,
-            navigationType = navigationType
+            navigationType = navigationType,
+            uiState = uiState
         )
     }
 }
@@ -71,7 +74,8 @@ fun ListAndDetailsCard(
     onCardClick: (CategoryName) -> Unit,
     viewModel: MyCityViewModel,
     isInHomePage: Boolean,
-    navigationType: MyCityNavigationType
+    navigationType: MyCityNavigationType,
+    uiState: MyCityUiState
 ) {
     Row(horizontalArrangement = Arrangement.Start, modifier = Modifier.width(600.dp)) {
         if (currentTab.name == CategoryName.Homepage.name) {
@@ -84,17 +88,17 @@ fun ListAndDetailsCard(
                     title = "Categories"
                 )
                 BestPlacesHorizontalListWithHeader(
-                    onCardClick = onCardClick,
                     title = "Best Ratings",
                     viewModel = viewModel,
                     isInHomePage = isInHomePage,
-                    navigationType = navigationType
+                    navigationType = navigationType,
                 )
             }
         } else {
             PlacesLists(
                 currentTab = currentTab,
                 viewModel = viewModel,
+                uiState = uiState,
                 isInHomePage = isInHomePage,
                 navigationType = navigationType
             )
@@ -155,7 +159,6 @@ fun CategoriesHorizontalListsWithHeader(
 @OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun BestPlacesHorizontalListWithHeader(
-    onCardClick: (CategoryName) -> Unit,
     modifier: Modifier = Modifier,
     title: String,
     viewModel: MyCityViewModel,
@@ -174,7 +177,6 @@ fun BestPlacesHorizontalListWithHeader(
             Card(
                 Modifier
                     .width(500.dp)
-                    .height(230.dp)
                     .graphicsLayer {
                         val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
                         lerp(
@@ -196,8 +198,18 @@ fun BestPlacesHorizontalListWithHeader(
                 ),
                 shape = MaterialTheme.shapes.large
             ) {
+                val context = LocalContext.current
+                val title = stringResource(id = bestPlacesWithFourOrMoreStars[page].name)
                 PlaceCard(
-                    place = bestPlacesWithFourOrMoreStars[page], onPlaceClick = {
+                    place = bestPlacesWithFourOrMoreStars[page],
+                    onClickToGo = {
+                        viewModel.navigateTo(
+                            context = context,
+                            latLng = bestPlacesWithFourOrMoreStars[page].latLng,
+                            title = title
+                        )
+                    },
+                    onPlaceClick = {
                         viewModel.updateCurrentDetails(it)
                     }, horizontalPadding = 0,
                     verticalPadding = 0,
@@ -213,16 +225,26 @@ fun BestPlacesHorizontalListWithHeader(
 fun PlacesLists(
     currentTab: CategoryName,
     viewModel: MyCityViewModel,
+    uiState: MyCityUiState,
     modifier: Modifier = Modifier,
     isInHomePage: Boolean,
     navigationType: MyCityNavigationType
 ) {
+    val context = LocalContext.current
     LazyColumn(modifier) {
         items(LocalPlaceData.places.filter { it.category.nameCategory.name == currentTab.name }) { place ->
+            val title = stringResource(id = place.name)
             PlaceCard(
                 place = place,
                 onPlaceClick = {
                     viewModel.updateCurrentDetails(it)
+                },
+                onClickToGo = {
+                    viewModel.navigateTo(
+                        context = context,
+                        latLng = place.latLng,
+                        title = title
+                    )
                 },
                 horizontalPadding = 18,
                 verticalPadding = 18,

@@ -31,6 +31,11 @@ fun MyCityApp(
         permission = Manifest.permission.CALL_PHONE,
         context = context
     )
+    RequestPermissions(
+        namePermission = "Location",
+        permission = Manifest.permission.ACCESS_FINE_LOCATION,
+        context = context
+    )
 
     val viewModel: MyCityViewModel = viewModel()
     val myCityAppUiState = viewModel.uiState.collectAsState().value
@@ -55,6 +60,7 @@ fun MyCityApp(
         MyCityNavigationType.BOTTOM_NAVIGATION -> {
             if (myCityAppUiState.currentDetails != null) {
                 val context = LocalContext.current
+                val title = stringResource(id = myCityAppUiState.currentDetails.name)
                 DetailsPlace(
                     place = myCityAppUiState.currentDetails,
                     onClose = { viewModel.updateCurrentDetails(null) },
@@ -62,6 +68,13 @@ fun MyCityApp(
                         viewModel.callPlace(
                             context = context,
                             phoneNumber = myCityAppUiState.currentDetails.phonePlace
+                        )
+                    },
+                    onClickToGo = {
+                        viewModel.navigateTo(
+                            context = context,
+                            latLng = myCityAppUiState.currentDetails.latLng,
+                            title = title
                         )
                     }
                 )
@@ -78,7 +91,8 @@ fun MyCityApp(
                             },
                             viewModel = viewModel,
                             isInHomePage = myCityAppUiState.isInHomePage,
-                            navigationType = navigationType
+                            navigationType = navigationType,
+                            uiState = myCityAppUiState
                         )
                     }
                 }, bottomBar = {
@@ -96,6 +110,7 @@ fun MyCityApp(
         MyCityNavigationType.NAVIGATION_RAIL -> {
             if (myCityAppUiState.currentDetails != null) {
                 val context = LocalContext.current
+                val title = stringResource(id = myCityAppUiState.currentDetails.name)
                 DetailsPlace(
                     place = myCityAppUiState.currentDetails,
                     onClose = { viewModel.updateCurrentDetails(null) },
@@ -103,6 +118,13 @@ fun MyCityApp(
                         viewModel.callPlace(
                             context = context,
                             phoneNumber = myCityAppUiState.currentDetails.phonePlace
+                        )
+                    },
+                    onClickToGo = {
+                        viewModel.navigateTo(
+                            context = context,
+                            latLng = myCityAppUiState.currentDetails.latLng,
+                            title = title
                         )
                     })
 
@@ -130,7 +152,8 @@ fun MyCityApp(
                         },
                         viewModel = viewModel,
                         isInHomePage = myCityAppUiState.isInHomePage,
-                        navigationType = navigationType
+                        navigationType = navigationType,
+                        uiState = myCityAppUiState
                     )
                 }
             }
@@ -170,7 +193,8 @@ fun MyCityApp(
                                 },
                                 viewModel = viewModel,
                                 isInHomePage = myCityAppUiState.isInHomePage,
-                                navigationType = navigationType
+                                navigationType = navigationType,
+                                uiState = myCityAppUiState
                             )
                             Spacer(
                                 modifier = Modifier
@@ -179,6 +203,8 @@ fun MyCityApp(
                             )
                             if (myCityAppUiState.currentDetails != null) {
                                 val context = LocalContext.current
+                                val title =
+                                    stringResource(id = myCityAppUiState.currentDetails.name)
                                 DetailsPlaceCard(
                                     place = myCityAppUiState.currentDetails,
                                     onClose = { viewModel.updateCurrentDetails(null) },
@@ -187,6 +213,13 @@ fun MyCityApp(
                                         viewModel.callPlace(
                                             context = context,
                                             phoneNumber = myCityAppUiState.currentDetails.phonePlace
+                                        )
+                                    },
+                                    onClickToGo = {
+                                        viewModel.navigateTo(
+                                            context = context,
+                                            latLng = myCityAppUiState.currentDetails.latLng,
+                                            title = title
                                         )
                                     }
                                 )

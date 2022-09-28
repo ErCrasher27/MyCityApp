@@ -28,6 +28,7 @@ import com.example.mycityapp.data.model.Rate
 import com.example.mycityapp.ui.utils.MyCityNavigationType
 import com.google.accompanist.pager.*
 import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
@@ -225,12 +226,13 @@ fun TextWithShadow(
 
 @Composable
 fun ClickToGo(
-    onClick: (Place) -> Unit,
+    onClickToGo: (LatLng) -> Unit,
+    latLng: LatLng,
     navigationType: MyCityNavigationType,
     modifier: Modifier = Modifier
 ) {
     Button(
-        onClick = {},
+        onClick = {onClickToGo(latLng)},
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
         modifier = modifier.widthIn(100.dp)
     ) {

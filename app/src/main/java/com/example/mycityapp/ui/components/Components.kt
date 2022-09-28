@@ -24,6 +24,7 @@ import com.example.mycityapp.data.model.Category
 import com.example.mycityapp.data.model.Place
 import com.example.mycityapp.ui.RequestPermissions
 import com.example.mycityapp.ui.utils.MyCityNavigationType
+import com.google.android.gms.maps.model.LatLng
 
 @Composable
 fun HeaderListCard(title: String, modifier: Modifier = Modifier) {
@@ -78,6 +79,7 @@ fun CategoryCard(
 fun PlaceCard(
     place: Place,
     onPlaceClick: (Place) -> Unit,
+    onClickToGo: (LatLng) -> Unit,
     horizontalPadding: Int,
     verticalPadding: Int,
     isInHomePage: Boolean,
@@ -126,8 +128,9 @@ fun PlaceCard(
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 ClickToGo(
-                    onClick = {},
-                    navigationType = navigationType
+                    onClickToGo = onClickToGo,
+                    latLng = place.latLng,
+                    navigationType = navigationType,
                 )
                 ClickForMore(
                     onClick = onPlaceClick,
@@ -145,6 +148,7 @@ fun DetailsPlace(
     place: Place,
     onClose: () -> Unit,
     onClickToCall: (String) -> Unit,
+    onClickToGo: (LatLng) -> Unit
 ) {
     Dialog(
         onDismissRequest = onClose,
@@ -153,6 +157,7 @@ fun DetailsPlace(
                 place = place,
                 onClose = onClose,
                 onClickToCall = onClickToCall,
+                onClickToGo = onClickToGo
             )
         }
     )
@@ -163,6 +168,7 @@ fun DetailsPlaceCard(
     place: Place,
     onClose: () -> Unit,
     onClickToCall: (String) -> Unit,
+    onClickToGo: (LatLng) -> Unit,
     modifier: Modifier = Modifier,
     navigationType: MyCityNavigationType = MyCityNavigationType.BOTTOM_NAVIGATION
 ) {
@@ -170,6 +176,11 @@ fun DetailsPlaceCard(
     RequestPermissions(
         namePermission = "Phone",
         permission = Manifest.permission.CALL_PHONE,
+        context = context
+    )
+    RequestPermissions(
+        namePermission = "Location",
+        permission = Manifest.permission.ACCESS_FINE_LOCATION,
         context = context
     )
     Card(
@@ -224,7 +235,8 @@ fun DetailsPlaceCard(
                 enablePhone = enablePhone,
             )
             ClickToGo(
-                onClick = {},
+                onClickToGo = onClickToGo,
+                latLng = place.latLng,
                 navigationType = MyCityNavigationType.PERMANENT_NAVIGATION_DRAWER,
             )
         }
