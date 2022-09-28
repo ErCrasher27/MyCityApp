@@ -80,6 +80,7 @@ fun PlaceCard(
     place: Place,
     onPlaceClick: (Place) -> Unit,
     onClickToGo: (LatLng) -> Unit,
+    loadDistance: (LatLng) -> String?,
     horizontalPadding: Int,
     verticalPadding: Int,
     isInHomePage: Boolean,
@@ -116,10 +117,7 @@ fun PlaceCard(
                     .clip(MaterialTheme.shapes.large)
                     .padding(vertical = 8.dp)
             ) {
-                LocationPlace(
-                    location = place.locationPlace,
-                    horizontalArrangement = Arrangement.Start
-                )
+                DistanceToPlace(placePosition = place.latLng, loadDistance = loadDistance)
                 Spacer(modifier = Modifier.height(4.dp))
                 StarsPlace(star = place.ratingPlace, horizontalArrangement = Arrangement.Start)
             }

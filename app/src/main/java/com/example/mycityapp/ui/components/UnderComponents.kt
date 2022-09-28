@@ -232,7 +232,7 @@ fun ClickToGo(
     modifier: Modifier = Modifier
 ) {
     Button(
-        onClick = {onClickToGo(latLng)},
+        onClick = { onClickToGo(latLng) },
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
         modifier = modifier.widthIn(100.dp)
     ) {
@@ -320,5 +320,32 @@ fun MapPlace(place: Place, modifier: Modifier = Modifier) {
                 tag = place.category.nameCategory.name
             )
         }
+    }
+}
+
+@Composable
+fun DistanceToPlace(
+    placePosition: LatLng,
+    loadDistance: (LatLng) -> String?,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        horizontalArrangement = Arrangement.Start,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(start = 8.dp)
+    ) {
+        Icon(
+            imageVector = Icons.Default.SocialDistance,
+            contentDescription = loadDistance(placePosition).toString(),
+            tint = MaterialTheme.colorScheme.secondary
+        )
+        Spacer(modifier = Modifier.width(2.dp))
+        Text(
+            text = loadDistance(placePosition).toString(),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.secondary
+        )
     }
 }

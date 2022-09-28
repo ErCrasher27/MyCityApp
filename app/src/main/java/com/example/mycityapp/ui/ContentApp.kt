@@ -209,6 +209,12 @@ fun BestPlacesHorizontalListWithHeader(
                             title = title
                         )
                     },
+                    loadDistance = {
+                        viewModel.displayDistance(
+                            placeLocation = bestPlacesWithFourOrMoreStars[page].latLng,
+                            context = context
+                        )
+                    },
                     onPlaceClick = {
                         viewModel.updateCurrentDetails(it)
                     }, horizontalPadding = 0,
@@ -244,6 +250,12 @@ fun PlacesLists(
                         context = context,
                         latLng = place.latLng,
                         title = title
+                    )
+                },
+                loadDistance = {
+                    viewModel.displayDistance(
+                        placeLocation = place.latLng,
+                        context = context
                     )
                 },
                 horizontalPadding = 18,

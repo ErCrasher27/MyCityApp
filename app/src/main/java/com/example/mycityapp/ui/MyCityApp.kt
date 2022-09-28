@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mycityapp.R
+import com.example.mycityapp.data.local.LocalPlaceData.places
 import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.ui.components.DetailsPlace
 import com.example.mycityapp.ui.components.DetailsPlaceCard
@@ -39,6 +40,11 @@ fun MyCityApp(
 
     val viewModel: MyCityViewModel = viewModel()
     val myCityAppUiState = viewModel.uiState.collectAsState().value
+
+    viewModel.displayDistance(
+        placeLocation = places[0].latLng,
+        context = context
+    )
 
     val navigationType: MyCityNavigationType = when (windowSize) {
         WindowWidthSizeClass.Compact -> {
