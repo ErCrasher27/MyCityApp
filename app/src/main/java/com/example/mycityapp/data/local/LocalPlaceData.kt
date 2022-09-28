@@ -21,7 +21,7 @@ object LocalPlaceData {
             ),
             locationPlace = R.string.place_activities_location1,
             latLng = LatLng(41.07592251854585, 14.327369549252298),
-            phonePlace = "327 903 0132",
+            phonePlace = "0823 448084",
             ratingPlace = Rate.STAR4
         ),
         Place(
@@ -34,7 +34,8 @@ object LocalPlaceData {
             latLng = LatLng(
                 41.100648, 14.316403
             ),
-            ratingPlace = Rate.STAR5
+            ratingPlace = Rate.STAR5,
+            phonePlace = "0823 273174"
         ),
         Place(
             category = categories[2],
@@ -47,7 +48,8 @@ object LocalPlaceData {
                 41.072332,
                 14.319006
             ),
-            ratingPlace = Rate.STAR4
+            ratingPlace = Rate.STAR4,
+            phonePlace = "0823 154 0786"
         ),
         Place(
             category = categories[3],
@@ -59,7 +61,8 @@ object LocalPlaceData {
             latLng = LatLng(
                 41.075813, 14.284915
             ),
-            ratingPlace = Rate.STAR3
+            ratingPlace = Rate.STAR3,
+            phonePlace = "320 780 3268"
         )
     )
 }
