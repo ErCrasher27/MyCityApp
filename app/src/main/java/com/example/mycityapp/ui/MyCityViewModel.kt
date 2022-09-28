@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
+import android.location.LocationRequest
 import android.net.Uri
-import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
@@ -52,6 +52,14 @@ class MyCityViewModel : ViewModel() {
         }
     }
 
+    fun updateCurrentLocation(location: Location?) {
+        _uiState.update {
+            it.copy(
+                currentLocation = location
+            )
+        }
+    }
+
     fun callPlace(context: Context, phoneNumber: String?) {
         if (phoneNumber != null) {
             if (ContextCompat.checkSelfPermission(
@@ -84,23 +92,27 @@ class MyCityViewModel : ViewModel() {
 
     @SuppressLint("MissingPermission")
     fun displayDistance(placeLocation: LatLng, context: Context): String? {
-        var result: Float
-        var formatResult: String? = null
-        //Log.d("ci", formatResult.toString())
-        var fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
-        fusedLocationClient.lastLocation
+
+        var fusedLocation = LocationServices.getFusedLocationProviderClient(context)
+        fusedLocation.getCurrentLocation(LocationRequest.QUALITY_HIGH_ACCURACY, null)
             .addOnSuccessListener { location: Location? ->
                 if (location != null) {
-                    val placeLocationToLocationType = Location("Place")
-                    placeLocationToLocationType.latitude = placeLocation.latitude
-                    placeLocationToLocationType.longitude = placeLocation.longitude
-                    result = location.distanceTo(placeLocationToLocationType) / 1000
-                    formatResult = "%.1f".format(result) + " km"
-                    Log.d("ci", formatResult.toString())
-                    //Log.d("ci", result.toString())
+                    updateCurrentLocation(location)
                 }
             }
-        //Log.d("ci", formatResult.toString())
+
+        var result: Float?
+        var formatResult: String? = null
+
+        val placeLocationToLocationType = Location("Place")
+        placeLocationToLocationType.latitude = placeLocation.latitude
+        placeLocationToLocationType.longitude = placeLocation.longitude
+
+        result = uiState.value.currentLocation?.distanceTo(placeLocationToLocationType)
+
+        if (result != null) {
+            formatResult = "%.1f".format(result / 1000) + " km from you"
+        }
         return formatResult
     }
 }

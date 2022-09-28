@@ -1,6 +1,5 @@
 package com.example.mycityapp.data.model
 
-import android.graphics.Color
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -29,6 +28,7 @@ data class Place(
     val latLng: LatLng,
     val ratingPlace: Rate,
 )
+
 
 
 

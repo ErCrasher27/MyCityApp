@@ -31,7 +31,9 @@ object LocalPlaceData {
             photoPlace = listOf
                 (R.drawable.place_panoramas_image_1),
             locationPlace = R.string.place_panoramas_location1,
-            latLng = LatLng(41.07592251854585, 14.327369549252298),
+            latLng = LatLng(
+                41.100648, 14.316403
+            ),
             ratingPlace = Rate.STAR5
         ),
         Place(
@@ -41,7 +43,10 @@ object LocalPlaceData {
             photoPlace = listOf
                 (R.drawable.place_restaurant_image_1),
             locationPlace = R.string.place_restaurants_location1,
-            latLng = LatLng(41.07592251854585, 14.327369549252298),
+            latLng = LatLng(
+                41.072332,
+                14.319006
+            ),
             ratingPlace = Rate.STAR4
         ),
         Place(
@@ -51,7 +56,9 @@ object LocalPlaceData {
             photoPlace = listOf
                 (R.drawable.place_bar_image_1),
             locationPlace = R.string.place_bar_location1,
-            latLng = LatLng(41.07592251854585, 14.327369549252298),
+            latLng = LatLng(
+                41.075813, 14.284915
+            ),
             ratingPlace = Rate.STAR3
         )
     )

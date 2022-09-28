@@ -41,11 +41,6 @@ fun MyCityApp(
     val viewModel: MyCityViewModel = viewModel()
     val myCityAppUiState = viewModel.uiState.collectAsState().value
 
-    viewModel.displayDistance(
-        placeLocation = places[0].latLng,
-        context = context
-    )
-
     val navigationType: MyCityNavigationType = when (windowSize) {
         WindowWidthSizeClass.Compact -> {
             MyCityNavigationType.BOTTOM_NAVIGATION
@@ -98,7 +93,6 @@ fun MyCityApp(
                             viewModel = viewModel,
                             isInHomePage = myCityAppUiState.isInHomePage,
                             navigationType = navigationType,
-                            uiState = myCityAppUiState
                         )
                     }
                 }, bottomBar = {
@@ -159,7 +153,6 @@ fun MyCityApp(
                         viewModel = viewModel,
                         isInHomePage = myCityAppUiState.isInHomePage,
                         navigationType = navigationType,
-                        uiState = myCityAppUiState
                     )
                 }
             }
@@ -200,7 +193,6 @@ fun MyCityApp(
                                 viewModel = viewModel,
                                 isInHomePage = myCityAppUiState.isInHomePage,
                                 navigationType = navigationType,
-                                uiState = myCityAppUiState
                             )
                             Spacer(
                                 modifier = Modifier

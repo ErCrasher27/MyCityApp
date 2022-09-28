@@ -39,8 +39,7 @@ fun OnlyListCards(
     onCardClick: (CategoryName) -> Unit,
     viewModel: MyCityViewModel,
     isInHomePage: Boolean,
-    navigationType: MyCityNavigationType,
-    uiState: MyCityUiState
+    navigationType: MyCityNavigationType
 ) {
     if (currentTab.name == CategoryName.Homepage.name) {
         Column(
@@ -62,7 +61,6 @@ fun OnlyListCards(
             viewModel = viewModel,
             isInHomePage = isInHomePage,
             navigationType = navigationType,
-            uiState = uiState
         )
     }
 }
@@ -75,7 +73,6 @@ fun ListAndDetailsCard(
     viewModel: MyCityViewModel,
     isInHomePage: Boolean,
     navigationType: MyCityNavigationType,
-    uiState: MyCityUiState
 ) {
     Row(horizontalArrangement = Arrangement.Start, modifier = Modifier.width(600.dp)) {
         if (currentTab.name == CategoryName.Homepage.name) {
@@ -98,7 +95,6 @@ fun ListAndDetailsCard(
             PlacesLists(
                 currentTab = currentTab,
                 viewModel = viewModel,
-                uiState = uiState,
                 isInHomePage = isInHomePage,
                 navigationType = navigationType
             )
@@ -217,10 +213,11 @@ fun BestPlacesHorizontalListWithHeader(
                     },
                     onPlaceClick = {
                         viewModel.updateCurrentDetails(it)
-                    }, horizontalPadding = 0,
+                    },
+                    horizontalPadding = 0,
                     verticalPadding = 0,
                     isInHomePage = isInHomePage,
-                    navigationType = navigationType
+                    navigationType = navigationType,
                 )
             }
         }
@@ -231,7 +228,6 @@ fun BestPlacesHorizontalListWithHeader(
 fun PlacesLists(
     currentTab: CategoryName,
     viewModel: MyCityViewModel,
-    uiState: MyCityUiState,
     modifier: Modifier = Modifier,
     isInHomePage: Boolean,
     navigationType: MyCityNavigationType
@@ -261,7 +257,7 @@ fun PlacesLists(
                 horizontalPadding = 18,
                 verticalPadding = 18,
                 isInHomePage = isInHomePage,
-                navigationType = navigationType
+                navigationType = navigationType,
             )
         }
     }

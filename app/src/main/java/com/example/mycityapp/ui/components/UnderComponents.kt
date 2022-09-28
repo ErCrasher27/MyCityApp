@@ -327,25 +327,28 @@ fun MapPlace(place: Place, modifier: Modifier = Modifier) {
 fun DistanceToPlace(
     placePosition: LatLng,
     loadDistance: (LatLng) -> String?,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-    Row(
-        horizontalArrangement = Arrangement.Start,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(start = 8.dp)
-    ) {
-        Icon(
-            imageVector = Icons.Default.SocialDistance,
-            contentDescription = loadDistance(placePosition).toString(),
-            tint = MaterialTheme.colorScheme.secondary
-        )
-        Spacer(modifier = Modifier.width(2.dp))
-        Text(
-            text = loadDistance(placePosition).toString(),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.secondary
-        )
+    val distanceCalculated = loadDistance(placePosition)
+    if (distanceCalculated != null) {
+        Row(
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(start = 8.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Default.LocationSearching,
+                contentDescription = distanceCalculated,
+                tint = MaterialTheme.colorScheme.secondary
+            )
+            Spacer(modifier = Modifier.width(2.dp))
+            Text(
+                text = distanceCalculated,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.secondary
+            )
+        }
     }
 }
