@@ -17,7 +17,8 @@ interface PostsService {
             return PostServiceImplementation(
                 client = HttpClient(Android){
                     install(JsonFeature){
-                        serializer = KotlinxSerializer()
+                        serializer = KotlinxSerializer(kotlinx.serialization.json.Json)
+
                     }
                 }
             )
