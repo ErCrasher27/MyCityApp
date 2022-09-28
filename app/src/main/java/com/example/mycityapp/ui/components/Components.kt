@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -87,6 +88,7 @@ fun PlaceCard(
     navigationType: MyCityNavigationType,
     modifier: Modifier = Modifier,
 ) {
+
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
@@ -106,7 +108,7 @@ fun PlaceCard(
                     modifier = modifier
                         .fillMaxWidth(),
                     imageVector = place.category.icon,
-                    contentDescription = place.category.nameCategory.name
+                    contentDescription = null
                 )
             }
             TitleAndDescriptionPlace(place = place)
@@ -170,6 +172,8 @@ fun DetailsPlaceCard(
     modifier: Modifier = Modifier,
     navigationType: MyCityNavigationType = MyCityNavigationType.BOTTOM_NAVIGATION
 ) {
+    val buttonCloseTestAndContentDescription = stringResource(id = R.string.close_details_place)
+    
     val context = LocalContext.current
     RequestPermissions(
         namePermission = "Phone",
@@ -193,7 +197,7 @@ fun DetailsPlaceCard(
             IconButton(onClick = onClose) {
                 Icon(
                     imageVector = Icons.Default.Close,
-                    contentDescription = stringResource(id = R.string.close_details_place),
+                    contentDescription = buttonCloseTestAndContentDescription,
                 )
             }
         }

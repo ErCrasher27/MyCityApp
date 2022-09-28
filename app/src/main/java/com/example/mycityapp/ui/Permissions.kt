@@ -23,6 +23,7 @@ fun PermissionState.isPermanentlyDenied(): Boolean {
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
+
 fun RequestPermissions(
     namePermission: String, permission: String, context: Context
 ) {
