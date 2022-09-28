@@ -50,7 +50,7 @@ fun OnlyListCards(
         {
             CategoriesHorizontalListsWithHeader(onCardClick = onCardClick, title = "Categories")
             BestPlacesHorizontalListWithHeader(
-                title = "Considering the Weather...",
+                title = "Considering the Weather",
                 viewModel = viewModel,
                 isInHomePage = isInHomePage,
                 navigationType = navigationType,
