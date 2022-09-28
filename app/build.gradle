@@ -72,7 +72,9 @@ dependencies {
 
     //Google Accompanist//
     implementation "com.google.accompanist:accompanist-pager-indicators:0.14.0"
+
     implementation "com.google.accompanist:accompanist-pager:0.26.3-beta"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.14.0"
     implementation 'com.google.accompanist:accompanist-permissions:0.26.3-beta'
 
     //Google Maps//
@@ -80,6 +82,7 @@ dependencies {
 
     //Google Play Services (Maps)//
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
+    implementation 'com.google.android.gms:play-services-location:20.0.0'
 
     //Junit//
     testImplementation 'junit:junit:4.12'

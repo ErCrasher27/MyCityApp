@@ -1,6 +1,7 @@
 package com.example.mycityapp.ui.components
 
 
+import android.Manifest
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -14,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -21,7 +23,9 @@ import androidx.compose.ui.window.Dialog
 import com.example.mycityapp.R
 import com.example.mycityapp.data.model.Category
 import com.example.mycityapp.data.model.Place
+import com.example.mycityapp.ui.RequestPermissions
 import com.example.mycityapp.ui.utils.MyCityNavigationType
+import com.google.android.gms.maps.model.LatLng
 
 @Composable
 fun HeaderListCard(title: String, modifier: Modifier = Modifier) {
@@ -72,12 +76,12 @@ fun CategoryCard(
 
 }
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlaceCard(
     place: Place,
     onPlaceClick: (Place) -> Unit,
+    onClickToGo: (LatLng) -> Unit,
+    loadDistance: (LatLng) -> String?,
     horizontalPadding: Int,
     verticalPadding: Int,
     isInHomePage: Boolean,
@@ -115,10 +119,7 @@ fun PlaceCard(
                     .clip(MaterialTheme.shapes.large)
                     .padding(vertical = 8.dp)
             ) {
-                LocationPlace(
-                    location = place.locationPlace,
-                    horizontalArrangement = Arrangement.Start
-                )
+                DistanceToPlace(placePosition = place.latLng, loadDistance = loadDistance)
                 Spacer(modifier = Modifier.height(4.dp))
                 StarsPlace(star = place.ratingPlace, horizontalArrangement = Arrangement.Start)
             }
@@ -127,8 +128,9 @@ fun PlaceCard(
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 ClickToGo(
-                    onClick = {},
-                    navigationType = navigationType
+                    onClickToGo = onClickToGo,
+                    latLng = place.latLng,
+                    navigationType = navigationType,
                 )
                 ClickForMore(
                     onClick = onPlaceClick,
@@ -142,14 +144,20 @@ fun PlaceCard(
 
 
 @Composable
-fun DetailsPlace(place: Place, onClose: () -> Unit, onClickToCall: (String) -> Unit) {
+fun DetailsPlace(
+    place: Place,
+    onClose: () -> Unit,
+    onClickToCall: (String) -> Unit,
+    onClickToGo: (LatLng) -> Unit
+) {
     Dialog(
         onDismissRequest = onClose,
         content = {
             DetailsPlaceCard(
                 place = place,
                 onClose = onClose,
-                onClickToCall = onClickToCall
+                onClickToCall = onClickToCall,
+                onClickToGo = onClickToGo
             )
         }
     )
@@ -160,10 +168,23 @@ fun DetailsPlaceCard(
     place: Place,
     onClose: () -> Unit,
     onClickToCall: (String) -> Unit,
+    onClickToGo: (LatLng) -> Unit,
     modifier: Modifier = Modifier,
     navigationType: MyCityNavigationType = MyCityNavigationType.BOTTOM_NAVIGATION
 ) {
     val buttonCloseTestAndContentDescription = stringResource(id = R.string.close_details_place)
+    
+    val context = LocalContext.current
+    RequestPermissions(
+        namePermission = "Phone",
+        permission = Manifest.permission.CALL_PHONE,
+        context = context
+    )
+    RequestPermissions(
+        namePermission = "Location",
+        permission = Manifest.permission.ACCESS_FINE_LOCATION,
+        context = context
+    )
     Card(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
@@ -216,7 +237,8 @@ fun DetailsPlaceCard(
                 enablePhone = enablePhone,
             )
             ClickToGo(
-                onClick = {},
+                onClickToGo = onClickToGo,
+                latLng = place.latLng,
                 navigationType = MyCityNavigationType.PERMANENT_NAVIGATION_DRAWER,
             )
         }

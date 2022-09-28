@@ -1,5 +1,6 @@
 package com.example.mycityapp.ui
 
+import android.Manifest
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -13,23 +14,32 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mycityapp.R
+import com.example.mycityapp.data.local.LocalPlaceData.places
 import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.ui.components.DetailsPlace
 import com.example.mycityapp.ui.components.DetailsPlaceCard
 import com.example.mycityapp.ui.utils.MyCityNavigationType
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.rememberPermissionState
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyCityApp(
     windowSize: WindowWidthSizeClass,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    RequestPermissions(
+        namePermission = "Phone",
+        permission = Manifest.permission.CALL_PHONE,
+        context = context
+    )
+    RequestPermissions(
+        namePermission = "Location",
+        permission = Manifest.permission.ACCESS_FINE_LOCATION,
+        context = context
+    )
+
     val viewModel: MyCityViewModel = viewModel()
     val myCityAppUiState = viewModel.uiState.collectAsState().value
-    val phonePermissionState =
-        rememberPermissionState(permission = android.Manifest.permission.CALL_PHONE)
 
     val navigationType: MyCityNavigationType = when (windowSize) {
         WindowWidthSizeClass.Compact -> {
@@ -51,6 +61,7 @@ fun MyCityApp(
         MyCityNavigationType.BOTTOM_NAVIGATION -> {
             if (myCityAppUiState.currentDetails != null) {
                 val context = LocalContext.current
+                val title = stringResource(id = myCityAppUiState.currentDetails.name)
                 DetailsPlace(
                     place = myCityAppUiState.currentDetails,
                     onClose = { viewModel.updateCurrentDetails(null) },
@@ -58,6 +69,13 @@ fun MyCityApp(
                         viewModel.callPlace(
                             context = context,
                             phoneNumber = myCityAppUiState.currentDetails.phonePlace
+                        )
+                    },
+                    onClickToGo = {
+                        viewModel.navigateTo(
+                            context = context,
+                            latLng = myCityAppUiState.currentDetails.latLng,
+                            title = title
                         )
                     }
                 )
@@ -74,7 +92,7 @@ fun MyCityApp(
                             },
                             viewModel = viewModel,
                             isInHomePage = myCityAppUiState.isInHomePage,
-                            navigationType = navigationType
+                            navigationType = navigationType,
                         )
                     }
                 }, bottomBar = {
@@ -82,11 +100,6 @@ fun MyCityApp(
                         currentTab = myCityAppUiState.currentTab,
                         onTabPressed = { category: CategoryName ->
                             viewModel.updateCurrentCategory(category = category)
-                            if (category == CategoryName.Homepage) {
-                                viewModel.updateIsInHomepage(isInHomePage = true)
-                            } else {
-                                viewModel.updateIsInHomepage(isInHomePage = false)
-                            }
                         },
                     )
                 }
@@ -97,6 +110,7 @@ fun MyCityApp(
         MyCityNavigationType.NAVIGATION_RAIL -> {
             if (myCityAppUiState.currentDetails != null) {
                 val context = LocalContext.current
+                val title = stringResource(id = myCityAppUiState.currentDetails.name)
                 DetailsPlace(
                     place = myCityAppUiState.currentDetails,
                     onClose = { viewModel.updateCurrentDetails(null) },
@@ -104,6 +118,13 @@ fun MyCityApp(
                         viewModel.callPlace(
                             context = context,
                             phoneNumber = myCityAppUiState.currentDetails.phonePlace
+                        )
+                    },
+                    onClickToGo = {
+                        viewModel.navigateTo(
+                            context = context,
+                            latLng = myCityAppUiState.currentDetails.latLng,
+                            title = title
                         )
                     })
 
@@ -116,11 +137,6 @@ fun MyCityApp(
                     currentTab = myCityAppUiState.currentTab,
                     onTabPressed = { category: CategoryName ->
                         viewModel.updateCurrentCategory(category = category)
-                        if (category == CategoryName.Homepage) {
-                            viewModel.updateIsInHomepage(isInHomePage = true)
-                        } else {
-                            viewModel.updateIsInHomepage(isInHomePage = false)
-                        }
                     },
                 )
                 Column(
@@ -136,7 +152,7 @@ fun MyCityApp(
                         },
                         viewModel = viewModel,
                         isInHomePage = myCityAppUiState.isInHomePage,
-                        navigationType = navigationType
+                        navigationType = navigationType,
                     )
                 }
             }
@@ -152,11 +168,6 @@ fun MyCityApp(
                             selectedDestination = myCityAppUiState.currentTab,
                             onTabPressed = { category: CategoryName ->
                                 viewModel.updateCurrentCategory(category = category)
-                                if (category == CategoryName.Homepage) {
-                                    viewModel.updateIsInHomepage(isInHomePage = true)
-                                } else {
-                                    viewModel.updateIsInHomepage(isInHomePage = false)
-                                }
                             }
                         )
                     }
@@ -181,7 +192,7 @@ fun MyCityApp(
                                 },
                                 viewModel = viewModel,
                                 isInHomePage = myCityAppUiState.isInHomePage,
-                                navigationType = navigationType
+                                navigationType = navigationType,
                             )
                             Spacer(
                                 modifier = Modifier
@@ -190,6 +201,8 @@ fun MyCityApp(
                             )
                             if (myCityAppUiState.currentDetails != null) {
                                 val context = LocalContext.current
+                                val title =
+                                    stringResource(id = myCityAppUiState.currentDetails.name)
                                 DetailsPlaceCard(
                                     place = myCityAppUiState.currentDetails,
                                     onClose = { viewModel.updateCurrentDetails(null) },
@@ -198,6 +211,13 @@ fun MyCityApp(
                                         viewModel.callPlace(
                                             context = context,
                                             phoneNumber = myCityAppUiState.currentDetails.phonePlace
+                                        )
+                                    },
+                                    onClickToGo = {
+                                        viewModel.navigateTo(
+                                            context = context,
+                                            latLng = myCityAppUiState.currentDetails.latLng,
+                                            title = title
                                         )
                                     }
                                 )
