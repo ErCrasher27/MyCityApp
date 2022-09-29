@@ -10,6 +10,7 @@ data class MyCityUiState(
     val currentDetails: Place? = null,
     val isInHomePage: Boolean = true,
     val currentLocation: Location? = null,
-    var currentFiltersPlace: MutableList<Filter> = mutableListOf(),
-    var expandedFilters: Boolean = false
+    var expandedFilters: Boolean = false,
+    var currentFilters: MutableList<Filter> = mutableListOf(),
+    var placesFiltered: List<Place> = listOf()
 )

@@ -25,7 +25,10 @@ fun PermissionState.isPermanentlyDenied(): Boolean {
 @Composable
 
 fun RequestPermissions(
-    namePermission: String, permission: String, context: Context
+    modifier: Modifier = Modifier,
+    context: Context,
+    namePermission: String,
+    permission: String,
 ) {
     val permissionState =
         rememberPermissionState(permission = permission)
@@ -57,10 +60,11 @@ fun RequestPermissions(
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun CheckPermissions(
-    namePermission: String,
+    modifier: Modifier = Modifier,
+    context: Context,
     permissionState: PermissionState,
     permission: String,
-    context: Context
+    namePermission: String
 ) {
 
     when (permissionState.permission) {
@@ -86,7 +90,12 @@ fun CheckPermissions(
 }
 
 @Composable
-fun DialogPermanentlyDeniedRequestPermission(title: String, content: String, context: Context) {
+fun DialogPermanentlyDeniedRequestPermission(
+    modifier: Modifier = Modifier,
+    context: Context,
+    title: String,
+    content: String
+) {
     Column(modifier = Modifier.fillMaxSize()) {
         val openDialog = remember { mutableStateOf(true) }
         if (openDialog.value) {

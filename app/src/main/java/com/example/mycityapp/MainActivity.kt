@@ -19,12 +19,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            /*val weatherInformation =
-                produceState<PostResponse>(
-                    initialValue = PostResponse(null), producer = {
-                        serviceWeather.getWeather()
-                    })*/
-
             MyCityAppTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),

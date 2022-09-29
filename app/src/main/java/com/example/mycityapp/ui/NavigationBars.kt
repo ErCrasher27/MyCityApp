@@ -16,9 +16,9 @@ import com.example.mycityapp.data.model.CategoryName
 
 @Composable
 fun MyCityAppBottomNavigationBar(
+    modifier: Modifier = Modifier,
     currentTab: CategoryName,
-    onTabPressed: (CategoryName) -> Unit,
-    modifier: Modifier = Modifier
+    onTabPressed: (CategoryName) -> Unit
 ) {
     val bottomNavigationContentDescription = stringResource(id = R.string.navigation_bottom)
 
@@ -45,9 +45,9 @@ fun MyCityAppBottomNavigationBar(
 
 @Composable
 fun MyCityAppNavigationRail(
+    modifier: Modifier = Modifier,
     currentTab: CategoryName,
-    onTabPressed: (CategoryName) -> Unit,
-    modifier: Modifier = Modifier
+    onTabPressed: (CategoryName) -> Unit
 ) {
     val railNavigationContentDescription = stringResource(id = R.string.navigation_rail)
     NavigationRail(
@@ -74,9 +74,9 @@ fun MyCityAppNavigationRail(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyCityAppNavigationDrawerContent(
+    modifier: Modifier = Modifier,
     selectedDestination: CategoryName,
-    onTabPressed: (CategoryName) -> Unit,
-    modifier: Modifier = Modifier
+    onTabPressed: (CategoryName) -> Unit
 ) {
     val drawerNavigationContentDescription = stringResource(id = R.string.navigation_drawer)
     NavigationRail(
@@ -111,7 +111,7 @@ fun MyCityAppNavigationDrawerContent(
 }
 
 @Composable
-private fun NavigationDrawerHeader(modifier: Modifier) {
+private fun NavigationDrawerHeader(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .fillMaxWidth()

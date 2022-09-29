@@ -52,6 +52,20 @@ object LocalPlaceData {
             phonePlace = "0823 154 0786"
         ),
         Place(
+            category = categories[2],
+            name = R.string.place_restaurants_name1,
+            descriptionPlace = R.string.place_restaurants_description1,
+            photoPlace = listOf
+                (R.drawable.place_restaurant_image_1),
+            locationPlace = R.string.place_restaurants_location1,
+            latLng = LatLng(
+                41.072332,
+                14.319006
+            ),
+            ratingPlace = Rate.STAR2,
+            phonePlace = "0823 154 0786"
+        ),
+        Place(
             category = categories[3],
             name = R.string.place_bar_name1,
             descriptionPlace = R.string.place_bar_description1,

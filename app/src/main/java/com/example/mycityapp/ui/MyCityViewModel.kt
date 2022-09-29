@@ -10,9 +10,11 @@ import android.net.Uri
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
+import com.example.mycityapp.data.local.LocalPlaceData.places
 import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.data.model.Filter
 import com.example.mycityapp.data.model.Place
+import com.example.mycityapp.data.model.Rate
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,6 +29,7 @@ class MyCityViewModel : ViewModel() {
     fun updateCurrentCategory(category: CategoryName) {
         if (category == CategoryName.Homepage) {
             updateIsInHomepage(true)
+            uiState.value.currentFilters.clear()
         } else {
             updateIsInHomepage(false)
         }
@@ -64,15 +67,26 @@ class MyCityViewModel : ViewModel() {
     fun updateCurrentFiltersPlace(currentFiltersPlace: MutableList<Filter>) {
         _uiState.update {
             it.copy(
-                currentFiltersPlace = currentFiltersPlace
+                currentFilters = currentFiltersPlace
             )
         }
     }
 
     fun updateExpandedFilters(expandedFilters: Boolean) {
+        if (!expandedFilters) {
+            uiState.value.currentFilters.clear()
+        }
         _uiState.update {
             it.copy(
                 expandedFilters = expandedFilters
+            )
+        }
+    }
+
+    fun updatePlacesFiltered(placesFiltered: List<Place>) {
+        _uiState.update {
+            it.copy(
+                placesFiltered = placesFiltered
             )
         }
     }
@@ -109,7 +123,7 @@ class MyCityViewModel : ViewModel() {
     }
 
     @SuppressLint("MissingPermission")
-    fun displayDistance(placeLocation: LatLng, context: Context): String? {
+    fun displayDistance(context: Context, placeLocation: LatLng): String? {
 
         var fusedLocation = LocationServices.getFusedLocationProviderClient(context)
         fusedLocation.getCurrentLocation(LocationRequest.QUALITY_HIGH_ACCURACY, null)
@@ -132,6 +146,28 @@ class MyCityViewModel : ViewModel() {
             formatResult = "%.1f".format(result / 1000) + " km from you"
         }
         return formatResult
+    }
+
+    fun filterPlace() {
+        var placesFilter = places
+        placesFilter =
+            placesFilter.filter { it.category.nameCategory.name == uiState.value.currentTab.name }
+
+        uiState.value.currentFilters.forEach {
+            placesFilter = when (it) {
+                Filter.Best ->
+                    placesFilter.filter {
+                        it.ratingPlace == Rate.STAR4 || it.ratingPlace == Rate.STAR5
+                    }
+                //Filter.Near -> TODO()
+                //Filter.Day -> TODO()
+                //Filter.Night -> TODO()
+                else -> {
+                    places
+                }
+            }
+        }
+        updatePlacesFiltered(placesFilter)
     }
 }
 

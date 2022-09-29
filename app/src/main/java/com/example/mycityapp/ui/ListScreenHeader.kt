@@ -1,6 +1,5 @@
 package com.example.mycityapp.ui
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
@@ -26,9 +25,10 @@ import com.example.mycityapp.data.model.Filter
 @Composable
 fun HeaderPlacesLists(
     currentFiltersPlace: MutableList<Filter>,
-    onClickFilter: (MutableList<Filter>) -> Unit,
     expandedFilters: Boolean,
+    onClickFilter: (MutableList<Filter>) -> Unit,
     onExpandFilters: (Boolean) -> Unit, modifier: Modifier = Modifier,
+    filterPlaces: () -> Unit,
 
     ) {
     Column(
@@ -47,15 +47,17 @@ fun HeaderPlacesLists(
             SearchPlace()
             Spacer(modifier = Modifier.weight(1f))
             FilterPlace(
-                currentFiltersPlace = currentFiltersPlace,
-                onClickFilter = onClickFilter,
                 expandedFilters = expandedFilters,
                 onExpandFilters = onExpandFilters
             )
         }
     }
     if (expandedFilters) {
-        FilterList(currentFiltersPlace = currentFiltersPlace, onClickFilter = onClickFilter)
+        FilterList(
+            currentFiltersPlace = currentFiltersPlace,
+            filterPlaces = filterPlaces,
+            onClickFilter = onClickFilter
+        )
     }
 }
 
@@ -102,11 +104,8 @@ fun SearchPlace(
 
 @Composable
 fun FilterPlace(
-    modifier: Modifier = Modifier,
-    currentFiltersPlace: MutableList<Filter>,
-    onClickFilter: (MutableList<Filter>) -> Unit,
-    onExpandFilters: (Boolean) -> Unit,
     expandedFilters: Boolean,
+    onExpandFilters: (Boolean) -> Unit
 ) {
     var iconArrow = if (!expandedFilters) Icons.Default.FilterList else Icons.Default.FilterListOff
     IconButton(
@@ -126,6 +125,7 @@ fun FilterList(
     modifier: Modifier = Modifier,
     currentFiltersPlace: MutableList<Filter>,
     onClickFilter: (MutableList<Filter>) -> Unit,
+    filterPlaces: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -145,29 +145,32 @@ fun FilterList(
             FilterItem(
                 title = "best rating (4-5)",
                 icon = Icons.Default.Stars,
+                filter = Filter.Best,
                 currentFiltersPlace = currentFiltersPlace,
+                filterPlaces = filterPlaces,
                 onClickFilter = onClickFilter,
-                filter = Filter.Best
             )
             FilterItem(
                 title = "near you (<10km)",
                 icon = Icons.Default.NearMe,
+                filter = Filter.Near,
                 currentFiltersPlace = currentFiltersPlace,
-                onClickFilter = onClickFilter,
-                filter = Filter.Near
+                filterPlaces = filterPlaces,
+                onClickFilter = onClickFilter
             )
             FilterItem(
                 icon = Icons.Default.WbSunny,
+                filter = Filter.Day,
                 currentFiltersPlace = currentFiltersPlace,
+                filterPlaces = filterPlaces,
                 onClickFilter = onClickFilter,
-                filter = Filter.Day
             )
             FilterItem(
                 icon = Icons.Default.Nightlight,
+                filter = Filter.Night,
                 currentFiltersPlace = currentFiltersPlace,
-                onClickFilter = onClickFilter,
-                filter = Filter.Night
-
+                filterPlaces = filterPlaces,
+                onClickFilter = onClickFilter
             )
         }
     }
@@ -178,14 +181,14 @@ fun FilterList(
 fun FilterItem(
     title: String? = null,
     icon: ImageVector,
+    filter: Filter,
     currentFiltersPlace: MutableList<Filter>,
     onClickFilter: (MutableList<Filter>) -> Unit,
-    filter: Filter
+    filterPlaces: () -> Unit,
 ) {
     var selected by rememberSaveable { mutableStateOf(false) }
     var buttonColor =
         if (selected) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.secondaryContainer
-
     OutlinedButton(
         colors = ButtonDefaults.buttonColors(buttonColor),
         border = BorderStroke(0.dp, Color.Transparent),
@@ -193,14 +196,13 @@ fun FilterItem(
             if (selected) {
                 currentFiltersPlace.remove(filter)
                 onClickFilter(currentFiltersPlace)
-                Log.d("prova", currentFiltersPlace.toString())
                 selected = false
             } else {
                 currentFiltersPlace.add(filter)
                 onClickFilter(currentFiltersPlace)
-                Log.d("prova", currentFiltersPlace.toString())
                 selected = true
             }
+            filterPlaces()
         }) {
         if (title != null) {
             Text(text = title)

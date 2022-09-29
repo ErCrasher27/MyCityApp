@@ -22,19 +22,19 @@ import com.example.mycityapp.ui.utils.MyCityNavigationType
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyCityApp(
+    modifier: Modifier = Modifier,
     windowSize: WindowWidthSizeClass,
-    modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
     RequestPermissions(
-        namePermission = "Phone",
+        context = context,
         permission = Manifest.permission.CALL_PHONE,
-        context = context
+        namePermission = "Phone"
     )
     RequestPermissions(
-        namePermission = "Location",
+        context = context,
         permission = Manifest.permission.ACCESS_FINE_LOCATION,
-        context = context
+        namePermission = "Location"
     )
 
     val viewModel: MyCityViewModel = viewModel()
@@ -56,7 +56,6 @@ fun MyCityApp(
     }
 
     when (navigationType) {
-
         MyCityNavigationType.BOTTOM_NAVIGATION -> {
             if (myCityAppUiState.currentDetails != null) {
                 val context = LocalContext.current
@@ -85,17 +84,19 @@ fun MyCityApp(
                 content = {
                     Column(modifier = modifier.padding(it)) {
                         OnlyListCards(
+                            navigationType = navigationType,
+                            viewModel = viewModel,
                             currentTab = myCityAppUiState.currentTab,
+                            isInHomePage = myCityAppUiState.isInHomePage,
+                            currentFiltersPlace = myCityAppUiState.currentFilters,
+                            expandedFilters = myCityAppUiState.expandedFilters,
+                            placesFiltered = myCityAppUiState.placesFiltered,
+                            onClickFilter = { viewModel.updateCurrentFiltersPlace(it) },
+                            onExpandFilters = { viewModel.updateExpandedFilters(it) },
+                            filterPlaces = { viewModel.filterPlace() },
                             onCardClick = { category: CategoryName ->
                                 viewModel.updateCurrentCategory(category = category)
                             },
-                            viewModel = viewModel,
-                            isInHomePage = myCityAppUiState.isInHomePage,
-                            navigationType = navigationType,
-                            currentFiltersPlace = myCityAppUiState.currentFiltersPlace,
-                            onClickFilter = { viewModel.updateCurrentFiltersPlace(it) },
-                            onExpandFilters = { viewModel.updateExpandedFilters(it) },
-                            expandedFilters = myCityAppUiState.expandedFilters
                         )
                     }
                 }, bottomBar = {
@@ -130,7 +131,6 @@ fun MyCityApp(
                             title = title
                         )
                     })
-
             }
             Row(
                 modifier = modifier
@@ -149,17 +149,19 @@ fun MyCityApp(
                 ) {
                     TopAppBar(title = stringResource(id = R.string.app_name))
                     OnlyListCards(
+                        navigationType = navigationType,
+                        viewModel = viewModel,
                         currentTab = myCityAppUiState.currentTab,
+                        isInHomePage = myCityAppUiState.isInHomePage,
+                        currentFiltersPlace = myCityAppUiState.currentFilters,
+                        placesFiltered = myCityAppUiState.placesFiltered,
+                        expandedFilters = myCityAppUiState.expandedFilters,
+                        onClickFilter = { viewModel.updateCurrentFiltersPlace(it) },
+                        onExpandFilters = { viewModel.updateExpandedFilters(it) },
+                        filterPlaces = { viewModel.filterPlace() },
                         onCardClick = { category: CategoryName ->
                             viewModel.updateCurrentCategory(category = category)
                         },
-                        viewModel = viewModel,
-                        isInHomePage = myCityAppUiState.isInHomePage,
-                        navigationType = navigationType,
-                        currentFiltersPlace = myCityAppUiState.currentFiltersPlace,
-                        onClickFilter = { viewModel.updateCurrentFiltersPlace(it) },
-                        onExpandFilters = { viewModel.updateExpandedFilters(it) },
-                        expandedFilters = myCityAppUiState.expandedFilters
                     )
                 }
             }
@@ -193,17 +195,19 @@ fun MyCityApp(
                                 .background(MaterialTheme.colorScheme.background)
                         ) {
                             ListAndDetailsCard(
+                                navigationType = navigationType,
+                                viewModel = viewModel,
                                 currentTab = myCityAppUiState.currentTab,
+                                isInHomePage = myCityAppUiState.isInHomePage,
+                                currentFiltersPlace = myCityAppUiState.currentFilters,
+                                placesFiltered = myCityAppUiState.placesFiltered,
+                                expandedFilters = myCityAppUiState.expandedFilters,
+                                onClickFilter = { viewModel.updateCurrentFiltersPlace(it) },
+                                onExpandFilters = { viewModel.updateExpandedFilters(it) },
+                                filterPlaces = { viewModel.filterPlace() },
                                 onCardClick = { category: CategoryName ->
                                     viewModel.updateCurrentCategory(category = category)
                                 },
-                                viewModel = viewModel,
-                                isInHomePage = myCityAppUiState.isInHomePage,
-                                navigationType = navigationType,
-                                currentFiltersPlace = myCityAppUiState.currentFiltersPlace,
-                                onClickFilter = { viewModel.updateCurrentFiltersPlace(it) },
-                                onExpandFilters = { viewModel.updateExpandedFilters(it) },
-                                expandedFilters = myCityAppUiState.expandedFilters
                             )
                             Spacer(
                                 modifier = Modifier
@@ -215,9 +219,9 @@ fun MyCityApp(
                                 val title =
                                     stringResource(id = myCityAppUiState.currentDetails.name)
                                 DetailsPlaceCard(
+                                    navigationType = MyCityNavigationType.PERMANENT_NAVIGATION_DRAWER,
                                     place = myCityAppUiState.currentDetails,
                                     onClose = { viewModel.updateCurrentDetails(null) },
-                                    navigationType = MyCityNavigationType.PERMANENT_NAVIGATION_DRAWER,
                                     onClickToCall = {
                                         viewModel.callPlace(
                                             context = context,

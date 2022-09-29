@@ -8,8 +8,8 @@ import androidx.compose.ui.Modifier
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBar(
-    title: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    title: String
 ) {
     TopAppBar(
         title = {
@@ -18,9 +18,9 @@ fun TopAppBar(
                 style = MaterialTheme.typography.titleLarge
             )
         },
-    colors = TopAppBarDefaults.smallTopAppBarColors(
-        containerColor = MaterialTheme.colorScheme.surfaceVariant,
-        titleContentColor = MaterialTheme.colorScheme.onSurfaceVariant
-    )
+        colors = TopAppBarDefaults.smallTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+            titleContentColor = MaterialTheme.colorScheme.onSurfaceVariant
+        )
     )
 }
