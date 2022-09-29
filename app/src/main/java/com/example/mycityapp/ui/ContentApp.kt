@@ -13,8 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
@@ -22,6 +22,7 @@ import com.example.mycityapp.data.local.LocalCategoryData.categories
 import com.example.mycityapp.data.local.LocalPlaceData
 import com.example.mycityapp.data.local.LocalPlaceData.places
 import com.example.mycityapp.data.model.CategoryName
+import com.example.mycityapp.data.model.Filter
 import com.example.mycityapp.data.model.Rate
 import com.example.mycityapp.ui.components.CategoryCard
 import com.example.mycityapp.ui.components.HeaderListCard
@@ -40,7 +41,11 @@ fun OnlyListCards(
     onCardClick: (CategoryName) -> Unit,
     viewModel: MyCityViewModel,
     isInHomePage: Boolean,
-    navigationType: MyCityNavigationType
+    navigationType: MyCityNavigationType,
+    currentFiltersPlace: MutableList<Filter>,
+    onClickFilter: (MutableList<Filter>) -> Unit,
+    expandedFilters: Boolean,
+    onExpandFilters: (Boolean) -> Unit, modifier: Modifier = Modifier,
 ) {
     if (currentTab.name == CategoryName.Homepage.name) {
         Column(
@@ -68,6 +73,10 @@ fun OnlyListCards(
             viewModel = viewModel,
             isInHomePage = isInHomePage,
             navigationType = navigationType,
+            currentFiltersPlace = currentFiltersPlace,
+            onClickFilter = onClickFilter,
+            expandedFilters = expandedFilters,
+            onExpandFilters = onExpandFilters
         )
     }
 }
@@ -80,6 +89,10 @@ fun ListAndDetailsCard(
     viewModel: MyCityViewModel,
     isInHomePage: Boolean,
     navigationType: MyCityNavigationType,
+    currentFiltersPlace: MutableList<Filter>,
+    onClickFilter: (MutableList<Filter>) -> Unit,
+    expandedFilters: Boolean,
+    onExpandFilters: (Boolean) -> Unit,
 ) {
     Row(horizontalArrangement = Arrangement.Start, modifier = Modifier.width(600.dp)) {
         if (currentTab.name == CategoryName.Homepage.name) {
@@ -103,7 +116,11 @@ fun ListAndDetailsCard(
                 currentTab = currentTab,
                 viewModel = viewModel,
                 isInHomePage = isInHomePage,
-                navigationType = navigationType
+                navigationType = navigationType,
+                currentFiltersPlace = currentFiltersPlace,
+                onClickFilter = onClickFilter,
+                onExpandFilters = onExpandFilters,
+                expandedFilters = expandedFilters
             )
         }
     }
@@ -238,9 +255,19 @@ fun PlacesLists(
     viewModel: MyCityViewModel,
     modifier: Modifier = Modifier,
     isInHomePage: Boolean,
-    navigationType: MyCityNavigationType
+    navigationType: MyCityNavigationType,
+    currentFiltersPlace: MutableList<Filter>,
+    onClickFilter: (MutableList<Filter>) -> Unit,
+    expandedFilters: Boolean,
+    onExpandFilters: (Boolean) -> Unit,
 ) {
     val context = LocalContext.current
+    HeaderPlacesLists(
+        currentFiltersPlace = currentFiltersPlace,
+        onClickFilter = onClickFilter,
+        onExpandFilters = onExpandFilters,
+        expandedFilters = expandedFilters
+    )
     LazyColumn(modifier) {
         items(LocalPlaceData.places.filter { it.category.nameCategory.name == currentTab.name }) { place ->
             val title = stringResource(id = place.name)

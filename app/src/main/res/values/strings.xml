@@ -9,7 +9,8 @@
     <string name="more_details_place">More Details</string>
     <string name="navigate_to_place">Navigate</string>
     <string name="call_place">Call</string>
-
+    <string name="search">Search</string>
+    <string name="filter">Filter</string>
 
     <!-- CATEGORIES !-->
     <string name="category_activities_description">outdoor activity</string>

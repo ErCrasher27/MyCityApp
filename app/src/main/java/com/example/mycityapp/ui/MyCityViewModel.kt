@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
 import com.example.mycityapp.data.model.CategoryName
+import com.example.mycityapp.data.model.Filter
 import com.example.mycityapp.data.model.Place
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
@@ -59,6 +60,23 @@ class MyCityViewModel : ViewModel() {
             )
         }
     }
+
+    fun updateCurrentFiltersPlace(currentFiltersPlace: MutableList<Filter>) {
+        _uiState.update {
+            it.copy(
+                currentFiltersPlace = currentFiltersPlace
+            )
+        }
+    }
+
+    fun updateExpandedFilters(expandedFilters: Boolean) {
+        _uiState.update {
+            it.copy(
+                expandedFilters = expandedFilters
+            )
+        }
+    }
+
 
     fun callPlace(context: Context, phoneNumber: String?) {
         if (phoneNumber != null) {

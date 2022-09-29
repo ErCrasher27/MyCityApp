@@ -15,3 +15,10 @@ enum class Rate {
     STAR4,
     STAR5
 }
+
+enum class Filter{
+    Best,
+    Near,
+    Day,
+    Night
+}

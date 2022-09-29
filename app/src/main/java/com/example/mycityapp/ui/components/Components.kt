@@ -7,14 +7,15 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDownward
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Expand
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -101,7 +102,7 @@ fun PlaceCard(
         Column(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(vertical = 13.dp)
+                .padding(vertical = 12.dp)
         ) {
             if (isInHomePage) {
                 Image(
@@ -173,7 +174,7 @@ fun DetailsPlaceCard(
     navigationType: MyCityNavigationType = MyCityNavigationType.BOTTOM_NAVIGATION
 ) {
     val buttonCloseTestAndContentDescription = stringResource(id = R.string.close_details_place)
-    
+
     val context = LocalContext.current
     RequestPermissions(
         namePermission = "Phone",
@@ -244,6 +245,7 @@ fun DetailsPlaceCard(
         }
     }
 }
+
 
 
 

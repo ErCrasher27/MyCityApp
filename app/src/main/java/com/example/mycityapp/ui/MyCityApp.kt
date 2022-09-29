@@ -14,7 +14,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mycityapp.R
-import com.example.mycityapp.data.local.LocalPlaceData.places
 import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.ui.components.DetailsPlace
 import com.example.mycityapp.ui.components.DetailsPlaceCard
@@ -93,6 +92,10 @@ fun MyCityApp(
                             viewModel = viewModel,
                             isInHomePage = myCityAppUiState.isInHomePage,
                             navigationType = navigationType,
+                            currentFiltersPlace = myCityAppUiState.currentFiltersPlace,
+                            onClickFilter = { viewModel.updateCurrentFiltersPlace(it) },
+                            onExpandFilters = { viewModel.updateExpandedFilters(it) },
+                            expandedFilters = myCityAppUiState.expandedFilters
                         )
                     }
                 }, bottomBar = {
@@ -153,6 +156,10 @@ fun MyCityApp(
                         viewModel = viewModel,
                         isInHomePage = myCityAppUiState.isInHomePage,
                         navigationType = navigationType,
+                        currentFiltersPlace = myCityAppUiState.currentFiltersPlace,
+                        onClickFilter = { viewModel.updateCurrentFiltersPlace(it) },
+                        onExpandFilters = { viewModel.updateExpandedFilters(it) },
+                        expandedFilters = myCityAppUiState.expandedFilters
                     )
                 }
             }
@@ -193,6 +200,10 @@ fun MyCityApp(
                                 viewModel = viewModel,
                                 isInHomePage = myCityAppUiState.isInHomePage,
                                 navigationType = navigationType,
+                                currentFiltersPlace = myCityAppUiState.currentFiltersPlace,
+                                onClickFilter = { viewModel.updateCurrentFiltersPlace(it) },
+                                onExpandFilters = { viewModel.updateExpandedFilters(it) },
+                                expandedFilters = myCityAppUiState.expandedFilters
                             )
                             Spacer(
                                 modifier = Modifier
