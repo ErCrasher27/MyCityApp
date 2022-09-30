@@ -83,6 +83,7 @@ fun MyCityApp(
                 topBar = { TopAppBar(title = myCityAppUiState.currentTab.name) },
                 content = {
                     Column(modifier = modifier.padding(it)) {
+                        val context = LocalContext.current
                         OnlyListCards(
                             navigationType = navigationType,
                             viewModel = viewModel,
@@ -93,7 +94,7 @@ fun MyCityApp(
                             placesFiltered = myCityAppUiState.placesFiltered,
                             onClickFilter = { viewModel.updateCurrentFiltersPlace(it) },
                             onExpandFilters = { viewModel.updateExpandedFilters(it) },
-                            filterPlaces = { viewModel.filterPlace() },
+                            filterPlaces = { viewModel.filterPlace(context = context) },
                             onCardClick = { category: CategoryName ->
                                 viewModel.updateCurrentCategory(category = category)
                             },
@@ -147,6 +148,7 @@ fun MyCityApp(
                         .fillMaxSize()
                         .background(MaterialTheme.colorScheme.background)
                 ) {
+                    val context = LocalContext.current
                     TopAppBar(title = stringResource(id = R.string.app_name))
                     OnlyListCards(
                         navigationType = navigationType,
@@ -158,7 +160,7 @@ fun MyCityApp(
                         expandedFilters = myCityAppUiState.expandedFilters,
                         onClickFilter = { viewModel.updateCurrentFiltersPlace(it) },
                         onExpandFilters = { viewModel.updateExpandedFilters(it) },
-                        filterPlaces = { viewModel.filterPlace() },
+                        filterPlaces = { viewModel.filterPlace(context) },
                         onCardClick = { category: CategoryName ->
                             viewModel.updateCurrentCategory(category = category)
                         },
@@ -194,6 +196,7 @@ fun MyCityApp(
                                 .fillMaxSize()
                                 .background(MaterialTheme.colorScheme.background)
                         ) {
+                            val context = LocalContext.current
                             ListAndDetailsCard(
                                 navigationType = navigationType,
                                 viewModel = viewModel,
@@ -204,7 +207,7 @@ fun MyCityApp(
                                 expandedFilters = myCityAppUiState.expandedFilters,
                                 onClickFilter = { viewModel.updateCurrentFiltersPlace(it) },
                                 onExpandFilters = { viewModel.updateExpandedFilters(it) },
-                                filterPlaces = { viewModel.filterPlace() },
+                                filterPlaces = { viewModel.filterPlace(context) },
                                 onCardClick = { category: CategoryName ->
                                     viewModel.updateCurrentCategory(category = category)
                                 },
