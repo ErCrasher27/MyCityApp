@@ -123,8 +123,10 @@ class MyCityViewModel : ViewModel() {
     }
 
     @SuppressLint("MissingPermission")
-    fun displayDistance(context: Context, placeLocation: LatLng): String? {
-
+    fun displayDistance(
+        context: Context,
+        placeLocation: LatLng,
+    ): String? {
         var fusedLocation = LocationServices.getFusedLocationProviderClient(context)
         fusedLocation.getCurrentLocation(LocationRequest.QUALITY_HIGH_ACCURACY, null)
             .addOnSuccessListener { location: Location? ->
@@ -143,29 +145,45 @@ class MyCityViewModel : ViewModel() {
         result = uiState.value.currentLocation?.distanceTo(placeLocationToLocationType)
 
         if (result != null) {
-            formatResult = "%.1f".format(result / 1000) + " km from you"
+            formatResult = "%.1f".format(result / 1000)
         }
+
         return formatResult
     }
 
-    fun filterPlace() {
+    fun filterPlace(context: Context) {
         var placesFilter = places
         placesFilter =
             placesFilter.filter { it.category.nameCategory.name == uiState.value.currentTab.name }
 
         uiState.value.currentFilters.forEach {
-            placesFilter = when (it) {
-                Filter.Best ->
-                    placesFilter.filter {
-                        it.ratingPlace == Rate.STAR4 || it.ratingPlace == Rate.STAR5
-                    }
-                //Filter.Near -> TODO()
-                //Filter.Day -> TODO()
-                //Filter.Night -> TODO()
-                else -> {
-                    places
+            if (it == Filter.Best) {
+                placesFilter.filter {
+                    it.ratingPlace == Rate.STAR4 || it.ratingPlace == Rate.STAR5
                 }
             }
+
+            if (it == Filter.Near) {
+                placesFilter.filter {
+                    displayDistance(
+                        context = context,
+                        placeLocation = it.latLng
+                    )?.toFloat()!! < 10.0
+                }
+            }
+
+            if (it == Filter.Day) {
+                placesFilter.filter {
+                    it.dayVisitable == true
+                }
+            }
+
+            if (it == Filter.Night) {
+                placesFilter.filter {
+                    it.dayVisitable == true
+                }
+            }
+
         }
         updatePlacesFiltered(placesFilter)
     }

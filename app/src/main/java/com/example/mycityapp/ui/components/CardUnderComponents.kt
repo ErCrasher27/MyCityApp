@@ -348,12 +348,12 @@ fun DistanceToPlace(
         ) {
             Icon(
                 imageVector = Icons.Default.LocationSearching,
-                contentDescription = distanceCalculated,
+                contentDescription = "$distanceCalculated km from you",
                 tint = MaterialTheme.colorScheme.secondary
             )
             Spacer(modifier = Modifier.width(2.dp))
             Text(
-                text = distanceCalculated,
+                text = "$distanceCalculated km from you",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.secondary
             )

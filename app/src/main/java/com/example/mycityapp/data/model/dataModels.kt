@@ -27,6 +27,8 @@ data class Place(
     val phonePlace: String? = null,
     val latLng: LatLng,
     val ratingPlace: Rate,
+    val dayVisitable: Boolean,
+    val nightVisitable: Boolean
 )
 
 
