@@ -153,18 +153,19 @@ class MyCityViewModel : ViewModel() {
 
     fun filterPlace(context: Context) {
         var placesFilter = places
+
         placesFilter =
             placesFilter.filter { it.category.nameCategory.name == uiState.value.currentTab.name }
 
         uiState.value.currentFilters.forEach {
             if (it == Filter.Best) {
-                placesFilter.filter {
+                placesFilter = placesFilter.filter {
                     it.ratingPlace == Rate.STAR4 || it.ratingPlace == Rate.STAR5
                 }
             }
 
             if (it == Filter.Near) {
-                placesFilter.filter {
+                placesFilter = placesFilter.filter {
                     displayDistance(
                         context = context,
                         placeLocation = it.latLng
@@ -173,14 +174,14 @@ class MyCityViewModel : ViewModel() {
             }
 
             if (it == Filter.Day) {
-                placesFilter.filter {
-                    it.dayVisitable == true
+                placesFilter = placesFilter.filter {
+                    it.dayVisitable
                 }
             }
 
             if (it == Filter.Night) {
-                placesFilter.filter {
-                    it.dayVisitable == true
+                placesFilter = placesFilter.filter {
+                    it.nightVisitable
                 }
             }
 
