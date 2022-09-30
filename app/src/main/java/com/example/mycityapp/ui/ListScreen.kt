@@ -30,6 +30,7 @@ fun PlacesLists(
         filterPlaces = filterPlaces,
         onExpandFilters = onExpandFilters,
         onClickFilter = onClickFilter,
+        onValueChangeSearchPlace = {viewModel.updateSearchNamePlace(it)}
     )
     PlacesFilter(
         navigationType = navigationType,
@@ -56,7 +57,7 @@ fun PlacesFilter(
             val title = stringResource(id = place.name)
             PlaceCard(
                 horizontalPadding = 18,
-                verticalPadding = 18,
+                verticalPadding = 10,
                 navigationType = navigationType,
                 place = place,
                 isInHomePage = isInHomePage,

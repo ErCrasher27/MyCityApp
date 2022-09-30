@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mycityapp.R
 import com.example.mycityapp.data.model.Filter
 
@@ -29,7 +30,7 @@ fun HeaderPlacesLists(
     onClickFilter: (MutableList<Filter>) -> Unit,
     onExpandFilters: (Boolean) -> Unit, modifier: Modifier = Modifier,
     filterPlaces: () -> Unit,
-
+    onValueChangeSearchPlace: (String) -> Unit
     ) {
     Column(
         Modifier
@@ -44,7 +45,7 @@ fun HeaderPlacesLists(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            SearchPlace()
+            SearchPlace(onValueChangeSearchPlace = onValueChangeSearchPlace)
             Spacer(modifier = Modifier.weight(1f))
             FilterPlace(
                 expandedFilters = expandedFilters,
@@ -65,6 +66,7 @@ fun HeaderPlacesLists(
 @Composable
 fun SearchPlace(
     modifier: Modifier = Modifier,
+    onValueChangeSearchPlace: (String) -> Unit
 ) {
     var textState by rememberSaveable {
         mutableStateOf("")
@@ -77,7 +79,10 @@ fun SearchPlace(
         singleLine = true,
         shape = MaterialTheme.shapes.large,
         value = textState,
-        onValueChange = { textState = it },
+        onValueChange = {
+            textState = it
+            onValueChangeSearchPlace(textState)
+            },
         placeholder = {
             Row {
                 Icon(
@@ -137,7 +142,7 @@ fun FilterList(
             modifier
                 .horizontalScroll(rememberScrollState())
                 .fillMaxWidth()
-                .padding(start = 18.dp, end = 18.dp, top = 18.dp),
+                .padding(start = 18.dp, end = 18.dp, top = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         )

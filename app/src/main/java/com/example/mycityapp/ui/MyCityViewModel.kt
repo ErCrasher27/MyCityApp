@@ -8,6 +8,7 @@ import android.location.Location
 import android.location.LocationRequest
 import android.net.Uri
 import android.util.Log
+import androidx.compose.ui.res.stringResource
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
@@ -92,6 +93,16 @@ class MyCityViewModel : ViewModel() {
         }
     }
 
+    fun updateSearchNamePlace(searchNamePlace: String) {
+        //Log.d("ciao", searchNamePlace)
+        _uiState.update {
+            it.copy(
+                searchPlaceName = searchNamePlace
+            )
+        }
+        //Log.d("ciao", searchNamePlace)
+    }
+
 
     fun callPlace(context: Context, phoneNumber: String?) {
         if (phoneNumber != null) {
@@ -153,11 +164,17 @@ class MyCityViewModel : ViewModel() {
     }
 
     fun filterPlace(context: Context) {
+        var searchNamePlace = uiState.value.searchPlaceName
         var placesFilter = places
 
-        placesFilter =
-            placesFilter.filter { it.category.nameCategory.name == uiState.value.currentTab.name }
-
+        placesFilter = placesFilter.filter { it.category.nameCategory.name == uiState.value.currentTab.name }
+        if (searchNamePlace.isNotEmpty())
+        {
+            placesFilter = placesFilter.filter {
+                context.getString(it.name).contains(searchNamePlace,true)
+                        || context.getString(it.descriptionPlace).contains(searchNamePlace,true)
+            }
+        }
         uiState.value.currentFilters.forEach {
             if (it == Filter.Best) {
                 placesFilter = placesFilter.filter {
