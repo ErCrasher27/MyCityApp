@@ -16,9 +16,11 @@ interface PostsService {
         fun create(): PostsService{
             return PostServiceImplementation(
                 client = HttpClient(Android){
-                    install(JsonFeature){
-                        serializer = KotlinxSerializer(kotlinx.serialization.json.Json)
 
+                    install(JsonFeature){
+                        serializer = KotlinxSerializer(kotlinx.serialization.json.Json{
+                            ignoreUnknownKeys = true
+                            isLenient = true})
                     }
                 }
             )

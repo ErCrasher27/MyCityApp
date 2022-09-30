@@ -11,10 +11,9 @@ import io.ktor.http.*
 class PostServiceImplementation (private val client: HttpClient) : PostsService {
     override suspend fun getWeather(): PostResponse {
         return client.get{
-            Log.d("ciao", "coapdsa")
 
             url(HttpRoutes.CURRENT_WEATHER_JSON_REQUEST)
-
+            Log.d("ciao", "coapdsa")
         }
     }
 
