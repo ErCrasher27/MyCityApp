@@ -37,7 +37,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import kotlin.math.absoluteValue
 
 @Composable
-fun TitleAndDescriptionPlace(place: Place, modifier: Modifier = Modifier) {
+fun TitleAndDescriptionPlace(modifier: Modifier = Modifier, place: Place) {
     val tagPlaceDescription = stringResource(id = place.descriptionPlace)
     Column(
         modifier = modifier
@@ -60,8 +60,9 @@ fun TitleAndDescriptionPlace(place: Place, modifier: Modifier = Modifier) {
 
 @Composable
 fun LocationPlace(
-    @StringRes location: Int, horizontalArrangement: Arrangement.Horizontal,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    @StringRes location: Int,
+    horizontalArrangement: Arrangement.Horizontal
 ) {
     Row(
         horizontalArrangement = horizontalArrangement,
@@ -86,8 +87,8 @@ fun LocationPlace(
 
 @Composable
 fun PhonePlace(
-    numberPhone: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    numberPhone: String
 ) {
     Row(
         horizontalArrangement = Arrangement.Start,
@@ -112,9 +113,9 @@ fun PhonePlace(
 
 @Composable
 fun StarsPlace(
+    modifier: Modifier = Modifier,
     star: Rate,
-    horizontalArrangement: Arrangement.Horizontal,
-    modifier: Modifier = Modifier
+    horizontalArrangement: Arrangement.Horizontal
 ) {
     Row(
         horizontalArrangement = horizontalArrangement,
@@ -144,9 +145,9 @@ fun StarsPlace(
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ImagePlace(
+    modifier: Modifier = Modifier,
     @DrawableRes imagePlace: List<Int>,
-    @StringRes namePlace: Int,
-    modifier: Modifier = Modifier
+    @StringRes namePlace: Int
 ) {
     val pagerState = rememberPagerState()
 
@@ -180,21 +181,20 @@ fun ImagePlace(
                     .fillMaxSize()
             ) {
                 Image(
+                    modifier = modifier
+                        .fillMaxSize(),
                     painter = painterResource(id = imagePlace[page]),
                     contentDescription = stringResource(namePlace),
-                    contentScale = ContentScale.Crop,
-                    modifier = modifier
-                        .fillMaxSize()
+                    contentScale = ContentScale.Crop
                 )
-
             }
         }
     }
     Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
         HorizontalPagerIndicator(
-            pagerState = pagerState,
             modifier = Modifier
                 .padding(top = 16.dp, bottom = 8.dp),
+            pagerState = pagerState,
             activeColor = MaterialTheme.colorScheme.onSurface,
         )
     }
@@ -202,9 +202,9 @@ fun ImagePlace(
 
 @Composable
 fun TextWithShadow(
+    modifier: Modifier = Modifier,
     text: String,
-    style: TextStyle,
-    modifier: Modifier = Modifier
+    style: TextStyle
 ) {
     Box {
         Text(
@@ -229,20 +229,20 @@ fun TextWithShadow(
 
 @Composable
 fun ClickToGo(
-    onClickToGo: (LatLng) -> Unit,
-    latLng: LatLng,
+    modifier: Modifier = Modifier,
     navigationType: MyCityNavigationType,
-    modifier: Modifier = Modifier
+    latLng: LatLng,
+    onClickToGo: (LatLng) -> Unit,
 ) {
     Button(
+        modifier = modifier.widthIn(100.dp),
         onClick = { onClickToGo(latLng) },
-        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
-        modifier = modifier.widthIn(100.dp)
+        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
     ) {
         Icon(
+            modifier = Modifier.size(ButtonDefaults.IconSize),
             imageVector = Icons.Default.Navigation,
             contentDescription = stringResource(id = R.string.navigate_to_place),
-            modifier = Modifier.size(ButtonDefaults.IconSize)
         )
         if (navigationType != MyCityNavigationType.BOTTOM_NAVIGATION) {
             Spacer(Modifier.size(ButtonDefaults.IconSize))
@@ -253,21 +253,21 @@ fun ClickToGo(
 
 @Composable
 fun ClickToCall(
-    onClickToCall: (String) -> Unit,
+    modifier: Modifier = Modifier,
     place: Place,
     enablePhone: Boolean,
-    modifier: Modifier = Modifier
+    onClickToCall: (String) -> Unit,
 ) {
     Button(
+        modifier = modifier.widthIn(100.dp),
         enabled = enablePhone,
         onClick = { place.phonePlace?.let { onClickToCall(it) } },
-        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary),
-        modifier = modifier.widthIn(100.dp)
+        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
     ) {
         Icon(
+            modifier = Modifier.size(ButtonDefaults.IconSize),
             imageVector = Icons.Default.Call,
             contentDescription = stringResource(id = R.string.call_place),
-            modifier = Modifier.size(ButtonDefaults.IconSize)
         )
         Spacer(Modifier.size(ButtonDefaults.IconSize))
         Text(text = stringResource(id = R.string.call_place))
@@ -276,10 +276,10 @@ fun ClickToCall(
 
 @Composable
 fun ClickForMore(
-    onClick: (Place) -> Unit,
-    place: Place,
+    modifier: Modifier = Modifier,
     navigationType: MyCityNavigationType,
-    modifier: Modifier = Modifier
+    place: Place,
+    onClick: (Place) -> Unit,
 ) {
     val placeTestTag = stringResource(id = place.locationPlace)
     val buttonTestTagMediumAndDrawer = stringResource(id = R.string.more_details_place)
@@ -304,7 +304,7 @@ fun ClickForMore(
 }
 
 @Composable
-fun MapPlace(place: Place, modifier: Modifier = Modifier) {
+fun MapPlace(modifier: Modifier = Modifier, place: Place) {
     val locationMaps = place.latLng
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(locationMaps, 12f)
@@ -333,18 +333,18 @@ fun MapPlace(place: Place, modifier: Modifier = Modifier) {
 
 @Composable
 fun DistanceToPlace(
-    placePosition: LatLng,
-    loadDistance: (LatLng) -> String?,
     modifier: Modifier = Modifier,
+    placePosition: LatLng,
+    loadDistance: (LatLng) -> String?
 ) {
     val distanceCalculated = loadDistance(placePosition)
     if (distanceCalculated != null) {
         Row(
-            horizontalArrangement = Arrangement.Start,
-            verticalAlignment = Alignment.CenterVertically,
             modifier = modifier
                 .fillMaxWidth()
-                .padding(start = 8.dp)
+                .padding(start = 8.dp),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 imageVector = Icons.Default.LocationSearching,
