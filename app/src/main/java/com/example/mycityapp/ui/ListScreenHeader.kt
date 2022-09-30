@@ -97,7 +97,10 @@ fun SearchPlace(
         },
         trailingIcon = {
             if (textState.isNotEmpty()) {
-                IconButton(onClick = { textState = "" }) {
+                IconButton(onClick = {
+                    textState = ""
+                    onValueChangeSearchPlace("")
+                }) {
                     Icon(
                         imageVector = Icons.Outlined.Close,
                         contentDescription = "Delete Search"

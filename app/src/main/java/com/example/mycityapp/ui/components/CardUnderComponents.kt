@@ -23,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
+import androidx.compose.ui.window.Dialog
 import com.example.mycityapp.R
 import com.example.mycityapp.data.model.Place
 import com.example.mycityapp.data.model.Rate
@@ -360,4 +361,12 @@ fun DistanceToPlace(
         }
     }
 }
+
+@Composable
+fun alertDialogIfEmptyPlaces(){
+    Dialog(onDismissRequest = { /*TODO*/ }) {
+        Text(text = "ciao")
+    }
+}
+
 

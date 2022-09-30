@@ -30,7 +30,7 @@ fun PlacesLists(
         filterPlaces = filterPlaces,
         onExpandFilters = onExpandFilters,
         onClickFilter = onClickFilter,
-        onValueChangeSearchPlace = {viewModel.updateSearchNamePlace(it)}
+        onValueChangeSearchPlace = { viewModel.updateSearchNamePlace(it) }
     )
     PlacesFilter(
         navigationType = navigationType,
@@ -52,6 +52,7 @@ fun PlacesFilter(
 ) {
     val context = LocalContext.current
     filterPlaces()
+    //TODO if placesFiltered is empty do an alert dialog or something
     LazyColumn(modifier) {
         items(placesFiltered) { place ->
             val title = stringResource(id = place.name)
@@ -79,5 +80,6 @@ fun PlacesFilter(
                 },
             )
         }
+
     }
 }

@@ -39,6 +39,9 @@
     <string name="place_bar_name1">Rock and Blues</string>
     <string name="place_bar_description1">il locale ambientato nel rock</string>
     <string name="place_bar_location1">Via Nazionale Appia, 231/a, 81020 Casapulla CE</string>
+    <string name="place_bar_name2">Flaming Pub</string>
+    <string name="place_bar_description2">il pub pieno di giochi da tavolo!</string>
+    <string name="place_bar_location2">Via Giuseppe Maria Bosco, 50, 81100 Caserta CE</string>
 
     <!-- TEST TAGS !-->
         <!-- NAVIGATION TAGS !-->
