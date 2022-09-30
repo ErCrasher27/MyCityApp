@@ -74,6 +74,21 @@ object LocalPlaceData {
             phonePlace = "320 780 3268",
             dayVisitable = false,
             nightVisitable = true
+        ),
+        Place(
+            category = categories[3],
+            name = R.string.place_bar_name1,
+            descriptionPlace = R.string.place_bar_description1,
+            photoPlace = listOf
+                (R.drawable.place_bar_image_1),
+            locationPlace = R.string.place_bar_location1,
+            latLng = LatLng(
+                48.075813, 10.284915
+            ),
+            ratingPlace = Rate.STAR3,
+            phonePlace = "320 780 3268",
+            dayVisitable = false,
+            nightVisitable = true
         )
     )
 }

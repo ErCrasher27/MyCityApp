@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationRequest
 import android.net.Uri
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
@@ -166,10 +167,17 @@ class MyCityViewModel : ViewModel() {
 
             if (it == Filter.Near) {
                 placesFilter = placesFilter.filter {
-                    displayDistance(
+                    var distanceResult = displayDistance(
                         context = context,
                         placeLocation = it.latLng
-                    )?.toFloat()!! < 10.0
+                    )
+                    distanceResult = distanceResult?.replace(",",".")
+                    val distanceResultToFloat = distanceResult?.toFloatOrNull()
+                    if (distanceResultToFloat == null){
+                        true
+                    }else {
+                        distanceResultToFloat < 10.0
+                    }
                 }
             }
 
