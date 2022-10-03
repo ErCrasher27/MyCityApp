@@ -1,7 +1,6 @@
 package com.example.mycityapp.ui
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -92,6 +91,7 @@ fun BestPlacesHorizontalListWithHeader(
     viewModel: MyCityViewModel,
     isInHomePage: Boolean
 ) {
+
     Column {
         val bestPlacesWithFourOrMoreStars =
             LocalPlaceData.places.filter { place -> place.ratingPlace == Rate.STAR4 || place.ratingPlace == Rate.STAR5 }
@@ -112,87 +112,111 @@ fun BestPlacesHorizontalListWithHeader(
                         .fillMaxHeight()
                         .padding(4.dp), verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Box(modifier = Modifier
-                        .fillMaxHeight()
-                        .width(70.dp)) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .width(70.dp)
+                    ) {
                         Image(
                             painter = rememberAsyncImagePainter("https:" + viewModel.uiState.value.weather!!.current?.condition?.icon),
-                            contentDescription = "hello",
+                            contentDescription = "Image of weather",
                             modifier = Modifier.fillMaxSize()
                         )
                     }
 
                     Column(modifier = Modifier.padding(start = 8.dp)) {
-                        viewModel.uiState.value.weather!!.current?.condition?.text?.let { Text(text = it, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold) }
-                        viewModel.uiState.value.weather!!.location?.name?.let { Text(text = it, style = MaterialTheme.typography.labelSmall) }
+                        viewModel.uiState.value.weather!!.current?.condition?.text?.let {
+                            Text(
+                                text = it,
+                                style = MaterialTheme.typography.bodyLarge,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                        viewModel.uiState.value.weather!!.location?.name?.let {
+                            Text(
+                                text = it,
+                                style = MaterialTheme.typography.labelSmall
+                            )
+                        }
 
                     }
                     Spacer(modifier = Modifier.weight(1f))
-                    Box(modifier = Modifier.fillMaxHeight().width(70.dp), contentAlignment = Alignment.Center){
-                        Text(text = viewModel.uiState.value.weather!!.current?.temp_c?.toInt().toString() + "°C", style = MaterialTheme.typography.titleLarge)
+                    Box(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .width(70.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = viewModel.uiState.value.weather!!.current?.temp_c?.toInt()
+                                .toString() + "°C", style = MaterialTheme.typography.titleLarge
+                        )
                     }
 
                 }
             }
         }
+        //val day = viewModel.uiState.value.weather?.current?.is_day != 0
         HorizontalPager(
             count = bestPlacesWithFourOrMoreStars.size,
             modifier,
             contentPadding = PaddingValues(horizontal = 40.dp)
         ) { page ->
-            Card(
-                Modifier
-                    .width(500.dp)
-                    .graphicsLayer {
-                        val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
-                        lerp(
-                            start = 0.85f,
-                            stop = 1f,
-                            fraction = 1f - pageOffset.coerceIn(0f, 1f)
-                        ).also { scale ->
-                            scaleX = scale
-                            scaleY = scale
-                        }
-                        alpha = lerp(
-                            start = 0.5f,
-                            stop = 1f,
-                            fraction = 1f - pageOffset.coerceIn(0f, 1f)
-                        )
-                    },
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                ),
-                shape = MaterialTheme.shapes.large
-            ) {
-                val context = LocalContext.current
-                val title = stringResource(id = bestPlacesWithFourOrMoreStars[page].name)
+            //if (bestPlacesWithFourOrMoreStars[page].dayVisitable && day) {
+                Card(
+                    Modifier
+                        .width(500.dp)
+                        .graphicsLayer {
+                            val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
+                            lerp(
+                                start = 0.85f,
+                                stop = 1f,
+                                fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                            ).also { scale ->
+                                scaleX = scale
+                                scaleY = scale
+                            }
+                            alpha = lerp(
+                                start = 0.5f,
+                                stop = 1f,
+                                fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                            )
+                        },
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                    ),
+                    shape = MaterialTheme.shapes.large
+                ) {
+                    val context = LocalContext.current
+                    val title = stringResource(id = bestPlacesWithFourOrMoreStars[page].name)
 
 
-                PlaceCard(
-                    horizontalPadding = 0,
-                    verticalPadding = 0,
-                    navigationType = navigationType,
-                    place = bestPlacesWithFourOrMoreStars[page],
-                    isInHomePage = isInHomePage,
-                    onClickToGo = {
-                        viewModel.navigateTo(
-                            context = context,
-                            latLng = bestPlacesWithFourOrMoreStars[page].latLng,
-                            title = title
-                        )
-                    },
-                    loadDistance = {
-                        viewModel.displayDistance(
+                    PlaceCard(
+                        horizontalPadding = 0,
+                        verticalPadding = 0,
+                        navigationType = navigationType,
+                        place = bestPlacesWithFourOrMoreStars[page],
+                        isInHomePage = isInHomePage,
+                        onClickToGo = {
+                            viewModel.navigateTo(
+                                context = context,
+                                latLng = bestPlacesWithFourOrMoreStars[page].latLng,
+                                title = title
+                            )
+                        },
+                        loadDistance = {
+                            viewModel.displayDistance(
 
-                            placeLocation = bestPlacesWithFourOrMoreStars[page].latLng,
-                            context = context
-                        )
-                    },
-                    onPlaceClick = {
-                        viewModel.updateCurrentDetails(it)
-                    },
-                )
-            }
+                                placeLocation = bestPlacesWithFourOrMoreStars[page].latLng,
+                                context = context
+                            )
+                        },
+                        onPlaceClick = {
+                            viewModel.updateCurrentDetails(it)
+                        },
+                    )
+                }
+           // }
         }
         if (viewModel.uiState.value.currentLocation != null) {
             produceState<PostResponse?>(initialValue = null, producer = {

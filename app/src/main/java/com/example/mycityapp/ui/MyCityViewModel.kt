@@ -111,8 +111,9 @@ class MyCityViewModel : ViewModel() {
         }
     }
 
-    //CallPlace will let the user call the place only if the place has a number and if the user
-    //has garanted the Phone Call permission, else the button will be disabled
+    /*  CallPlace will let the user call the place only if the place has a number and if the user
+     *  has garanted the Phone Call permission, else the button will be disabled
+    */
     fun callPlace(context: Context, phoneNumber: String?) {
         if (phoneNumber != null) {
             if (ContextCompat.checkSelfPermission(
@@ -126,7 +127,11 @@ class MyCityViewModel : ViewModel() {
             }
         }
     }
-    //navigateTo will let the user open
+
+    /*
+     *    Function that let the user open the location of the place on the google maps app if they
+     *    accept the permission of the Location
+    */
     fun navigateTo(context: Context, latLng: LatLng, title: String) {
         if (ContextCompat.checkSelfPermission(
                 context,
@@ -141,6 +146,11 @@ class MyCityViewModel : ViewModel() {
         }
     }
 
+    /*
+     *    Function that gets the current location of the user if they accept the location and calculate
+     *   the distance between the user location and the place location, and then save the result in
+     *   the UiState variable [currentLocation]
+    */
     @SuppressLint("MissingPermission")
     fun displayDistance(
         context: Context,
@@ -211,8 +221,9 @@ class MyCityViewModel : ViewModel() {
         updatePlacesFiltered(placesFilter)
     }
 
-    //Function that filters a list of places by the user input in the textLabel, and returns
-    //a place only if the place title or description contains the input.
+    /*  Function that filters a list of places by the user input in the textLabel, and returns
+     *  a place only if the place title or description contains the input.
+     */
     fun filterPlacesByTitleOrDescription(
         context: Context,
         places: List<Place>,
@@ -224,13 +235,14 @@ class MyCityViewModel : ViewModel() {
         }
     }
 
-    //function that filters a list of places by its rating. True if greater of 4 or equal to 5 stars
+    //Function that filters a list of places by its rating. True if greater of 4 or equal to 5 stars
     fun placesFilterByBestRating(placesFilter: List<Place>): List<Place> {
         return placesFilter.filter {
             it.ratingPlace == Rate.STAR4 || it.ratingPlace == Rate.STAR5
         }
     }
 
+    //Function that gets the location of the user if they accept the Location Request
     @SuppressLint("MissingPermission")
     fun getCurrentLocation(context: Context) {
         val fusedLocation = LocationServices.getFusedLocationProviderClient(context)
@@ -242,7 +254,7 @@ class MyCityViewModel : ViewModel() {
             }
     }
 
-    //function
+    //Function to create a call to the weather API and save the information to the UiState
     suspend fun callWeatherApi() {
         val serviceWeather = PostsService.create()
         updateWeather(serviceWeather.getWeather(uiState.value.currentLocation))
