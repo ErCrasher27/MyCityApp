@@ -1,6 +1,6 @@
 package com.example.mycityapp.ui
 
-import android.util.Log
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,16 +8,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.produceState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.data.model.Filter
 import com.example.mycityapp.data.model.Place
-import com.example.mycityapp.data.remote.dto.PostResponse
 import com.example.mycityapp.ui.utils.MyCityNavigationType
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun OnlyListCards(
     modifier: Modifier = Modifier,
@@ -40,6 +38,7 @@ fun OnlyListCards(
         )
         {
             CategoriesHorizontalListsWithHeader(title = "Categories", onCardClick = onCardClick)
+
             BestPlacesHorizontalListWithHeader(
                 navigationType = navigationType,
                 title = "Considering the Weather",

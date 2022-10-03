@@ -1,21 +1,23 @@
 package com.example.mycityapp.ui
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import android.util.Log
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.produceState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
+import coil.compose.rememberAsyncImagePainter
 import com.example.mycityapp.data.local.LocalCategoryData
 import com.example.mycityapp.data.local.LocalPlaceData
 import com.example.mycityapp.data.model.CategoryName
@@ -90,11 +92,49 @@ fun BestPlacesHorizontalListWithHeader(
     viewModel: MyCityViewModel,
     isInHomePage: Boolean
 ) {
-    val context = LocalContext.current
     Column {
         val bestPlacesWithFourOrMoreStars =
             LocalPlaceData.places.filter { place -> place.ratingPlace == Rate.STAR4 || place.ratingPlace == Rate.STAR5 }
         HeaderListCard(title = title)
+        if (viewModel.uiState.value.weather != null) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(90.dp)
+                    .padding(start = 20.dp, end = 20.dp, bottom = 20.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                ),
+                shape = MaterialTheme.shapes.large
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(4.dp), verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box(modifier = Modifier
+                        .fillMaxHeight()
+                        .width(70.dp)) {
+                        Image(
+                            painter = rememberAsyncImagePainter("https:" + viewModel.uiState.value.weather!!.current?.condition?.icon),
+                            contentDescription = "hello",
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    }
+
+                    Column(modifier = Modifier.padding(start = 8.dp)) {
+                        viewModel.uiState.value.weather!!.current?.condition?.text?.let { Text(text = it, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold) }
+                        viewModel.uiState.value.weather!!.location?.name?.let { Text(text = it, style = MaterialTheme.typography.labelSmall) }
+
+                    }
+                    Spacer(modifier = Modifier.weight(1f))
+                    Box(modifier = Modifier.fillMaxHeight().width(70.dp), contentAlignment = Alignment.Center){
+                        Text(text = viewModel.uiState.value.weather!!.current?.temp_c?.toInt().toString() + "°C", style = MaterialTheme.typography.titleLarge)
+                    }
+
+                }
+            }
+        }
         HorizontalPager(
             count = bestPlacesWithFourOrMoreStars.size,
             modifier,
@@ -156,7 +196,7 @@ fun BestPlacesHorizontalListWithHeader(
         }
         if (viewModel.uiState.value.currentLocation != null) {
             produceState<PostResponse?>(initialValue = null, producer = {
-                viewModel.callWeatherApi(context)
+                viewModel.callWeatherApi()
                 value = viewModel.uiState.value.weather
             })
         }

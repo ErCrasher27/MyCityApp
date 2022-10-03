@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationRequest
 import android.net.Uri
-import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
@@ -17,7 +16,6 @@ import com.example.mycityapp.data.model.Filter
 import com.example.mycityapp.data.model.Place
 import com.example.mycityapp.data.model.Rate
 import com.example.mycityapp.data.remote.PostsService
-import com.example.mycityapp.data.remote.dto.PostRequest
 import com.example.mycityapp.data.remote.dto.PostResponse
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
@@ -29,6 +27,7 @@ class MyCityViewModel : ViewModel() {
 
     private val _uiState = MutableStateFlow(MyCityUiState())
     val uiState: StateFlow<MyCityUiState> = _uiState
+
 
     fun updateCurrentCategory(category: CategoryName) {
         if (category == CategoryName.Homepage) {
@@ -43,6 +42,7 @@ class MyCityViewModel : ViewModel() {
             )
         }
     }
+
 
     fun updateCurrentDetails(place: Place?) {
         _uiState.update {
@@ -96,16 +96,23 @@ class MyCityViewModel : ViewModel() {
     }
 
     fun updateSearchNamePlace(searchNamePlace: String) {
-        //Log.d("ciao", searchNamePlace)
         _uiState.update {
             it.copy(
                 searchPlaceName = searchNamePlace
             )
         }
-        //Log.d("ciao", searchNamePlace)
     }
 
+    fun updateWeather(postResponse: PostResponse) {
+        _uiState.update {
+            it.copy(
+                weather = postResponse
+            )
+        }
+    }
 
+    //CallPlace will let the user call the place only if the place has a number and if the user
+    //has garanted the Phone Call permission, else the button will be disabled
     fun callPlace(context: Context, phoneNumber: String?) {
         if (phoneNumber != null) {
             if (ContextCompat.checkSelfPermission(
@@ -116,11 +123,10 @@ class MyCityViewModel : ViewModel() {
                 val intent = Intent(Intent.ACTION_CALL)
                 intent.data = Uri.parse("tel: $phoneNumber")
                 startActivity(context, intent, null)
-            } else {
             }
         }
     }
-
+    //navigateTo will let the user open
     fun navigateTo(context: Context, latLng: LatLng, title: String) {
         if (ContextCompat.checkSelfPermission(
                 context,
@@ -132,7 +138,6 @@ class MyCityViewModel : ViewModel() {
             val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
             mapIntent.setPackage("com.google.android.apps.maps")
             startActivity(context, mapIntent, null)
-        } else {
         }
     }
 
@@ -143,7 +148,7 @@ class MyCityViewModel : ViewModel() {
     ): String? {
 
         getCurrentLocation(context = context)
-        var result: Float?
+        val result: Float?
         var formatResult: String? = null
 
         val placeLocationToLocationType = Location("Place")
@@ -158,23 +163,22 @@ class MyCityViewModel : ViewModel() {
         return formatResult
     }
 
+
+
     fun filterPlace(context: Context) {
-        var searchNamePlace = uiState.value.searchPlaceName
+        val searchNamePlace = uiState.value.searchPlaceName
         var placesFilter = places
 
-        placesFilter = placesFilter.filter { it.category.nameCategory.name == uiState.value.currentTab.name }
-        if (searchNamePlace.isNotEmpty())
-        {
-            placesFilter = placesFilter.filter {
-                context.getString(it.name).contains(searchNamePlace,true)
-                        || context.getString(it.descriptionPlace).contains(searchNamePlace,true)
-            }
+        placesFilter =
+            placesFilter.filter { it.category.nameCategory.name == uiState.value.currentTab.name }
+
+        if (searchNamePlace.isNotEmpty()) {
+            placesFilter = filterPlacesByTitleOrDescription(context, placesFilter, searchNamePlace)
         }
+
         uiState.value.currentFilters.forEach {
             if (it == Filter.Best) {
-                placesFilter = placesFilter.filter {
-                    it.ratingPlace == Rate.STAR4 || it.ratingPlace == Rate.STAR5
-                }
+                placesFilter = placesFilterByBestRating(placesFilter)
             }
 
             if (it == Filter.Near) {
@@ -183,11 +187,10 @@ class MyCityViewModel : ViewModel() {
                         context = context,
                         placeLocation = it.latLng
                     )
-                    distanceResult = distanceResult?.replace(",",".")
-                    val distanceResultToFloat = distanceResult?.toFloatOrNull()
-                    if (distanceResultToFloat == null){
+                    val distanceResultToFloat = (distanceResult?.replace(",", "."))?.toFloatOrNull()
+                    if (distanceResultToFloat == null) {
                         true
-                    }else {
+                    } else {
                         distanceResultToFloat < 10.0
                     }
                 }
@@ -204,33 +207,47 @@ class MyCityViewModel : ViewModel() {
                     it.nightVisitable
                 }
             }
-
         }
         updatePlacesFiltered(placesFilter)
     }
 
+    //Function that filters a list of places by the user input in the textLabel, and returns
+    //a place only if the place title or description contains the input.
+    fun filterPlacesByTitleOrDescription(
+        context: Context,
+        places: List<Place>,
+        searchNamePlace: String
+    ): List<Place> {
+        return places.filter {
+            context.getString(it.name).contains(searchNamePlace, true)
+                    || context.getString(it.descriptionPlace).contains(searchNamePlace, true)
+        }
+    }
+
+    //function that filters a list of places by its rating. True if greater of 4 or equal to 5 stars
+    fun placesFilterByBestRating(placesFilter: List<Place>): List<Place> {
+        return placesFilter.filter {
+            it.ratingPlace == Rate.STAR4 || it.ratingPlace == Rate.STAR5
+        }
+    }
+
     @SuppressLint("MissingPermission")
-    fun getCurrentLocation(context: Context){
-        var fusedLocation = LocationServices.getFusedLocationProviderClient(context)
+    fun getCurrentLocation(context: Context) {
+        val fusedLocation = LocationServices.getFusedLocationProviderClient(context)
         fusedLocation.getCurrentLocation(LocationRequest.QUALITY_HIGH_ACCURACY, null)
             .addOnSuccessListener { location: Location? ->
                 if (location != null) {
                     updateCurrentLocation(location)
-
                 }
             }
     }
 
-    suspend fun callWeatherApi(context: Context) {
+    //function
+    suspend fun callWeatherApi() {
         val serviceWeather = PostsService.create()
         updateWeather(serviceWeather.getWeather(uiState.value.currentLocation))
     }
-    fun updateWeather(postResponse: PostResponse) {
-        _uiState.update {
-            it.copy(
-                weather = postResponse
-            )
-        }
-    }
+
+
 }
 

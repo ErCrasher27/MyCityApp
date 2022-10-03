@@ -22,8 +22,8 @@ import com.example.mycityapp.ui.utils.MyCityNavigationType
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyCityApp(
-    modifier: Modifier = Modifier,
     windowSize: WindowWidthSizeClass,
+    modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
     RequestPermissions(

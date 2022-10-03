@@ -11,6 +11,8 @@ import io.ktor.http.*
 import kotlinx.serialization.json.Json
 
 class PostServiceImplementation (private val client: HttpClient) : PostsService {
+
+    //Will send the API request for actual weather informations
     override suspend fun getWeather(location: Location?): PostResponse {
         return client.get{
             url(HttpRoutesString.returnCurrentWeatherString(location))
