@@ -17,22 +17,11 @@ import com.example.mycityapp.ui.MyCityApp
 import com.example.mycityapp.ui.theme.MyCityAppTheme
 
 class MainActivity : ComponentActivity() {
-    private val serviceWeather = PostsService.create()
-
     @SuppressLint("ProduceStateDoesNotAssignValue")
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
-            /*
-           val weatherInformation =
-               produceState(initialValue = PostResponse(null), producer = {
-                   serviceWeather.getWeather()
-               })
-            Log.d("ciao", weatherInformation.value.current.toString())
-
-             */
             MyCityAppTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),

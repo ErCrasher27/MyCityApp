@@ -8,7 +8,6 @@ import android.location.Location
 import android.location.LocationRequest
 import android.net.Uri
 import android.util.Log
-import androidx.compose.ui.res.stringResource
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
@@ -17,6 +16,9 @@ import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.data.model.Filter
 import com.example.mycityapp.data.model.Place
 import com.example.mycityapp.data.model.Rate
+import com.example.mycityapp.data.remote.PostsService
+import com.example.mycityapp.data.remote.dto.PostRequest
+import com.example.mycityapp.data.remote.dto.PostResponse
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -139,14 +141,8 @@ class MyCityViewModel : ViewModel() {
         context: Context,
         placeLocation: LatLng,
     ): String? {
-        var fusedLocation = LocationServices.getFusedLocationProviderClient(context)
-        fusedLocation.getCurrentLocation(LocationRequest.QUALITY_HIGH_ACCURACY, null)
-            .addOnSuccessListener { location: Location? ->
-                if (location != null) {
-                    updateCurrentLocation(location)
-                }
-            }
 
+        getCurrentLocation(context = context)
         var result: Float?
         var formatResult: String? = null
 
@@ -155,7 +151,6 @@ class MyCityViewModel : ViewModel() {
         placeLocationToLocationType.longitude = placeLocation.longitude
 
         result = uiState.value.currentLocation?.distanceTo(placeLocationToLocationType)
-
         if (result != null) {
             formatResult = "%.1f".format(result / 1000)
         }
@@ -212,6 +207,30 @@ class MyCityViewModel : ViewModel() {
 
         }
         updatePlacesFiltered(placesFilter)
+    }
+
+    @SuppressLint("MissingPermission")
+    fun getCurrentLocation(context: Context){
+        var fusedLocation = LocationServices.getFusedLocationProviderClient(context)
+        fusedLocation.getCurrentLocation(LocationRequest.QUALITY_HIGH_ACCURACY, null)
+            .addOnSuccessListener { location: Location? ->
+                if (location != null) {
+                    updateCurrentLocation(location)
+
+                }
+            }
+    }
+
+    suspend fun callWeatherApi(context: Context) {
+        val serviceWeather = PostsService.create()
+        updateWeather(serviceWeather.getWeather(uiState.value.currentLocation))
+    }
+    fun updateWeather(postResponse: PostResponse) {
+        _uiState.update {
+            it.copy(
+                weather = postResponse
+            )
+        }
     }
 }
 

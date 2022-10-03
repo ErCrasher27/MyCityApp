@@ -1,14 +1,13 @@
 package com.example.mycityapp.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.produceState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -21,6 +20,7 @@ import com.example.mycityapp.data.local.LocalCategoryData
 import com.example.mycityapp.data.local.LocalPlaceData
 import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.data.model.Rate
+import com.example.mycityapp.data.remote.dto.PostResponse
 import com.example.mycityapp.ui.components.CategoryCard
 import com.example.mycityapp.ui.components.HeaderListCard
 import com.example.mycityapp.ui.components.PlaceCard
@@ -80,6 +80,7 @@ fun CategoriesHorizontalListsWithHeader(
 
 }
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun BestPlacesHorizontalListWithHeader(
@@ -89,6 +90,7 @@ fun BestPlacesHorizontalListWithHeader(
     viewModel: MyCityViewModel,
     isInHomePage: Boolean
 ) {
+    val context = LocalContext.current
     Column {
         val bestPlacesWithFourOrMoreStars =
             LocalPlaceData.places.filter { place -> place.ratingPlace == Rate.STAR4 || place.ratingPlace == Rate.STAR5 }
@@ -124,6 +126,8 @@ fun BestPlacesHorizontalListWithHeader(
             ) {
                 val context = LocalContext.current
                 val title = stringResource(id = bestPlacesWithFourOrMoreStars[page].name)
+
+
                 PlaceCard(
                     horizontalPadding = 0,
                     verticalPadding = 0,
@@ -139,6 +143,7 @@ fun BestPlacesHorizontalListWithHeader(
                     },
                     loadDistance = {
                         viewModel.displayDistance(
+
                             placeLocation = bestPlacesWithFourOrMoreStars[page].latLng,
                             context = context
                         )
@@ -148,6 +153,12 @@ fun BestPlacesHorizontalListWithHeader(
                     },
                 )
             }
+        }
+        if (viewModel.uiState.value.currentLocation != null) {
+            produceState<PostResponse?>(initialValue = null, producer = {
+                viewModel.callWeatherApi(context)
+                value = viewModel.uiState.value.weather
+            })
         }
     }
 }
