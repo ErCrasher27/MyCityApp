@@ -91,19 +91,88 @@ fun BestPlacesHorizontalListWithHeader(
     viewModel: MyCityViewModel,
     isInHomePage: Boolean
 ) {
-
     Column {
         val bestPlacesWithFourOrMoreStars =
             LocalPlaceData.places.filter { place -> place.ratingPlace == Rate.STAR4 || place.ratingPlace == Rate.STAR5 }
         HeaderListCard(title = title)
-        if (viewModel.uiState.value.weather != null) {
+        HorizontalPager(
+            count = bestPlacesWithFourOrMoreStars.size,
+            modifier,
+            contentPadding = PaddingValues(horizontal = 40.dp)
+        ) { page ->
+            Card(
+                Modifier
+                    .width(500.dp)
+                    .graphicsLayer {
+                        val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
+                        lerp(
+                            start = 0.85f,
+                            stop = 1f,
+                            fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                        ).also { scale ->
+                            scaleX = scale
+                            scaleY = scale
+                        }
+                        alpha = lerp(
+                            start = 0.5f,
+                            stop = 1f,
+                            fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                        )
+                    },
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                ),
+                shape = MaterialTheme.shapes.large
+            ) {
+                val context = LocalContext.current
+                val title = stringResource(id = bestPlacesWithFourOrMoreStars[page].name)
+                PlaceCard(
+                    horizontalPadding = 0,
+                    verticalPadding = 0,
+                    navigationType = navigationType,
+                    place = bestPlacesWithFourOrMoreStars[page],
+                    isInHomePage = isInHomePage,
+                    onClickToGo = {
+                        viewModel.navigateTo(
+                            context = context,
+                            latLng = bestPlacesWithFourOrMoreStars[page].latLng,
+                            title = title
+                        )
+                    },
+                    loadDistance = {
+                        viewModel.displayDistance(
+
+                            placeLocation = bestPlacesWithFourOrMoreStars[page].latLng,
+                            context = context
+                        )
+                    },
+                    onPlaceClick = {
+                        viewModel.updateCurrentDetails(it)
+                    },
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun WeatherWithHeader(
+    modifier: Modifier = Modifier,
+    navigationType: MyCityNavigationType,
+    title: String,
+    viewModel: MyCityViewModel,
+    isInHomePage: Boolean
+) {
+    if (viewModel.uiState.value.weather != null) {
+        Column {
+            HeaderListCard(title = title)
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(90.dp)
-                    .padding(start = 20.dp, end = 20.dp, bottom = 20.dp),
+                    .height(80.dp)
+                    .padding(start = 20.dp, end = 20.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                    containerColor = MaterialTheme.colorScheme.inverseSurface,
                 ),
                 shape = MaterialTheme.shapes.large
             ) {
@@ -156,73 +225,95 @@ fun BestPlacesHorizontalListWithHeader(
                 }
             }
         }
-        //val day = viewModel.uiState.value.weather?.current?.is_day != 0
+        ConsideringTheWeatherHorizontalList(
+            navigationType = navigationType,
+            viewModel = viewModel,
+            isInHomePage = isInHomePage,
+        )
+    }
+    if (viewModel.uiState.value.currentLocation != null) {
+        produceState<PostResponse?>(initialValue = null, producer = {
+            viewModel.callWeatherApi()
+            value = viewModel.uiState.value.weather
+        })
+    }
+}
+
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun ConsideringTheWeatherHorizontalList(
+    modifier: Modifier = Modifier,
+    navigationType: MyCityNavigationType,
+    viewModel: MyCityViewModel,
+    isInHomePage: Boolean
+) {
+    Column {
+        val isDay =
+            when (viewModel.uiState.value.weather?.current?.is_day) {
+                0 -> false
+                1 -> true
+                else -> {
+                    true
+                }
+            }
+        val bestPlacesWithFourOrMoreStars =
+            LocalPlaceData.places.filter { place -> place.dayVisitable == isDay }
         HorizontalPager(
             count = bestPlacesWithFourOrMoreStars.size,
             modifier,
             contentPadding = PaddingValues(horizontal = 40.dp)
         ) { page ->
-            //if (bestPlacesWithFourOrMoreStars[page].dayVisitable && day) {
-                Card(
-                    Modifier
-                        .width(500.dp)
-                        .graphicsLayer {
-                            val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
-                            lerp(
-                                start = 0.85f,
-                                stop = 1f,
-                                fraction = 1f - pageOffset.coerceIn(0f, 1f)
-                            ).also { scale ->
-                                scaleX = scale
-                                scaleY = scale
-                            }
-                            alpha = lerp(
-                                start = 0.5f,
-                                stop = 1f,
-                                fraction = 1f - pageOffset.coerceIn(0f, 1f)
-                            )
-                        },
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                    ),
-                    shape = MaterialTheme.shapes.large
-                ) {
-                    val context = LocalContext.current
-                    val title = stringResource(id = bestPlacesWithFourOrMoreStars[page].name)
+            Card(
+                Modifier
+                    .width(500.dp)
+                    .graphicsLayer {
+                        val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
+                        lerp(
+                            start = 0.85f,
+                            stop = 1f,
+                            fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                        ).also { scale ->
+                            scaleX = scale
+                            scaleY = scale
+                        }
+                        alpha = lerp(
+                            start = 0.5f,
+                            stop = 1f,
+                            fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                        )
+                    },
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                ),
+                shape = MaterialTheme.shapes.large
+            ) {
+                val context = LocalContext.current
+                val title = stringResource(id = bestPlacesWithFourOrMoreStars[page].name)
+                PlaceCard(
+                    horizontalPadding = 0,
+                    verticalPadding = 0,
+                    navigationType = navigationType,
+                    place = bestPlacesWithFourOrMoreStars[page],
+                    isInHomePage = isInHomePage,
+                    onClickToGo = {
+                        viewModel.navigateTo(
+                            context = context,
+                            latLng = bestPlacesWithFourOrMoreStars[page].latLng,
+                            title = title
+                        )
+                    },
+                    loadDistance = {
+                        viewModel.displayDistance(
 
-
-                    PlaceCard(
-                        horizontalPadding = 0,
-                        verticalPadding = 0,
-                        navigationType = navigationType,
-                        place = bestPlacesWithFourOrMoreStars[page],
-                        isInHomePage = isInHomePage,
-                        onClickToGo = {
-                            viewModel.navigateTo(
-                                context = context,
-                                latLng = bestPlacesWithFourOrMoreStars[page].latLng,
-                                title = title
-                            )
-                        },
-                        loadDistance = {
-                            viewModel.displayDistance(
-
-                                placeLocation = bestPlacesWithFourOrMoreStars[page].latLng,
-                                context = context
-                            )
-                        },
-                        onPlaceClick = {
-                            viewModel.updateCurrentDetails(it)
-                        },
-                    )
-                }
-           // }
-        }
-        if (viewModel.uiState.value.currentLocation != null) {
-            produceState<PostResponse?>(initialValue = null, producer = {
-                viewModel.callWeatherApi()
-                value = viewModel.uiState.value.weather
-            })
+                            placeLocation = bestPlacesWithFourOrMoreStars[page].latLng,
+                            context = context
+                        )
+                    },
+                    onPlaceClick = {
+                        viewModel.updateCurrentDetails(it)
+                    },
+                )
+            }
         }
     }
 }

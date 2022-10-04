@@ -9,18 +9,19 @@ import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 
 interface PostsService {
-    suspend fun getWeather(location: Location?): PostResponse
+    suspend fun getWeather(location: Location?): PostResponse?
 
     suspend fun createRequest(PostRequest: PostRequest): PostResponse?
 
     companion object {
-        fun create(): PostsService{
+        fun create(): PostsService {
             return PostServiceImplementation(
-                client = HttpClient(Android){
-                    install(JsonFeature){
-                        serializer = KotlinxSerializer(kotlinx.serialization.json.Json{
+                client = HttpClient(Android) {
+                    install(JsonFeature) {
+                        serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
                             ignoreUnknownKeys = true
-                            isLenient = true})
+                            isLenient = true
+                        })
                     }
                 }
             )

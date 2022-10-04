@@ -256,7 +256,7 @@ class MyCityViewModel : ViewModel() {
     //Function to create a call to the weather API and save the information to the UiState
     suspend fun callWeatherApi() {
         val serviceWeather = PostsService.create()
-        updateWeather(serviceWeather.getWeather(uiState.value.currentLocation))
+        serviceWeather.getWeather(uiState.value.currentLocation)?.let { updateWeather(it) }
     }
 
 

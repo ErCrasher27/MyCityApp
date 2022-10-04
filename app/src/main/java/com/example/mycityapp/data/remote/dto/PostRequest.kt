@@ -1,8 +1,11 @@
 package com.example.mycityapp.data.remote.dto
 
+import com.example.mycityapp.BuildConfig
+
+val apiKey = BuildConfig.WEATHER_API_KEY
 
 data class PostRequest(
-    val Key: String = "37c83c2007634a058af124740222709",
+    val Key: String = apiKey,
     val q: String = "",
     val aqi: String = "no"
 )

@@ -38,11 +38,16 @@ fun OnlyListCards(
             verticalArrangement = Arrangement.spacedBy(32.dp)
         )
         {
-            CategoriesHorizontalListsWithHeader(title = "Categories", onCardClick = onCardClick)
-
+            CategoriesHorizontalListsWithHeader(title = "categories", onCardClick = onCardClick)
+            WeatherWithHeader(
+                navigationType = navigationType,
+                title = "considering the weather...",
+                viewModel = viewModel,
+                isInHomePage = isInHomePage,
+            )
             BestPlacesHorizontalListWithHeader(
                 navigationType = navigationType,
-                title = "Considering the Weather",
+                title = "best Ratings",
                 viewModel = viewModel,
                 isInHomePage = isInHomePage,
             )

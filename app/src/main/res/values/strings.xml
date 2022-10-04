@@ -44,8 +44,10 @@
     <string name="place_bar_location2">Via Giuseppe Maria Bosco, 50, 81100 Caserta CE</string>
 
     <!-- TEST TAGS !-->
-        <!-- NAVIGATION TAGS !-->
-        <string name="navigation_bottom">Navigation Bottom</string>
-        <string name="navigation_rail">Navigation Rail</string>
-        <string name="navigation_drawer">Navigation Drawer</string>
+
+    <!-- NAVIGATION TAGS !-->
+    <string name="navigation_bottom">Navigation Bottom</string>
+    <string name="navigation_rail">Navigation Rail</string>
+    <string name="navigation_drawer">Navigation Drawer</string>
+
 </resources>
