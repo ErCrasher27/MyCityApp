@@ -97,18 +97,20 @@ fun ListAndDetailsCard(
                 )
             }
         } else {
-            PlacesLists(
-                navigationType = navigationType,
-                viewModel = viewModel,
-                isInHomePage = isInHomePage,
-                currentFiltersPlace = currentFiltersPlace,
-                expandedFilters = expandedFilters,
-                placesFiltered = placesFiltered,
-                filterPlaces = filterPlaces,
-                onExpandFilters = onExpandFilters,
-                onClickFilter = onClickFilter,
-                onValueChangeSearchPlace = onValueChangeSearchPlace
-            )
+            Column {
+                PlacesLists(
+                    navigationType = navigationType,
+                    viewModel = viewModel,
+                    isInHomePage = isInHomePage,
+                    currentFiltersPlace = currentFiltersPlace,
+                    expandedFilters = expandedFilters,
+                    placesFiltered = placesFiltered,
+                    filterPlaces = filterPlaces,
+                    onExpandFilters = onExpandFilters,
+                    onClickFilter = onClickFilter,
+                    onValueChangeSearchPlace = onValueChangeSearchPlace
+                )
+            }
         }
     }
 }

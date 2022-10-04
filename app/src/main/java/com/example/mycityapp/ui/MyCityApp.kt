@@ -175,7 +175,6 @@ fun MyCityApp(
             PermanentNavigationDrawer(
                 drawerContent = {
                     PermanentDrawerSheet(Modifier.width(240.dp)) {
-                        Spacer(Modifier.height(12.dp))
                         MyCityAppNavigationDrawerContent(
                             selectedDestination = myCityAppUiState.currentTab,
                             onTabPressed = { category: CategoryName ->
