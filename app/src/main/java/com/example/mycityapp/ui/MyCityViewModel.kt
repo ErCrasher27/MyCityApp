@@ -174,7 +174,6 @@ class MyCityViewModel : ViewModel() {
     }
 
 
-
     fun filterPlace(context: Context) {
         val searchNamePlace = uiState.value.searchPlaceName
         var placesFilter = places

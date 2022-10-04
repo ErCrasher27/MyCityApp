@@ -30,6 +30,7 @@ fun OnlyListCards(
     filterPlaces: () -> Unit,
     onClickFilter: (MutableList<Filter>) -> Unit,
     onCardClick: (CategoryName) -> Unit,
+    onValueChangeSearchPlace: (String) -> Unit
 ) {
     if (currentTab.name == CategoryName.Homepage.name) {
         Column(
@@ -57,6 +58,7 @@ fun OnlyListCards(
             filterPlaces = filterPlaces,
             onExpandFilters = onExpandFilters,
             onClickFilter = onClickFilter,
+            onValueChangeSearchPlace = onValueChangeSearchPlace
         )
     }
 }
@@ -75,6 +77,7 @@ fun ListAndDetailsCard(
     filterPlaces: () -> Unit,
     onClickFilter: (MutableList<Filter>) -> Unit,
     onCardClick: (CategoryName) -> Unit,
+    onValueChangeSearchPlace: (String) -> Unit
 ) {
     Row(horizontalArrangement = Arrangement.Start, modifier = Modifier.width(600.dp)) {
         if (currentTab.name == CategoryName.Homepage.name) {
@@ -104,6 +107,7 @@ fun ListAndDetailsCard(
                 filterPlaces = filterPlaces,
                 onExpandFilters = onExpandFilters,
                 onClickFilter = onClickFilter,
+                onValueChangeSearchPlace = onValueChangeSearchPlace
             )
         }
     }

@@ -13,7 +13,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.mycityapp.R
 import com.example.mycityapp.data.model.CategoryName
 import com.example.mycityapp.ui.components.DetailsPlace
 import com.example.mycityapp.ui.components.DetailsPlaceCard
@@ -95,6 +94,7 @@ fun MyCityApp(
                             onClickFilter = { viewModel.updateCurrentFiltersPlace(it) },
                             onExpandFilters = { viewModel.updateExpandedFilters(it) },
                             filterPlaces = { viewModel.filterPlace(context = context) },
+                            onValueChangeSearchPlace = { viewModel.updateSearchNamePlace(it) },
                             onCardClick = { category: CategoryName ->
                                 viewModel.updateCurrentCategory(category = category)
                             },
@@ -149,7 +149,7 @@ fun MyCityApp(
                         .background(MaterialTheme.colorScheme.background)
                 ) {
                     val context = LocalContext.current
-                    TopAppBar(title = stringResource(id = R.string.app_name))
+                    TopAppBar(title = myCityAppUiState.currentTab.name)
                     OnlyListCards(
                         navigationType = navigationType,
                         viewModel = viewModel,
@@ -161,9 +161,10 @@ fun MyCityApp(
                         onClickFilter = { viewModel.updateCurrentFiltersPlace(it) },
                         onExpandFilters = { viewModel.updateExpandedFilters(it) },
                         filterPlaces = { viewModel.filterPlace(context) },
+                        onValueChangeSearchPlace = { viewModel.updateSearchNamePlace(it) },
                         onCardClick = { category: CategoryName ->
                             viewModel.updateCurrentCategory(category = category)
-                        },
+                        }
                     )
                 }
             }
@@ -208,6 +209,7 @@ fun MyCityApp(
                                 onClickFilter = { viewModel.updateCurrentFiltersPlace(it) },
                                 onExpandFilters = { viewModel.updateExpandedFilters(it) },
                                 filterPlaces = { viewModel.filterPlace(context) },
+                                onValueChangeSearchPlace = { viewModel.updateSearchNamePlace(it) },
                                 onCardClick = { category: CategoryName ->
                                     viewModel.updateCurrentCategory(category = category)
                                 },

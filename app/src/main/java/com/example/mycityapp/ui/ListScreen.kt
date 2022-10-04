@@ -23,6 +23,7 @@ fun PlacesLists(
     onClickFilter: (MutableList<Filter>) -> Unit,
     onExpandFilters: (Boolean) -> Unit,
     filterPlaces: () -> Unit,
+    onValueChangeSearchPlace: (String) -> Unit
 ) {
     HeaderPlacesLists(
         currentFiltersPlace = currentFiltersPlace,
@@ -30,7 +31,7 @@ fun PlacesLists(
         filterPlaces = filterPlaces,
         onExpandFilters = onExpandFilters,
         onClickFilter = onClickFilter,
-        onValueChangeSearchPlace = { viewModel.updateSearchNamePlace(it) }
+        onValueChangeSearchPlace = onValueChangeSearchPlace
     )
     PlacesFilter(
         navigationType = navigationType,
