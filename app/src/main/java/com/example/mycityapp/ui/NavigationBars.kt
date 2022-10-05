@@ -23,7 +23,7 @@ fun MyCityAppBottomNavigationBar(
     val bottomNavigationContentDescription = stringResource(id = R.string.navigation_bottom)
 
     NavigationBar(
-        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+        containerColor = MaterialTheme.colorScheme.background,
         modifier = modifier
             .fillMaxWidth()
             .testTag(bottomNavigationContentDescription)
@@ -54,7 +54,7 @@ fun MyCityAppNavigationRail(
         modifier = modifier
             .fillMaxHeight()
             .testTag(railNavigationContentDescription),
-        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+        containerColor = MaterialTheme.colorScheme.background,
     ) {
         for (navItem in navigationsItems) {
             NavigationRailItem(
@@ -84,7 +84,7 @@ fun MyCityAppNavigationDrawerContent(
             .fillMaxHeight()
             .testTag(drawerNavigationContentDescription),
 
-        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+        containerColor = MaterialTheme.colorScheme.background,
     ) {
         NavigationDrawerHeader(modifier)
         for (navItem in navigationsItems) {
