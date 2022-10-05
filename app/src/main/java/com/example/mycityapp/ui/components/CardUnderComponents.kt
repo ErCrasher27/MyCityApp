@@ -54,7 +54,7 @@ fun TitleAndDescriptionPlace(modifier: Modifier = Modifier, place: Place) {
         Text(
             text = "\"" + stringResource(place.descriptionPlace) + "\"",
             style = MaterialTheme.typography.labelMedium,
-            color = MaterialTheme.colorScheme.secondary
+            color = MaterialTheme.colorScheme.primary
         )
     }
 }
@@ -75,13 +75,13 @@ fun LocationPlace(
         Icon(
             imageVector = Icons.Default.LocationOn,
             contentDescription = stringResource(location),
-            tint = MaterialTheme.colorScheme.secondary
+            tint = MaterialTheme.colorScheme.tertiary
         )
         Spacer(modifier = Modifier.width(2.dp))
         Text(
             text = stringResource(location),
             style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.secondary
+            color = MaterialTheme.colorScheme.tertiary
         )
     }
 }
@@ -101,13 +101,13 @@ fun PhonePlace(
         Icon(
             imageVector = Icons.Default.Phone,
             contentDescription = numberPhone,
-            tint = MaterialTheme.colorScheme.secondary
+            tint = MaterialTheme.colorScheme.tertiary
         )
         Spacer(modifier = Modifier.width(2.dp))
         Text(
             text = numberPhone,
             style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.secondary
+            color = MaterialTheme.colorScheme.tertiary
         )
     }
 }
@@ -350,20 +350,20 @@ fun DistanceToPlace(
             Icon(
                 imageVector = Icons.Default.LocationSearching,
                 contentDescription = "$distanceCalculated km from you",
-                tint = MaterialTheme.colorScheme.secondary
+                tint = MaterialTheme.colorScheme.tertiary
             )
             Spacer(modifier = Modifier.width(2.dp))
             Text(
                 text = "$distanceCalculated km from you",
                 style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.secondary
+                color = MaterialTheme.colorScheme.tertiary
             )
         }
     }
 }
 
 @Composable
-fun alertDialogIfEmptyPlaces(){
+fun alertDialogIfEmptyPlaces() {
     Dialog(onDismissRequest = { /*TODO*/ }) {
         Text(text = "ciao")
     }

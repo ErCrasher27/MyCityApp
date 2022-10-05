@@ -47,7 +47,7 @@ fun OnlyListCards(
             )
             BestPlacesHorizontalListWithHeader(
                 navigationType = navigationType,
-                title = "best Ratings",
+                title = "best ratings",
                 viewModel = viewModel,
                 isInHomePage = isInHomePage,
             )
@@ -91,12 +91,12 @@ fun ListAndDetailsCard(
                 verticalArrangement = Arrangement.spacedBy(32.dp)
             ) {
                 CategoriesHorizontalListsWithHeader(
-                    title = "Categories",
+                    title = "categories",
                     onCardClick = onCardClick,
                 )
                 BestPlacesHorizontalListWithHeader(
                     navigationType = navigationType,
-                    title = "Best Ratings",
+                    title = "best ratings",
                     viewModel = viewModel,
                     isInHomePage = isInHomePage,
                 )
