@@ -38,7 +38,7 @@ fun MyCityApp(
 
     val viewModel: MyCityViewModel = viewModel()
     val myCityAppUiState = viewModel.uiState.collectAsState().value
-
+    viewModel.getCurrentLocation(context)
     val navigationType: MyCityNavigationType = when (windowSize) {
         WindowWidthSizeClass.Compact -> {
             MyCityNavigationType.BOTTOM_NAVIGATION

@@ -156,8 +156,6 @@ class MyCityViewModel : ViewModel() {
         context: Context,
         placeLocation: LatLng,
     ): String? {
-
-        getCurrentLocation(context = context)
         val result: Float?
         var formatResult: String? = null
 
