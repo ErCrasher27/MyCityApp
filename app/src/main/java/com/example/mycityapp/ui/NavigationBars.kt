@@ -54,7 +54,7 @@ fun MyCityAppNavigationRail(
         modifier = modifier
             .fillMaxHeight()
             .testTag(railNavigationContentDescription),
-        containerColor = MaterialTheme.colorScheme.background,
+        containerColor = MaterialTheme.colorScheme.surfaceVariant,
     ) {
         for (navItem in navigationsItems) {
             NavigationRailItem(
@@ -84,7 +84,7 @@ fun MyCityAppNavigationDrawerContent(
             .fillMaxHeight()
             .testTag(drawerNavigationContentDescription),
 
-        containerColor = MaterialTheme.colorScheme.background,
+        containerColor = MaterialTheme.colorScheme.surfaceVariant,
     ) {
         NavigationDrawerHeader(modifier)
         for (navItem in navigationsItems) {

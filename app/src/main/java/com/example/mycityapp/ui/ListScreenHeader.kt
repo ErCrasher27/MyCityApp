@@ -47,9 +47,13 @@ fun HeaderPlacesLists(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            SearchPlace(onValueChangeSearchPlace = onValueChangeSearchPlace)
+            SearchPlace(
+                modifier = Modifier.weight(10f),
+                onValueChangeSearchPlace = onValueChangeSearchPlace
+            )
             Spacer(modifier = Modifier.weight(1f))
             FilterPlace(
+                modifier = Modifier.weight(2f),
                 icon = iconArrow,
                 expand = { expanded = !expanded }
             )
@@ -79,7 +83,18 @@ fun SearchPlace(
         mutableStateOf("")
     }
     TextField(
-        modifier = modifier.widthIn(max = 300.dp),
+        modifier = modifier,
+        placeholder = {
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = stringResource(id = R.string.search)
+                )
+                Text(
+                    text = "Enter name place"
+                )
+            }
+        },
         colors = TextFieldDefaults.textFieldColors(
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
@@ -90,18 +105,6 @@ fun SearchPlace(
         onValueChange = {
             textState = it
             onValueChangeSearchPlace(textState)
-        },
-        placeholder = {
-            Row {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = stringResource(id = R.string.search)
-                )
-                Spacer(modifier = modifier.width(4.dp))
-                Text(
-                    text = "Enter name place"
-                )
-            }
         },
         trailingIcon = {
             if (textState.isNotEmpty()) {
@@ -115,15 +118,18 @@ fun SearchPlace(
                     )
                 }
             }
-        })
+        }
+    )
 }
 
 @Composable
 fun FilterPlace(
+    modifier: Modifier = Modifier,
     icon: ImageVector,
     expand: () -> Unit
 ) {
     IconButton(
+        modifier = modifier,
         onClick = expand
     ) {
         Icon(
