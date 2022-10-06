@@ -71,6 +71,7 @@ fun CheckPermissions(
         permission -> {
             when {
                 permissionState.status.isGranted -> {
+
                 }
                 permissionState.status.shouldShowRationale -> {
                 }
