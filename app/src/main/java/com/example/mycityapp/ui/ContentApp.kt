@@ -1,6 +1,7 @@
 package com.example.mycityapp.ui
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,6 +16,7 @@ import com.example.mycityapp.data.model.Filter
 import com.example.mycityapp.data.model.Place
 import com.example.mycityapp.ui.utils.MyCityNavigationType
 
+@OptIn(ExperimentalAnimationApi::class)
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun OnlyListCards(

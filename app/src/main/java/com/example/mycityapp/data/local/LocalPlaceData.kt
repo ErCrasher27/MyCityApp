@@ -91,5 +91,187 @@ object LocalPlaceData {
             dayVisitable = false,
             nightVisitable = true
         )
+
+
+
+
+
+        ,
+        Place(
+            category = categories[3],
+            name = R.string.place_bar_name2,
+            descriptionPlace = R.string.place_bar_description2,
+            photoPlace = listOf
+                (R.drawable.place_bar_image_2,
+                R.drawable.place_bar_image_2_2),
+            locationPlace = R.string.place_bar_location2,
+            latLng = LatLng(
+                41.0801502,14.33277821
+            ),
+            ratingPlace = Rate.STAR5,
+            phonePlace = "329 206 2208",
+            dayVisitable = false,
+            nightVisitable = true
+        ),
+        Place(
+            category = categories[3],
+            name = R.string.place_bar_name2,
+            descriptionPlace = R.string.place_bar_description2,
+            photoPlace = listOf
+                (R.drawable.place_bar_image_2,
+                R.drawable.place_bar_image_2_2),
+            locationPlace = R.string.place_bar_location2,
+            latLng = LatLng(
+                41.0801502,14.33277821
+            ),
+            ratingPlace = Rate.STAR5,
+            phonePlace = "329 206 2208",
+            dayVisitable = false,
+            nightVisitable = true
+        ),
+        Place(
+            category = categories[3],
+            name = R.string.place_bar_name2,
+            descriptionPlace = R.string.place_bar_description2,
+            photoPlace = listOf
+                (R.drawable.place_bar_image_2,
+                R.drawable.place_bar_image_2_2),
+            locationPlace = R.string.place_bar_location2,
+            latLng = LatLng(
+                41.0801502,14.33277821
+            ),
+            ratingPlace = Rate.STAR5,
+            phonePlace = "329 206 2208",
+            dayVisitable = false,
+            nightVisitable = true
+        ),
+        Place(
+            category = categories[3],
+            name = R.string.place_bar_name2,
+            descriptionPlace = R.string.place_bar_description2,
+            photoPlace = listOf
+                (R.drawable.place_bar_image_2,
+                R.drawable.place_bar_image_2_2),
+            locationPlace = R.string.place_bar_location2,
+            latLng = LatLng(
+                41.0801502,14.33277821
+            ),
+            ratingPlace = Rate.STAR5,
+            phonePlace = "329 206 2208",
+            dayVisitable = false,
+            nightVisitable = true
+        ),
+        Place(
+            category = categories[3],
+            name = R.string.place_bar_name2,
+            descriptionPlace = R.string.place_bar_description2,
+            photoPlace = listOf
+                (R.drawable.place_bar_image_2,
+                R.drawable.place_bar_image_2_2),
+            locationPlace = R.string.place_bar_location2,
+            latLng = LatLng(
+                41.0801502,14.33277821
+            ),
+            ratingPlace = Rate.STAR5,
+            phonePlace = "329 206 2208",
+            dayVisitable = false,
+            nightVisitable = true
+        ),
+        Place(
+            category = categories[3],
+            name = R.string.place_bar_name2,
+            descriptionPlace = R.string.place_bar_description2,
+            photoPlace = listOf
+                (R.drawable.place_bar_image_2,
+                R.drawable.place_bar_image_2_2),
+            locationPlace = R.string.place_bar_location2,
+            latLng = LatLng(
+                41.0801502,14.33277821
+            ),
+            ratingPlace = Rate.STAR5,
+            phonePlace = "329 206 2208",
+            dayVisitable = false,
+            nightVisitable = true
+        ),
+        Place(
+            category = categories[3],
+            name = R.string.place_bar_name2,
+            descriptionPlace = R.string.place_bar_description2,
+            photoPlace = listOf
+                (R.drawable.place_bar_image_2,
+                R.drawable.place_bar_image_2_2),
+            locationPlace = R.string.place_bar_location2,
+            latLng = LatLng(
+                41.0801502,14.33277821
+            ),
+            ratingPlace = Rate.STAR5,
+            phonePlace = "329 206 2208",
+            dayVisitable = false,
+            nightVisitable = true
+        ),
+        Place(
+            category = categories[3],
+            name = R.string.place_bar_name2,
+            descriptionPlace = R.string.place_bar_description2,
+            photoPlace = listOf
+                (R.drawable.place_bar_image_2,
+                R.drawable.place_bar_image_2_2),
+            locationPlace = R.string.place_bar_location2,
+            latLng = LatLng(
+                41.0801502,14.33277821
+            ),
+            ratingPlace = Rate.STAR5,
+            phonePlace = "329 206 2208",
+            dayVisitable = false,
+            nightVisitable = true
+        ),
+        Place(
+            category = categories[3],
+            name = R.string.place_bar_name2,
+            descriptionPlace = R.string.place_bar_description2,
+            photoPlace = listOf
+                (R.drawable.place_bar_image_2,
+                R.drawable.place_bar_image_2_2),
+            locationPlace = R.string.place_bar_location2,
+            latLng = LatLng(
+                41.0801502,14.33277821
+            ),
+            ratingPlace = Rate.STAR5,
+            phonePlace = "329 206 2208",
+            dayVisitable = false,
+            nightVisitable = true
+        ),
+        Place(
+            category = categories[3],
+            name = R.string.place_bar_name2,
+            descriptionPlace = R.string.place_bar_description2,
+            photoPlace = listOf
+                (R.drawable.place_bar_image_2,
+                R.drawable.place_bar_image_2_2),
+            locationPlace = R.string.place_bar_location2,
+            latLng = LatLng(
+                41.0801502,14.33277821
+            ),
+            ratingPlace = Rate.STAR5,
+            phonePlace = "329 206 2208",
+            dayVisitable = false,
+            nightVisitable = true
+        ),
+        Place(
+            category = categories[3],
+            name = R.string.place_bar_name2,
+            descriptionPlace = R.string.place_bar_description2,
+            photoPlace = listOf
+                (R.drawable.place_bar_image_2,
+                R.drawable.place_bar_image_2_2),
+            locationPlace = R.string.place_bar_location2,
+            latLng = LatLng(
+                41.0801502,14.33277821
+            ),
+            ratingPlace = Rate.STAR5,
+            phonePlace = "329 206 2208",
+            dayVisitable = false,
+            nightVisitable = true
+        )
     )
 }

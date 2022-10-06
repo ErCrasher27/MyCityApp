@@ -1,6 +1,7 @@
 package com.example.mycityapp.ui
 
 import android.Manifest
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -81,7 +82,11 @@ fun MyCityApp(
                 containerColor = MaterialTheme.colorScheme.background,
                 topBar = { TopAppBar(title = myCityAppUiState.currentTab.name) },
                 content = {
-                    Column(modifier = modifier.padding(it)) {
+                    Column(
+                        modifier = modifier
+                            .padding(it)
+                            .animateContentSize()
+                    ) {
                         val context = LocalContext.current
                         OnlyListCards(
                             navigationType = navigationType,
