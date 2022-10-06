@@ -25,8 +25,6 @@ fun OnlyListCards(
     isInHomePage: Boolean,
     currentFiltersPlace: MutableList<Filter>,
     placesFiltered: List<Place>,
-    expandedFilters: Boolean,
-    onExpandFilters: (Boolean) -> Unit,
     filterPlaces: () -> Unit,
     onClickFilter: (MutableList<Filter>) -> Unit,
     onCardClick: (CategoryName) -> Unit,
@@ -58,10 +56,8 @@ fun OnlyListCards(
             viewModel = viewModel,
             isInHomePage = isInHomePage,
             currentFiltersPlace = currentFiltersPlace,
-            expandedFilters = expandedFilters,
             placesFiltered = placesFiltered,
             filterPlaces = filterPlaces,
-            onExpandFilters = onExpandFilters,
             onClickFilter = onClickFilter,
             onValueChangeSearchPlace = onValueChangeSearchPlace
         )
@@ -77,8 +73,6 @@ fun ListAndDetailsCard(
     isInHomePage: Boolean,
     currentFiltersPlace: MutableList<Filter>,
     placesFiltered: List<Place>,
-    expandedFilters: Boolean,
-    onExpandFilters: (Boolean) -> Unit,
     filterPlaces: () -> Unit,
     onClickFilter: (MutableList<Filter>) -> Unit,
     onCardClick: (CategoryName) -> Unit,
@@ -108,10 +102,8 @@ fun ListAndDetailsCard(
                     viewModel = viewModel,
                     isInHomePage = isInHomePage,
                     currentFiltersPlace = currentFiltersPlace,
-                    expandedFilters = expandedFilters,
                     placesFiltered = placesFiltered,
                     filterPlaces = filterPlaces,
-                    onExpandFilters = onExpandFilters,
                     onClickFilter = onClickFilter,
                     onValueChangeSearchPlace = onValueChangeSearchPlace
                 )

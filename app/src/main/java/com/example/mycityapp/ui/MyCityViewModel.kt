@@ -76,17 +76,6 @@ class MyCityViewModel : ViewModel() {
         }
     }
 
-    fun updateExpandedFilters(expandedFilters: Boolean) {
-        if (!expandedFilters) {
-            uiState.value.currentFilters.clear()
-        }
-        _uiState.update {
-            it.copy(
-                expandedFilters = expandedFilters
-            )
-        }
-    }
-
     fun updatePlacesFiltered(placesFiltered: List<Place>) {
         _uiState.update {
             it.copy(

@@ -15,7 +15,6 @@ data class MyCityUiState(
     val isInHomePage: Boolean = true,
     val currentLocation: Location? = null,
     val searchPlaceName: String = "",
-    var expandedFilters: Boolean = false,
     var currentFilters: MutableList<Filter> = mutableListOf(),
     var placesFiltered: List<Place> = listOf(),
     var weather: PostResponse? = null

@@ -19,17 +19,13 @@ fun PlacesLists(
     isInHomePage: Boolean,
     placesFiltered: List<Place>,
     currentFiltersPlace: MutableList<Filter>,
-    expandedFilters: Boolean,
     onClickFilter: (MutableList<Filter>) -> Unit,
-    onExpandFilters: (Boolean) -> Unit,
     filterPlaces: () -> Unit,
     onValueChangeSearchPlace: (String) -> Unit
 ) {
     HeaderPlacesLists(
         currentFiltersPlace = currentFiltersPlace,
-        expandedFilters = expandedFilters,
         filterPlaces = filterPlaces,
-        onExpandFilters = onExpandFilters,
         onClickFilter = onClickFilter,
         onValueChangeSearchPlace = onValueChangeSearchPlace
     )

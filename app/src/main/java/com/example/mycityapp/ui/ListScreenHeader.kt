@@ -1,5 +1,6 @@
 package com.example.mycityapp.ui
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
@@ -19,19 +20,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mycityapp.R
 import com.example.mycityapp.data.model.Filter
 
 @Composable
 fun HeaderPlacesLists(
+    modifier: Modifier = Modifier,
     currentFiltersPlace: MutableList<Filter>,
-    expandedFilters: Boolean,
     onClickFilter: (MutableList<Filter>) -> Unit,
-    onExpandFilters: (Boolean) -> Unit, modifier: Modifier = Modifier,
     filterPlaces: () -> Unit,
     onValueChangeSearchPlace: (String) -> Unit
-    ) {
+) {
+    var expanded by rememberSaveable { mutableStateOf(false) }
+    var iconArrow = if (!expanded) Icons.Default.FilterList else Icons.Default.FilterListOff
+
     Column(
         Modifier
             .fillMaxWidth(),
@@ -48,18 +50,23 @@ fun HeaderPlacesLists(
             SearchPlace(onValueChangeSearchPlace = onValueChangeSearchPlace)
             Spacer(modifier = Modifier.weight(1f))
             FilterPlace(
-                expandedFilters = expandedFilters,
-                onExpandFilters = onExpandFilters
+                icon = iconArrow,
+                expand = { expanded = !expanded }
             )
         }
     }
-    if (expandedFilters) {
-        FilterList(
-            currentFiltersPlace = currentFiltersPlace,
-            filterPlaces = filterPlaces,
-            onClickFilter = onClickFilter
-        )
+    Column(
+        modifier.animateContentSize()
+    ) {
+        if (expanded) {
+            FilterList(
+                currentFiltersPlace = currentFiltersPlace,
+                filterPlaces = filterPlaces,
+                onClickFilter = onClickFilter
+            )
+        }
     }
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -72,6 +79,7 @@ fun SearchPlace(
         mutableStateOf("")
     }
     TextField(
+        modifier = modifier.widthIn(max = 300.dp),
         colors = TextFieldDefaults.textFieldColors(
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
@@ -82,7 +90,7 @@ fun SearchPlace(
         onValueChange = {
             textState = it
             onValueChangeSearchPlace(textState)
-            },
+        },
         placeholder = {
             Row {
                 Icon(
@@ -112,15 +120,14 @@ fun SearchPlace(
 
 @Composable
 fun FilterPlace(
-    expandedFilters: Boolean,
-    onExpandFilters: (Boolean) -> Unit
+    icon: ImageVector,
+    expand: () -> Unit
 ) {
-    var iconArrow = if (!expandedFilters) Icons.Default.FilterList else Icons.Default.FilterListOff
     IconButton(
-        onClick = { onExpandFilters(!expandedFilters) }
+        onClick = expand
     ) {
         Icon(
-            imageVector = iconArrow,
+            imageVector = icon,
             contentDescription = stringResource(id = R.string.filter),
             tint = MaterialTheme.colorScheme.secondary
         )
@@ -135,6 +142,8 @@ fun FilterList(
     onClickFilter: (MutableList<Filter>) -> Unit,
     filterPlaces: () -> Unit,
 ) {
+
+
     Column(
         modifier = Modifier
             .fillMaxWidth(),

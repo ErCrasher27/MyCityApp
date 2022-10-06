@@ -89,10 +89,8 @@ fun MyCityApp(
                             currentTab = myCityAppUiState.currentTab,
                             isInHomePage = myCityAppUiState.isInHomePage,
                             currentFiltersPlace = myCityAppUiState.currentFilters,
-                            expandedFilters = myCityAppUiState.expandedFilters,
                             placesFiltered = myCityAppUiState.placesFiltered,
                             onClickFilter = { viewModel.updateCurrentFiltersPlace(it) },
-                            onExpandFilters = { viewModel.updateExpandedFilters(it) },
                             filterPlaces = { viewModel.filterPlace(context = context) },
                             onValueChangeSearchPlace = { viewModel.updateSearchNamePlace(it) },
                             onCardClick = { category: CategoryName ->
@@ -157,9 +155,7 @@ fun MyCityApp(
                         isInHomePage = myCityAppUiState.isInHomePage,
                         currentFiltersPlace = myCityAppUiState.currentFilters,
                         placesFiltered = myCityAppUiState.placesFiltered,
-                        expandedFilters = myCityAppUiState.expandedFilters,
                         onClickFilter = { viewModel.updateCurrentFiltersPlace(it) },
-                        onExpandFilters = { viewModel.updateExpandedFilters(it) },
                         filterPlaces = { viewModel.filterPlace(context) },
                         onValueChangeSearchPlace = { viewModel.updateSearchNamePlace(it) },
                         onCardClick = { category: CategoryName ->
@@ -204,9 +200,7 @@ fun MyCityApp(
                                 isInHomePage = myCityAppUiState.isInHomePage,
                                 currentFiltersPlace = myCityAppUiState.currentFilters,
                                 placesFiltered = myCityAppUiState.placesFiltered,
-                                expandedFilters = myCityAppUiState.expandedFilters,
                                 onClickFilter = { viewModel.updateCurrentFiltersPlace(it) },
-                                onExpandFilters = { viewModel.updateExpandedFilters(it) },
                                 filterPlaces = { viewModel.filterPlace(context) },
                                 onValueChangeSearchPlace = { viewModel.updateSearchNamePlace(it) },
                                 onCardClick = { category: CategoryName ->
