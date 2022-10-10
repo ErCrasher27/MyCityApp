@@ -80,33 +80,13 @@ object LocalPlaceData {
             name = R.string.place_bar_name2,
             descriptionPlace = R.string.place_bar_description2,
             photoPlace = listOf
-                (R.drawable.place_bar_image_2,
-                R.drawable.place_bar_image_2_2),
-            locationPlace = R.string.place_bar_location2,
-            latLng = LatLng(
-                41.0801502,14.33277821
+                (
+                R.drawable.place_bar_image_2,
+                R.drawable.place_bar_image_2_2
             ),
-            ratingPlace = Rate.STAR5,
-            phonePlace = "329 206 2208",
-            dayVisitable = false,
-            nightVisitable = true
-        )
-
-
-
-
-
-        ,
-        Place(
-            category = categories[3],
-            name = R.string.place_bar_name2,
-            descriptionPlace = R.string.place_bar_description2,
-            photoPlace = listOf
-                (R.drawable.place_bar_image_2,
-                R.drawable.place_bar_image_2_2),
             locationPlace = R.string.place_bar_location2,
             latLng = LatLng(
-                41.0801502,14.33277821
+                41.0801502, 14.33277821
             ),
             ratingPlace = Rate.STAR5,
             phonePlace = "329 206 2208",
@@ -114,164 +94,70 @@ object LocalPlaceData {
             nightVisitable = true
         ),
         Place(
-            category = categories[3],
-            name = R.string.place_bar_name2,
-            descriptionPlace = R.string.place_bar_description2,
+            category = categories[1],
+            name = R.string.place_panoramas_name2,
+            descriptionPlace = R.string.place_panoramas_description2,
             photoPlace = listOf
-                (R.drawable.place_bar_image_2,
-                R.drawable.place_bar_image_2_2),
-            locationPlace = R.string.place_bar_location2,
-            latLng = LatLng(
-                41.0801502,14.33277821
+                (
+                R.drawable.place_placeholder,
+                R.drawable.place_placeholder
             ),
-            ratingPlace = Rate.STAR5,
-            phonePlace = "329 206 2208",
-            dayVisitable = false,
+            locationPlace = R.string.place_panoramas_location2,
+            latLng = LatLng(
+                41.0971322, 14.3668002
+            ),
+            ratingPlace = Rate.STAR4,
+            dayVisitable = true,
             nightVisitable = true
         ),
         Place(
             category = categories[3],
-            name = R.string.place_bar_name2,
-            descriptionPlace = R.string.place_bar_description2,
+            name = R.string.place_bar_name3,
+            descriptionPlace = R.string.place_bar_description3,
             photoPlace = listOf
-                (R.drawable.place_bar_image_2,
-                R.drawable.place_bar_image_2_2),
-            locationPlace = R.string.place_bar_location2,
-            latLng = LatLng(
-                41.0801502,14.33277821
+                (
+                R.drawable.place_placeholder,
+                R.drawable.place_placeholder
             ),
-            ratingPlace = Rate.STAR5,
-            phonePlace = "329 206 2208",
+            locationPlace = R.string.place_bar_location3,
+            latLng = LatLng(
+                41.0792805, 14.3413061
+            ),
+            ratingPlace = Rate.STAR2,
             dayVisitable = false,
             nightVisitable = true
         ),
         Place(
-            category = categories[3],
-            name = R.string.place_bar_name2,
-            descriptionPlace = R.string.place_bar_description2,
+            category = categories[2],
+            name = R.string.place_restaurants_name2,
+            descriptionPlace = R.string.place_restaurants_description2,
             photoPlace = listOf
-                (R.drawable.place_bar_image_2,
-                R.drawable.place_bar_image_2_2),
-            locationPlace = R.string.place_bar_location2,
+                (R.drawable.place_placeholder),
+            locationPlace = R.string.place_restaurants_location2,
             latLng = LatLng(
-                41.0801502,14.33277821
+                41.0733054,
+                14.3483661
             ),
             ratingPlace = Rate.STAR5,
-            phonePlace = "329 206 2208",
-            dayVisitable = false,
+            phonePlace = "0823 327822",
+            dayVisitable = true,
             nightVisitable = true
         ),
         Place(
-            category = categories[3],
-            name = R.string.place_bar_name2,
-            descriptionPlace = R.string.place_bar_description2,
+            category = categories[0],
+            name = R.string.place_activities_name2,
+            descriptionPlace = R.string.place_activities_description2,
             photoPlace = listOf
-                (R.drawable.place_bar_image_2,
-                R.drawable.place_bar_image_2_2),
-            locationPlace = R.string.place_bar_location2,
-            latLng = LatLng(
-                41.0801502,14.33277821
+                (
+                R.drawable.place_placeholder,
+                R.drawable.place_placeholder,
+                R.drawable.place_placeholder,
             ),
-            ratingPlace = Rate.STAR5,
-            phonePlace = "329 206 2208",
-            dayVisitable = false,
+            locationPlace = R.string.place_activities_location2,
+            latLng = LatLng(41.0716581, 14.339467),
+            ratingPlace = Rate.STAR3,
+            dayVisitable = true,
             nightVisitable = true
         ),
-        Place(
-            category = categories[3],
-            name = R.string.place_bar_name2,
-            descriptionPlace = R.string.place_bar_description2,
-            photoPlace = listOf
-                (R.drawable.place_bar_image_2,
-                R.drawable.place_bar_image_2_2),
-            locationPlace = R.string.place_bar_location2,
-            latLng = LatLng(
-                41.0801502,14.33277821
-            ),
-            ratingPlace = Rate.STAR5,
-            phonePlace = "329 206 2208",
-            dayVisitable = false,
-            nightVisitable = true
-        ),
-        Place(
-            category = categories[3],
-            name = R.string.place_bar_name2,
-            descriptionPlace = R.string.place_bar_description2,
-            photoPlace = listOf
-                (R.drawable.place_bar_image_2,
-                R.drawable.place_bar_image_2_2),
-            locationPlace = R.string.place_bar_location2,
-            latLng = LatLng(
-                41.0801502,14.33277821
-            ),
-            ratingPlace = Rate.STAR5,
-            phonePlace = "329 206 2208",
-            dayVisitable = false,
-            nightVisitable = true
-        ),
-        Place(
-            category = categories[3],
-            name = R.string.place_bar_name2,
-            descriptionPlace = R.string.place_bar_description2,
-            photoPlace = listOf
-                (R.drawable.place_bar_image_2,
-                R.drawable.place_bar_image_2_2),
-            locationPlace = R.string.place_bar_location2,
-            latLng = LatLng(
-                41.0801502,14.33277821
-            ),
-            ratingPlace = Rate.STAR5,
-            phonePlace = "329 206 2208",
-            dayVisitable = false,
-            nightVisitable = true
-        ),
-        Place(
-            category = categories[3],
-            name = R.string.place_bar_name2,
-            descriptionPlace = R.string.place_bar_description2,
-            photoPlace = listOf
-                (R.drawable.place_bar_image_2,
-                R.drawable.place_bar_image_2_2),
-            locationPlace = R.string.place_bar_location2,
-            latLng = LatLng(
-                41.0801502,14.33277821
-            ),
-            ratingPlace = Rate.STAR5,
-            phonePlace = "329 206 2208",
-            dayVisitable = false,
-            nightVisitable = true
-        ),
-        Place(
-            category = categories[3],
-            name = R.string.place_bar_name2,
-            descriptionPlace = R.string.place_bar_description2,
-            photoPlace = listOf
-                (R.drawable.place_bar_image_2,
-                R.drawable.place_bar_image_2_2),
-            locationPlace = R.string.place_bar_location2,
-            latLng = LatLng(
-                41.0801502,14.33277821
-            ),
-            ratingPlace = Rate.STAR5,
-            phonePlace = "329 206 2208",
-            dayVisitable = false,
-            nightVisitable = true
-        ),
-        Place(
-            category = categories[3],
-            name = R.string.place_bar_name2,
-            descriptionPlace = R.string.place_bar_description2,
-            photoPlace = listOf
-                (R.drawable.place_bar_image_2,
-                R.drawable.place_bar_image_2_2),
-            locationPlace = R.string.place_bar_location2,
-            latLng = LatLng(
-                41.0801502,14.33277821
-            ),
-            ratingPlace = Rate.STAR5,
-            phonePlace = "329 206 2208",
-            dayVisitable = false,
-            nightVisitable = true
-        )
     )
 }

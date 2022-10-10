@@ -26,18 +26,17 @@ fun MyCityApp(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
+    val viewModel: MyCityViewModel = viewModel()
     RequestPermissions(
         context = context,
         permission = Manifest.permission.CALL_PHONE,
-        namePermission = "Phone"
+        namePermission = "Phone",
     )
     RequestPermissions(
         context = context,
         permission = Manifest.permission.ACCESS_FINE_LOCATION,
-        namePermission = "Location"
+        namePermission = "Location",
     )
-
-    val viewModel: MyCityViewModel = viewModel()
     val myCityAppUiState = viewModel.uiState.collectAsState().value
     viewModel.getCurrentLocation(context)
     val navigationType: MyCityNavigationType = when (windowSize) {

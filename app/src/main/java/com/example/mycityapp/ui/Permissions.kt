@@ -53,7 +53,7 @@ fun RequestPermissions(
         namePermission = namePermission,
         permissionState = permissionState,
         permission = permission,
-        context = context
+        context = context,
     )
 }
 
@@ -64,7 +64,7 @@ fun CheckPermissions(
     context: Context,
     permissionState: PermissionState,
     permission: String,
-    namePermission: String
+    namePermission: String,
 ) {
 
     when (permissionState.permission) {
