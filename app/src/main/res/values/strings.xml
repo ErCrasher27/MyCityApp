@@ -1,3 +1,70 @@
 <resources>
-    <string name="app_name">MyCityApp</string>
+    <string name="app_name">My City App</string>
+
+    <!-- UTILS !-->
+    <string name="navigation_back">Back</string>
+    <string name="close_details_place">Close</string>
+
+    <!-- BUTTONS !-->
+    <string name="more_details_place">More Details</string>
+    <string name="navigate_to_place">Navigate</string>
+    <string name="call_place">Call</string>
+    <string name="search">Search</string>
+    <string name="filter">Filter</string>
+
+    <!-- CATEGORIES !-->
+    <string name="category_activities_description">outdoor activity</string>
+    <string name="category_restaurations_description">our typical plates</string>
+    <string name="category_bar_description">get a coffe!</string>
+    <string name="category_panoramas_description">The best views</string>
+
+    <!-- PLACES !-->
+
+    <!-- ACTIVITIES !-->
+    <string name="place_activities_name1">Reggia Di Caserta</string>
+    <string name="place_activities_description1">una magnifica avventura alla reggia</string>
+    <string name="place_activities_location1">Piazza Carlo di Borbone, 81100 Caserta CE</string>
+
+    <string name="place_activities_name2">Monumento ai Caduti di Caserta</string>
+    <string name="place_activities_description2">Notte prima degli esami</string>
+    <string name="place_activities_location2">Monumento ai Caduti, Via Unità Italiana, 81100 Caserta CE</string>
+
+    <!-- PANORAMAS !-->
+    <string name="place_panoramas_name1">Belvedere di San Leucio</string>
+    <string name="place_panoramas_description1">una vista mozzafiato</string>
+    <string name="place_panoramas_location1">Via del Setifiicio 5, CE</string>
+
+    <string name="place_panoramas_name2">Caserta Vecchia</string>
+    <string name="place_panoramas_description2">Il villaggio mediavale da esplorare</string>
+    <string name="place_panoramas_location2">Caserta Vecchia, CE</string>
+
+    <!-- RESTAURANTS !-->
+    <string name="place_restaurants_name1">I Masanielli</string>
+    <string name="place_restaurants_description1">la pizza dai mille sapori</string>
+    <string name="place_restaurants_location1">Viale Giulio Douhet, 11, 81100 Caserta CE</string>
+
+    <string name="place_restaurants_name2">Morsi e Rimorsi</string>
+    <string name="place_restaurants_description2">Ristorante dai mille piatti</string>
+    <string name="place_restaurants_location2">Viale dei Bersaglieri, 14, 81100 Caserta CE</string>
+
+    <!-- BAR !-->
+    <string name="place_bar_name1">Rock and Blues</string>
+    <string name="place_bar_description1">il locale ambientato nel rock</string>
+    <string name="place_bar_location1">Via Nazionale Appia, 231/a, 81020 Casapulla CE</string>
+
+    <string name="place_bar_name2">Flaming Pub</string>
+    <string name="place_bar_description2">il pub pieno di giochi da tavolo!</string>
+    <string name="place_bar_location2">Via Giuseppe Maria Bosco, 50, 81100 Caserta CE</string>
+
+    <string name="place_bar_name3">Bar Boys</string>
+    <string name="place_bar_description3">Il bar perfetto per gli studenti</string>
+    <string name="place_bar_location3">Piazza Carlo Cattaneo, 1-2, 81100 Caserta CE</string>
+
+    <!-- TEST TAGS !-->
+
+    <!-- NAVIGATION TAGS !-->
+    <string name="navigation_bottom">Navigation Bottom</string>
+    <string name="navigation_rail">Navigation Rail</string>
+    <string name="navigation_drawer">Navigation Drawer</string>
+
 </resources>

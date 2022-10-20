@@ -1,10 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id "org.jetbrains.kotlin.plugin.serialization" version "1.7.20-RC"
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.mycityapp"
@@ -17,11 +19,15 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+        buildConfigField "String", "WEATHER_API_KEY", "\"${properties.getProperty("WEATHER_API_KEY")}\""
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -46,17 +52,59 @@ android {
 }
 
 dependencies {
+    //Kotlin//
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    implementation 'androidx.core:core-ktx:1.7.0'
+    //Activity Compose//
+    implementation 'androidx.activity:activity-compose:1.5.1'
+
+    //Core-ktx//
+    implementation 'androidx.core:core-ktx:1.8.0'
+
+    //Compose UI-Material3//
     implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.material:material:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'androidx.activity:activity-compose:1.3.1'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    implementation "androidx.compose.ui:ui-util:$compose_version"
+    implementation "androidx.compose.material3:material3:1.0.0-beta02"
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
+    implementation "androidx.compose.material3:material3-window-size-class:1.0.0-beta02"
+
+    //Lifecycle ViewModel//
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+
+    //Google Accompanist//
+    implementation "com.google.accompanist:accompanist-pager:0.26.3-beta"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.14.0"
+    implementation 'com.google.accompanist:accompanist-permissions:0.26.3-beta'
+
+    //Google Maps//
+    implementation 'com.google.maps.android:maps-compose:2.5.3'
+
+    //Google Play Services (Maps)//
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
+    implementation 'com.google.android.gms:play-services-location:20.0.0'
+
+    //Junit//
+    testImplementation 'junit:junit:4.12'
+    debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_version")
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.4.0'
+    androidTestImplementation "androidx.navigation:navigation-testing:2.5.0"
+
+    //API Request ktor
+    def ktor_version = "1.6.3"
+    implementation "io.ktor:ktor-client-core:$ktor_version"
+    implementation "io.ktor:ktor-client-android:$ktor_version"
+    implementation "io.ktor:ktor-client-serialization:$ktor_version"
+    implementation "io.ktor:ktor-client-logging:$ktor_version"
+    implementation "ch.qos.logback:logback-classic:1.2.3"
+
+    //Serialization for json responses
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0"
+
+    //Image loading via URL library
+    implementation "io.coil-kt:coil-compose:2.0.0-rc01"
 }
